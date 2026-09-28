@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Putra Lab – 10 směrů webu</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:,">
+<meta name="description" content="Designová laboratoř pro cukrárnu Putra v Brně: rešerše, směry z inspirační knihovny a deset funkčních verzí webu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#f5efe6;--card:#fffaf2;--ink:#241d17;--ink2:#6f6356;--line:rgba(36,29,23,.14);--acc:#b8742d;--a:#2f6f5e;--b:#8a3f6b;
+--serif:"Instrument Serif",Georgia,serif;--sans:"Inter",system-ui,sans-serif}
+:root[data-theme=dark]{--bg:#17130f;--card:#211b16;--ink:#f1e8dc;--ink2:#b3a492;--line:rgba(241,232,220,.14)}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#17130f;--card:#211b16;--ink:#f1e8dc;--ink2:#b3a492;--line:rgba(241,232,220,.14)}}
+*{box-sizing:border-box;margin:0}
+body{font:400 16px/1.6 var(--sans);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+.wrap{max-width:1320px;margin:0 auto;padding:0 clamp(16px,4vw,48px)}
+header.top{padding:clamp(40px,6vw,80px) 0 24px;border-bottom:1px solid var(--line)}
+.eyebrow{font:600 12px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--acc)}
+h1{font:400 clamp(48px,7vw,104px)/.95 var(--serif);letter-spacing:-.02em;margin:12px 0 18px}
+h1 i{color:var(--acc)}
+.lead{font-size:19px;color:var(--ink2);max-width:64ch}
+nav.toc{display:flex;gap:8px;flex-wrap:wrap;margin-top:28px}
+nav.toc a{text-decoration:none;border:1px solid var(--line);border-radius:99px;padding:7px 14px;font-size:14px;font-weight:500}
+nav.toc a:hover{background:var(--card)}
+section{padding:clamp(48px,6vw,80px) 0;border-bottom:1px solid var(--line)}
+h2{font:400 clamp(34px,4vw,56px)/1 var(--serif);margin:10px 0 20px}
+h3{font:600 17px var(--sans);margin-bottom:6px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+.box ul{padding-left:18px;color:var(--ink2)}
+.box li{margin:4px 0}
+.box p{color:var(--ink2)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:15px}
+.kv dt{color:var(--ink2)}
+.inv{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px;margin-top:18px}
+.inv figure{position:relative;border-radius:10px;overflow:hidden;aspect-ratio:1}
+.inv img{width:100%;height:100%;object-fit:cover}
+.inv figcaption{position:absolute;left:0;right:0;bottom:0;font-size:10px;line-height:1.2;padding:14px 6px 5px;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.7))}
+.dirs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin-top:20px}
+.dir{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--card)}
+.dir img{aspect-ratio:16/10;object-fit:cover;width:100%;border-bottom:1px solid var(--line)}
+.dir div{padding:14px 16px}
+.dir b{display:block;font-size:15px}
+.dir span{font-size:12px;color:var(--acc);font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.dir p{font-size:14px;color:var(--ink2);margin-top:6px}
+.dir.rej{opacity:.62}
+/* versions */
+.vers{display:grid;gap:28px;margin-top:24px}
+.v{display:grid;grid-template-columns:1.6fr 1fr;gap:24px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;align-items:start}
+.shots{position:relative;display:block;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+.shots .d{width:100%;aspect-ratio:1440/900;object-fit:cover;object-position:top}
+.shots .m{position:absolute;right:12px;bottom:12px;width:22%;border-radius:10px;border:3px solid #111;box-shadow:0 10px 30px rgba(0,0,0,.35);aspect-ratio:390/844;object-fit:cover;object-position:top}
+.v .meta{padding:6px 6px 6px 0}
+.tag{display:inline-block;font:600 11px var(--sans);letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;border-radius:6px;color:#fff;background:var(--a)}
+.tag.b{background:var(--b)}
+.v h3{font:400 38px/1 var(--serif);margin:12px 0 8px}
+.v .src{font-size:14px;color:var(--ink2)}
+.v p.c{margin:12px 0;color:var(--ink2)}
+.v ul{padding-left:18px;font-size:14px;color:var(--ink2)}
+.lh{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}
+.lh span{font:600 12px var(--sans);border-radius:99px;padding:5px 10px;background:rgba(47,111,94,.12);color:var(--a)}
+.lh span.warn{background:rgba(184,116,45,.15);color:var(--acc)}
+.go{display:inline-flex;gap:8px;margin-top:10px;background:var(--ink);color:var(--bg);text-decoration:none;padding:11px 18px;border-radius:99px;font-weight:500;font-size:15px}
+.rec{background:#2a211a;color:#f5efe6;border-radius:20px;padding:clamp(24px,4vw,44px);border:1px solid var(--line)}
+.rec h2{color:#f5efe6}
+.rec p,.rec li{color:rgba(245,239,230,.84)}
+.rec ul{padding-left:18px}.rec li{margin:8px 0}
+.gm{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
+.gm .ph{margin:0;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.gm .ph>a{display:block;aspect-ratio:4/3;overflow:hidden;background:var(--line)}
+.gm img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.gm .ph>a:hover img{transform:scale(1.04)}
+.gm figcaption{display:grid;gap:4px;padding:12px 14px 14px;font-size:14px}
+.gm figcaption span{color:var(--ink2);font-size:13px}
+.gm .dl{justify-self:start;margin-top:6px;font-weight:600;font-size:14px;color:var(--acc);text-decoration:none;padding:6px 0}
+.gm .dl:hover{text-decoration:underline}
+.zips{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 18px}
+.go.alt{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.gmf{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.gmf button{font:500 14px var(--sans);border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:99px;padding:8px 14px;cursor:pointer}
+.gmf button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.gm .own{justify-self:start;font-style:normal;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--a);padding:3px 8px;border-radius:6px}
+.note{margin-top:18px;font-size:14px;color:var(--ink2);max-width:72ch}
+footer{padding:30px 0 50px;color:var(--ink2);font-size:14px}
+@media (max-width:900px){.grid2,.grid3,.v{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <p class="eyebrow">Putra · výrobna a sladké pečení · Brno-Židenice</p>
+  <h1>Putra Lab — <i>deset cest</i> k teplému webu.</h1>
+  <p class="lead">Rešerše putra.cz, Instagramu @putrabrno a profilu na Google Maps, výběr směrů z inspirační knihovny a deset funkčních, rychlých a SEO-připravených verzí webu. Pět vychází z knihovny, pět jsou vlastní koncepty.</p>
+  <nav class="toc" aria-label="Obsah"><a href="#verze">10 verzí</a><a href="#variace">Variace 07</a><a href="#doporuceni">Doporučení</a><a href="#fotky">Fotky z Maps ↓ (28)</a><a href="#reserse">Rešerše</a><a href="#smery">Směry z knihovny</a><a href="#zaklad">SEO a výkon</a><a href="#vymysleno">Co je vymyšlené</a></nav>
+</header>
+
+<section id="verze">
+  <p class="eyebrow">Laboratoř</p>
+  <h2>Deset verzí</h2>
+  <p class="lead">Každá verze je samostatná statická stránka: sdílený SEO základ, stejná data, zcela jiný výraz. Velký snímek = desktop 1440 px, malý = mobil 390 px.</p>
+  <div class="vers">
+
+    <article class="v"><a class="shots" href="v01-maslo-na-okne/"><img class="d" src="shots/web/v01-maslo-na-okne-desk.webp" alt="V01 desktop" loading="lazy"><img class="m" src="shots/web/v01-maslo-na-okne-mob.webp" alt="V01 mobil" loading="lazy"></a>
+      <div class="meta"><span class="tag">A · z knihovny</span><h3>01 Máslo na okně</h3><p class="src">Podle: Graft (Warm Grain Overlay)</p>
+      <p class="c">Obří obrysové logo „putra“ položené přímo na fotku okna; při scrollu se nad druhou fotkou posouvají karty (máslo, dorty, káva). Teplé zrno, lněné pozadí, serif Instrument.</p>
+      <div class="lh" data-lh="v01-maslo-na-okne"></div>
+      <ul><li>Nejvěrnější atmosféře podniku</li><li>Fotky dělají většinu práce</li></ul><a class="go" href="v01-maslo-na-okne/">Otevřít verzi →</a></div></article>
+
+    <article class="v"><a class="shots" href="v02-papir-a-slunce/"><img class="d" src="shots/web/v02-papir-a-slunce-desk.webp" alt="V02 desktop" loading="lazy"><img class="m" src="shots/web/v02-papir-a-slunce-mob.webp" alt="V02 mobil" loading="lazy"></a>
+      <div class="meta"><span class="tag">A · z knihovny</span><h3>02 Papír a slunce</h3><p class="src">Podle: Daylight Computer (Print-Tech Paper)</p>
+      <p class="c">Teplý papír, sluncem zalitá fotka pusinek, rotující pečeť 5,0 ★ a „herbář surovin“: pět tužkových kreseb (máslo, vejce, mouka, jahoda, vanilka) s drobnou roztřeseností kresby.</p>
+      <div class="lh" data-lh="v02-papir-a-slunce"></div>
+      <ul><li>Nejsilněji vypráví o kvalitě surovin</li><li>Jantarová CTA, klidná čitelnost</li></ul><a class="go" href="v02-papir-a-slunce/">Otevřít verzi →</a></div></article>
+
+    <article class="v"><a class="shots" href="v03-zlata-hodina/"><img class="d" src="shots/web/v03-zlata-hodina-desk.webp" alt="V03 desktop" loading="lazy"><img class="m" src="shots/web/v03-zlata-hodina-mob.webp" alt="V03 mobil" loading="lazy"></a>
+      <div class="meta"><span class="tag">A · z knihovny</span><h3>03 Zlatá hodina</h3><p class="src">Podle: Omai Villas + Aerodynamics (Editorial Serif Luxe)</p>
+      <p class="c">Hotelová elegance: prostrkaný serifový „P U T R A“, zlatá fotka parapetu a na horizontu „rezervační“ lišta pro dort (příležitost · den · porce). Lístek jako tištěná karta s tečkovanými linkami.</p>
+      <div class="lh" data-lh="v03-zlata-hodina"></div>
+      <ul><li>Objednávka dortu hned v hero</li><li>Prémiový dojem, dobré pro svatební dorty</li></ul><a class="go" href="v03-zlata-hodina/">Otevřít verzi →</a></div></article>
+
+    <article class="v"><a class="shots" href="v04-maslove-zluta/"><img class="d" src="shots/web/v04-maslove-zluta-desk.webp" alt="V04 desktop" loading="lazy"><img class="m" src="shots/web/v04-maslove-zluta-mob.webp" alt="V04 mobil" loading="lazy"></a>
+      <div class="meta"><span class="tag">A · z knihovny</span><h3>04 Máslově žlutá</h3><p class="src">Podle: Motion (Bright Terminal Gradient)</p>
+      <p class="c">Hipsterská poloha: máslově žluté plátno, terminál „putra vitrina --dnes“ s živým stavem otevřeno/zavřeno, fotky vykreslené jako skutečný rastr (canvas halftone; při najetí se ukáže originál). Záložky nabídky, formulář jako příkazová řádka.</p>
+      <div class="lh" data-lh="v04-maslove-zluta"></div>
+      <ul><li>Nejvýraznější, nejvíc „Instagram-share“</li><li>LCP je text → extrémně rychlé</li></ul><a class="go" href="v04-maslove-zluta/">Otevřít verzi →</a></div></article>
+
+    <article class="v"><a class="shots" href="v05-tisk/"><img class="d" src="shots/web/v05-tisk-desk.webp" alt="V05 desktop" loading="lazy"><img class="m" src="shots/web/v05-tisk-mob.webp" alt="V05 mobil" loading="lazy"></a>
+      <div class="meta"><span class="tag">A · z knihovny</span><h3>05 Tisk</h3><p class="src">Podle: Tresmares Capital + NRG (Vast Quiet / Kinetic Swiss)</p>
+      <p class="c">„Máslo. Cukr. Čas.“ obřím groteskem na kostním papíře, šedý rastr interiéru se rozpouští do stránky. Index zákusků jako tabulka; při najetí vyskočí fotka. Jediná barva: rezavý akcent.</p>
+      <div class="lh" data-lh="v05-tisk"></div>
+      <ul><li>Nejvíc „designové studio“</li><li>Silné sdělení v jedné větě</li></ul><a class="go" href="v05-tisk/">Otevřít verzi →</a></div></article>
+
+    <article class="v"><a class="shots" href="v06-slovnik/"><img class="d" src="shots/web/v06-slovnik-desk.webp" alt="V06 desktop" loading="lazy"><img class="m" src="shots/web/v06-slovnik-mob.webp" alt="V06 mobil" loading="lazy"></a>
+      <div class="meta"><span class="tag b">B · vlastní</span><h3>06 Slovník</h3><p class="src">Vlastní koncept, rozvíjí „putra (pod. jm.)“ ze současného webu</p>
+      <p class="c">Celý web je stránka výkladového slovníku: heslo „putra“ se třemi významy, výslovnost, abecední hesla (cukroví, dort, káva, pavlova, Táborská, voda…), výřez rejstříku po straně a živé záhlaví „PUTRA — VODA · str. 102“.</p>
+      <div class="lh" data-lh="v06-slovnik"></div>
+      <ul><li>Nejvíc textu → nejsilnější SEO</li><li>Vtipné, zapamatovatelné, lokální</li></ul><a class="go" href="v06-slovnik/">Otevřít verzi →</a></div></article>
+
+    <article class="v"><a class="shots" href="v07-den-v-putre/"><img class="d" src="shots/web/v07-den-v-putre-desk.webp" alt="V07 desktop" loading="lazy"><img class="m" src="shots/web/v07-den-v-putre-mob.webp" alt="V07 mobil" loading="lazy"></a>
+      <div class="meta"><span class="tag b">B · vlastní</span><h3>07 Den v Putře</h3><p class="src">Vlastní koncept · ~95 % fotek</p>
+      <p class="c">Jeden den od 7:00 do „vyprodáno“: celoobrazovkové snímky se scroll-snapem, u každého jen čas a věta. Hodiny v liště se točí podle příběhu. Na konci tři karty: objednávka, cukroví, návštěva.</p>
+      <div class="lh" data-lh="v07-den-v-putre"></div>
+      <ul><li>Fotky na 95 %, jak bylo v zadání</li><li>Emoce &gt; informace; info je až na konci</li></ul><a class="go" href="v07-den-v-putre/">Otevřít verzi →</a></div></article>
+
+    <article class="v"><a class="shots" href="v08-vitrina/"><img class="d" src="shots/web/v08-vitrina-desk.webp" alt="V08 desktop" loading="lazy"><img class="m" src="shots/web/v08-vitrina-mob.webp" alt="V08 mobil" loading="lazy"></a>
+      <div class="meta"><span class="tag b">B · vlastní</span><h3>08 Vitrína</h3><p class="src">Vlastní koncept · nová služba</p>
+      <p class="c">Úvodní obrazovka je samotná vitrína: skleněné police, talíře a papírové cenovky. Klepnutím zákusek přidáte do krabičky a odložíte si ho k vyzvednutí („žádné už došlo“). Pod tím dorty, cukroví, kontakt.</p>
+      <div class="lh" data-lh="v08-vitrina"></div>
+      <ul><li>Řeší reálný problém: páteční vyprodání</li><li>Nejvíc „produkt“, nejméně brožura</li></ul><a class="go" href="v08-vitrina/">Otevřít verzi →</a></div></article>
+
+    <article class="v"><a class="shots" href="v09-dopis-od-petry/"><img class="d" src="shots/web/v09-dopis-od-petry-desk.webp" alt="V09 desktop" loading="lazy"><img class="m" src="shots/web/v09-dopis-od-petry-mob.webp" alt="V09 mobil" loading="lazy"></a>
+      <div class="meta"><span class="tag b">B · vlastní</span><h3>09 Dopis od Petry</h3><p class="src">Vlastní koncept · hlas z Instagramu</p>
+      <p class="c">Stůl s linkovaným dopisem („Na začátku byl sen…“ je skutečný text z IG), polaroidy na lepicí pásce, kartička s lístkem psaná rukou, post-it s hodinami a objednávka jako účtenka, která se „vytiskne“.</p>
+      <div class="lh" data-lh="v09-dopis-od-petry"></div>
+      <ul><li>Nejosobnější, stojí na majitelce</li><li>Vřelost a služba bez jediné fráze</li></ul><a class="go" href="v09-dopis-od-petry/">Otevřít verzi →</a></div></article>
+
+    <article class="v"><a class="shots" href="v10-riso-zin/"><img class="d" src="shots/web/v10-riso-zin-desk.webp" alt="V10 desktop" loading="lazy"><img class="m" src="shots/web/v10-riso-zin-mob.webp" alt="V10 mobil" loading="lazy"></a>
+      <div class="meta"><span class="tag b">B · vlastní</span><h3>10 Riso zin</h3><p class="src">Vlastní koncept · hipster tiskovina</p>
+      <p class="c">Dvoubarevný risograf (fluo růžová + modrá + žlutá): fotky jako duotón s rastrem, posunutý soutisk nadpisů, samolepky, běžící páska, kupóny k vystřižení a ručně kreslená mapka Táborské.</p>
+      <div class="lh" data-lh="v10-riso-zin"></div>
+      <ul><li>Nejhravější, cílí na mladší Brno</li><li>Najetím se fotky vrátí do barev</li></ul><a class="go" href="v10-riso-zin/">Otevřít verzi →</a></div></article>
+  </div>
+</section>
+
+<section id="variace">
+  <p class="eyebrow">Druhé kolo · 07 Den v Putře</p>
+  <h2>Šest variací na „Den v Putře“</h2>
+  <p class="lead">Stejný příběh jednoho dne a fotky na ~95 %, ale jiný vizuální jazyk a jiné kombinace snímků: kino, kontaktní arch, horizontální časová osa, barevná okna, makro s lupami a nově 07F – širší verze se svislou osou dne, digitálním časem a vodorovnými galeriemi. Stejná data, SEO a výkonový základ jako zbytek laboratoře.</p>
+  <div class="vers">
+    <article class="v"><a class="shots" href="v07a-film/"><img class="d" src="shots/web/v07a-film-desk.webp" alt="07A Film desktop" loading="lazy"><img class="m" src="shots/web/v07a-film-mob.webp" alt="07A Film mobil" loading="lazy"></a>
+      <div class="meta"><span class="tag b">Variace V07</span><h3>07A Film</h3><p class="src">Vychází z 07 Den v Putře</p>
+      <p class="c">Kino: letterbox 2,39 : 1, scénáristické hlavičky („INT. VITRÍNA — DOPOLEDNE“), titulky pod obrazem, timecode a barevný grade, který se během dne posouvá od chladného svítání do zlatého odpoledne. Na konci titulky, kde zákusky „hrají“ i s cenou.</p>
+      <div class="lh" data-lh="v07a-film"></div>
+      <ul><li>Nejdramatičtější, úvod je čistá typografie</li><li>Titulky v černém pruhu = vždy čitelné</li></ul><a class="go" href="v07a-film/">Otevřít verzi →</a></div></article>
+    <article class="v"><a class="shots" href="v07b-kontaktni-arch/"><img class="d" src="shots/web/v07b-kontaktni-arch-desk.webp" alt="07B Kontaktní arch desktop" loading="lazy"><img class="m" src="shots/web/v07b-kontaktni-arch-mob.webp" alt="07B Kontaktní arch mobil" loading="lazy"></a>
+      <div class="meta"><span class="tag b">Variace V07</span><h3>07B Kontaktní arch</h3><p class="src">Vychází z 07 Den v Putře</p>
+      <p class="c">Fotografův kontaktní arch: každá hodina je list filmu s políčky, jiné výřezy a černobílé varianty téže fotky a oranžová tužka kroužkuje „tu nejlepší“. Boční lišta s hodinami se rozsvěcí podle scrollu.</p>
+      <div class="lh" data-lh="v07b-kontaktni-arch"></div>
+      <ul><li>Nejvíc kombinací fotek z mála zdrojů</li><li>Výřezy = jedna stažená fotka, víc záběrů</li></ul><a class="go" href="v07b-kontaktni-arch/">Otevřít verzi →</a></div></article>
+    <article class="v"><a class="shots" href="v07c-horizontalni-den/"><img class="d" src="shots/web/v07c-horizontalni-den-desk.webp" alt="07C Horizontální den desktop" loading="lazy"><img class="m" src="shots/web/v07c-horizontalni-den-mob.webp" alt="07C Horizontální den mobil" loading="lazy"></a>
+      <div class="meta"><span class="tag b">Variace V07</span><h3>07C Horizontální den</h3><p class="src">Vychází z 07 Den v Putře</p>
+      <p class="c">Svislý scroll posouvá den do strany: fotky různých velikostí na časové ose s pravítkem, hodiny uprostřed ukazují čas mezi snímky a obloha se přelévá z ranní modré přes broskvovou do soumraku; slunce jde po oblouku.</p>
+      <div class="lh" data-lh="v07c-horizontalni-den"></div>
+      <ul><li>Nejvíc „zážitek“, drží pocit plynutí dne</li><li>Na mobilu se mění na svislý příběh</li></ul><a class="go" href="v07c-horizontalni-den/">Otevřít verzi →</a></div></article>
+    <article class="v"><a class="shots" href="v07d-okna/"><img class="d" src="shots/web/v07d-okna-desk.webp" alt="07D Okna desktop" loading="lazy"><img class="m" src="shots/web/v07d-okna-mob.webp" alt="07D Okna mobil" loading="lazy"></a>
+      <div class="meta"><span class="tag b">Variace V07</span><h3>07D Okna</h3><p class="src">Vychází z 07 Den v Putře</p>
+      <p class="c">Každá hodina je obloukové okno pekárny na vlastní barvě (ranní růžová, máslová, šalvějová, terakota, malinová, levandulová) s kulatým detailem jiné fotky. Při scrollu se okno „otevře“ a číslice přijede.</p>
+      <div class="lh" data-lh="v07d-okna"></div>
+      <ul><li>Nejbarevnější a nejvřelejší</li><li>Dvojice fotek: celek + detail</li></ul><a class="go" href="v07d-okna/">Otevřít verzi →</a></div></article>
+    <article class="v"><a class="shots" href="v07e-makro/"><img class="d" src="shots/web/v07e-makro-desk.webp" alt="07E Makro desktop" loading="lazy"><img class="m" src="shots/web/v07e-makro-mob.webp" alt="07E Makro mobil" loading="lazy"></a>
+      <div class="meta"><span class="tag b">Variace V07</span><h3>07E Makro</h3><p class="src">Vychází z 07 Den v Putře</p>
+      <p class="c">Tmavá kakaová editorial verze: fotky se při scrollu pomalu přibližují a kulaté lupy ukazují skutečné zvětšení detailu (borůvky, choux, latte art) se štítky o surovinách a cenách.</p>
+      <div class="lh" data-lh="v07e-makro"></div>
+      <ul><li>Nejsilněji prodává kvalitu surovin</li><li>Lupy = stejný obrázek, nula bajtů navíc</li></ul><a class="go" href="v07e-makro/">Otevřít verzi →</a></div></article>
+    <article class="v"><a class="shots" href="v07f-den-v-putre-plus/"><img class="d" src="shots/web/v07f-den-v-putre-plus-desk.webp" alt="07F Den v Putře, celý desktop" loading="lazy"><img class="m" src="shots/web/v07f-den-v-putre-plus-mob.webp" alt="07F Den v Putře, celý mobil" loading="lazy"></a>
+      <div class="meta"><span class="tag b">Variace V07</span><h3>07F Den v Putře, celý</h3><p class="src">Vychází z 07 Den v Putře · třetí kolo</p>
+      <p class="c">Širší verze oblíbené 07: 11 zastávek od 6:50 do 16:30 a 54 nejlepších fotek z celé složky (Instagram v plném rozlišení + originály z Maps) plus krátký reel. Hlavní linie jede svisle, u většiny hodin se dá listovat do strany (scroll-snap, šipky, klávesnice, tažení myší). Místo ručičkových hodin velký digitální displej, jehož číslice se při scrollu přetáčejí minutu po minutě, a denní lišta 6–18 h s otevírací dobou.</p>
+      <div class="lh" data-lh="v07f-den-v-putre-plus"></div>
+      <ul><li>Nejvíc fotek, stále jeden příběh dne</li><li>Digitální čas místo analogového</li></ul><a class="go" href="v07f-den-v-putre-plus/">Otevřít verzi →</a></div></article>
+  </div>
+</section>
+
+<section id="doporuceni">
+  <div class="rec">
+    <p class="eyebrow">Můj tip</p>
+    <h2>Základ 01, služba z 08, texty z 06.</h2>
+    <ul>
+      <li><b>01 Máslo na okně</b> nejlépe přenáší to, co lidi na Maps chválí (útulnost, světlo, dřevo). Je to bezpečný, teplý základ.</li>
+      <li><b>08 Vitrína</b> přidává něco, co konkurence nemá: odložení zákusků k vyzvednutí. Přímo řeší „v pátek do vyprodání“ a dá se nasadit bez plateb online.</li>
+      <li><b>06 Slovník</b> je nejlepší zdroj SEO textu. Hesla typu „větrník“, „pavlova dort Brno“ nebo „vánoční cukroví Židenice“ se dají použít jako podstránky nabídky.</li>
+      <li>Pokud má web hlavně bavit a sdílet se: <b>04</b> nebo <b>10</b>. Pokud má prodávat svatební dorty: <b>03</b>.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="fotky">
+  <p class="eyebrow">Ke stažení</p>
+  <h2>Fotky z Google Maps</h2>
+  <p class="lead">Všech 28 fotek z profilu Putry na Google Maps v <b>originálním rozlišení</b> (až 7928 px). Klik na náhled otevře originál, tlačítkem ho stáhnete. <b>7 fotek nahrála přímo majitelka</b> (označené „od majitelky“) – ty jsou pro web nejbezpečnější; ostatní jsou od zákazníků. Na profilu je navíc jedna 360° panorama, kterou Google jako fotku ke stažení nenabízí.</p>
+  <p class="zips"><a class="go" href="assets/putra-google-maps-fotky.zip" download>Stáhnout vše jako ZIP (28 fotek, 127 MB)</a><a class="go alt" href="assets/putra-google-maps-od-majitelky.zip" download>Jen fotky od majitelky (7, 82 MB)</a></p>
+  <div class="gmf" role="group" aria-label="Filtr fotek"><button type="button" aria-pressed="true" data-f="all">Všechny (28)</button><button type="button" aria-pressed="false" data-f="own">Od majitelky (7)</button><button type="button" aria-pressed="false" data-f="cust">Od zákazníků (21)</button></div>
+  <div class="gm">
+    <figure class="ph" data-own="true"><a href="assets/gmaps-original/putra-google-maps-01-okno-posezeni.jpg" target="_blank" rel="noopener"><img src="shots/gmaps/putra-google-maps-01-okno-posezeni.webp" alt="Posezení u okna – fotka z Google Maps" loading="lazy"></a>
+      <figcaption><b>Posezení u okna</b><em class="own">od majitelky</em><span>7952 × 4472 px · 15,5 MB</span><a class="dl" href="assets/gmaps-original/putra-google-maps-01-okno-posezeni.jpg" download="putra-google-maps-01-okno-posezeni.jpg">Stáhnout originál ↓</a></figcaption></figure>
+    <figure class="ph" data-own="false"><a href="assets/gmaps-original/putra-google-maps-02-dort-cokoladovy.jpg" target="_blank" rel="noopener"><img src="shots/gmaps/putra-google-maps-02-dort-cokoladovy.webp" alt="Čokoládový dort – fotka z Google Maps" loading="lazy"></a>
+      <figcaption><b>Čokoládový dort</b><span>2268 × 4032 px · 2,0 MB</span><a class="dl" href="assets/gmaps-original/putra-google-maps-02-dort-cokoladovy.jpg" download="putra-google-maps-02-dort-cokoladovy.jpg">Stáhnout originál ↓</a></figcaption></figure>
+    <figure class="ph" data-own="false"><a href="assets/gmaps-original/putra-google-maps-03-krabice-zakusku.jpg" target="_blank" rel="noopener"><img src="shots/gmaps/putra-google-maps-03-krabice-zakusku.webp" alt="Krabice zákusků – fotka z Google Maps" loading="lazy"></a>
+      <figcaption><b>Krabice zákusků</b><span>3000 × 4000 px · 409 kB</span><a class="dl" href="assets/gmaps-original/putra-google-maps-03-krabice-zakusku.jpg" download="putra-google-maps-03-krabice-zakusku.jpg">Stáhnout originál ↓</a></figcaption></figure>
+    <figure class="ph" data-own="false"><a href="assets/gmaps-original/putra-google-maps-04-vitrina-zakusky.jpg" target="_blank" rel="noopener"><img src="shots/gmaps/putra-google-maps-04-vitrina-zakusky.webp" alt="Vitrína se zákusky – fotka z Google Maps" loading="lazy"></a>
+      <figcaption><b>Vitrína se zákusky</b><span>4080 × 3072 px · 7,9 MB</span><a class="dl" href="assets/gmaps-original/putra-google-maps-04-vitrina-zakusky.jpg" download="putra-google-maps-04-vitrina-zakusky.jpg">Stáhnout originál ↓</a></figcaption></figure>
+    <figure class="ph" data-own="false"><a href="assets/gmaps-original/putra-google-maps-05-interier-pult.jpg" target="_blank" rel="noopener"><img src="shots/gmaps/putra-google-maps-05-interier-pult.webp" alt="Interiér s pultem – fotka z Google Maps" loading="lazy"></a>
+      <figcaption><b>Interiér s pultem</b><span>3000 × 4000 px · 2,0 MB</span><a class="dl" href="assets/gmaps-original/putra-google-maps-05-interier-pult.jpg" download="putra-google-maps-05-interier-pult.jpg">Stáhnout originál ↓</a></figcaption></figure>
+    <figure class="ph" data-own="false"><a href="assets/gmaps-original/putra-google-maps-06-kava-a-dezert.jpg" target="_blank" rel="noopener"><img src="shots/gmaps/putra-google-maps-06-kava-a-dezert.webp" alt="Káva a dezerty – fotka z Google Maps" loading="lazy"></a>
+      <figcaption><b>Káva a dezerty</b><span>3024 × 4032 px · 1,7 MB</span><a class="dl" href="assets/gmaps-original/putra-google-maps-06-kava-a-dezert.jpg" download="putra-google-maps-06-kava-a-dezert.jpg">Stáhnout originál ↓</a></figcaption></figure>
+    <figure class="ph" data-own="true"><a href="assets/gmaps-original/putra-google-maps-07-interier-svetlo.jpg" target="_blank" rel="noopener"><img src="shots/gmaps/putra-google-maps-07-interier-svetlo.webp" alt="Světlý interiér – fotka z Google Maps" loading="lazy"></a>
+      <figcaption><b>Světlý interiér</b><em class="own">od majitelky</em><span>4032 × 3024 px · 3,0 MB</span><a class="dl" href="assets/gmaps-original/putra-google-maps-07-interier-svetlo.jpg" download="putra-google-maps-07-interier-svetlo.jpg">Stáhnout originál ↓</a></figcaption></figure>
+    <figure class="ph" data-own="true"><a href="assets/gmaps-original/putra-google-maps-08-slunce-na-okne.jpg" target="_blank" rel="noopener"><img src="shots/gmaps/putra-google-maps-08-slunce-na-okne.webp" alt="Slunce na parapetu – fotka z Google Maps" loading="lazy"></a>
+      <figcaption><b>Slunce na parapetu</b><em class="own">od majitelky</em><span>7346 × 4900 px · 15,6 MB</span><a class="dl" href="assets/gmaps-original/putra-google-maps-08-slunce-na-okne.jpg" download="putra-google-maps-08-slunce-na-okne.jpg">Stáhnout originál ↓</a></figcaption></figure>
+    <figure class="ph" data-own="false"><a href="assets/gmaps-original/putra-google-maps-09-tulipany-dezerty.jpg" target="_blank" rel="noopener"><img src="shots/gmaps/putra-google-maps-09-tulipany-dezerty.webp" alt="Dezerty s tulipány – fotka z Google Maps" loading="lazy"></a>
+      <figcaption><b>Dezerty s tulipány</b><span>3060 × 4080 px · 3,1 MB</span><a class="dl" href="assets/gmaps-original/putra-google-maps-09-tulipany-dezerty.jpg" download="putra-google-maps-09-tulipany-dezerty.jpg">Stáhnout originál ↓</a></figcaption></figure>
+    <figure class="ph" data-own="false"><a href="assets/gmaps-original/putra-google-maps-10-malinovy-dezert.jpg" target="_blank" rel="noopener"><img src="shots/gmaps/putra-google-maps-10-malinovy-dezert.webp" alt="Malinový dezert – fotka z Google Maps" loading="lazy"></a>
+      <figcaption><b>Malinový dezert</b><span>3024 × 4032 px · 1,4 MB</span><a class="dl" href="assets/gmaps-original/putra-google-maps-10-malinovy-dezert.jpg" download="putra-google-maps-10-malinovy-dezert.jpg">Stáhnout originál ↓</a></figcaption></figure>
+    <figure class="ph" data-own="false"><a href="assets/gmaps-original/putra-google-maps-11-cokoladovy-zakusek-venku.jpg" target="_blank" rel="noopener"><img src="shots/gmaps/putra-google-maps-11-cokoladovy-zakusek-venku.webp" alt="Čokoládový zákusek venku – fotka z Google Maps" loading="lazy"></a>
+      <figcaption><b>Čokoládový zákusek venku</b><span>3024 × 4032 px · 2,2 MB</span><a class="dl" href="assets/gmaps-original/putra-google-maps-11-cokoladovy-zakusek-venku.jpg" download="putra-google-maps-11-cokoladovy-zakusek-venku.jpg">Stáhnout originál ↓</a></figcaption></figure>
+    <figure class="ph" data-own="false"><a href="assets/gmaps-original/putra-google-maps-12-krabice-choux-a-pusinek.jpg" target="_blank" rel="noopener"><img src="shots/gmaps/putra-google-maps-12-krabice-choux-a-pusinek.webp" alt="Krabice choux a pusinek – fotka z Google Maps" loading="lazy"></a>
+      <figcaption><b>Krabice choux a pusinek</b><span>2976 × 3968 px · 3,0 MB</span><a class="dl" href="assets/gmaps-original/putra-google-maps-12-krabice-choux-a-pusinek.jpg" download="putra-google-maps-12-krabice-choux-a-pusinek.jpg">Stáhnout originál ↓</a></figcaption></figure>
+    <figure class="ph" data-own="true"><a href="assets/gmaps-original/putra-google-maps-13-pult-a-kavovar.jpg" target="_blank" rel="noopener"><img src="shots/gmaps/putra-google-maps-13-pult-a-kavovar.webp" alt="Pult a kávovar – fotka z Google Maps" loading="lazy"></a>
+      <figcaption><b>Pult a kávovar</b><em class="own">od majitelky</em><span>4032 × 3024 px · 3,9 MB</span><a class="dl" href="assets/gmaps-original/putra-google-maps-13-pult-a-kavovar.jpg" download="putra-google-maps-13-pult-a-kavovar.jpg">Stáhnout originál ↓</a></figcaption></figure>
+    <figure class="ph" data-own="false"><a href="assets/gmaps-original/putra-google-maps-14-vitrina-s-cedulkami.jpg" target="_blank" rel="noopener"><img src="shots/gmaps/putra-google-maps-14-vitrina-s-cedulkami.webp" alt="Vitrína s cedulkami – fotka z Google Maps" loading="lazy"></a>
+      <figcaption><b>Vitrína s cedulkami</b><span>3024 × 4032 px · 1,5 MB</span><a class="dl" href="assets/gmaps-original/putra-google-maps-14-vitrina-s-cedulkami.jpg" download="putra-google-maps-14-vitrina-s-cedulkami.jpg">Stáhnout originál ↓</a></figcaption></figure>
+    <figure class="ph" data-own="false"><a href="assets/gmaps-original/putra-google-maps-15-posezeni-u-okna-den.jpg" target="_blank" rel="noopener"><img src="shots/gmaps/putra-google-maps-15-posezeni-u-okna-den.webp" alt="Posezení u okna ve dne – fotka z Google Maps" loading="lazy"></a>
+      <figcaption><b>Posezení u okna ve dne</b><span>4000 × 2250 px · 3,2 MB</span><a class="dl" href="assets/gmaps-original/putra-google-maps-15-posezeni-u-okna-den.jpg" download="putra-google-maps-15-posezeni-u-okna-den.jpg">Stáhnout originál ↓</a></figcaption></figure>
+    <figure class="ph" data-own="true"><a href="assets/gmaps-original/putra-google-maps-16-okno-s-polstari.jpg" target="_blank" rel="noopener"><img src="shots/gmaps/putra-google-maps-16-okno-s-polstari.webp" alt="Okno s polštáři – fotka z Google Maps" loading="lazy"></a>
+      <figcaption><b>Okno s polštáři</b><em class="own">od majitelky</em><span>7928 × 5288 px · 16,5 MB</span><a class="dl" href="assets/gmaps-original/putra-google-maps-16-okno-s-polstari.jpg" download="putra-google-maps-16-okno-s-polstari.jpg">Stáhnout originál ↓</a></figcaption></figure>
+    <figure class="ph" data-own="false"><a href="assets/gmaps-original/putra-google-maps-17-vchod-a-tabule.jpg" target="_blank" rel="noopener"><img src="shots/gmaps/putra-google-maps-17-vchod-a-tabule.webp" alt="Vchod a tabule – fotka z Google Maps" loading="lazy"></a>
+      <figcaption><b>Vchod a tabule</b><span>2992 × 4000 px · 3,5 MB</span><a class="dl" href="assets/gmaps-original/putra-google-maps-17-vchod-a-tabule.jpg" download="putra-google-maps-17-vchod-a-tabule.jpg">Stáhnout originál ↓</a></figcaption></figure>
+    <figure class="ph" data-own="false"><a href="assets/gmaps-original/putra-google-maps-18-vitrina-shora.jpg" target="_blank" rel="noopener"><img src="shots/gmaps/putra-google-maps-18-vitrina-shora.webp" alt="Vitrína shora – fotka z Google Maps" loading="lazy"></a>
+      <figcaption><b>Vitrína shora</b><span>3024 × 4032 px · 2,1 MB</span><a class="dl" href="assets/gmaps-original/putra-google-maps-18-vitrina-shora.jpg" download="putra-google-maps-18-vitrina-shora.jpg">Stáhnout originál ↓</a></figcaption></figure>
+    <figure class="ph" data-own="false"><a href="assets/gmaps-original/putra-google-maps-19-pult-ve-slunci.jpg" target="_blank" rel="noopener"><img src="shots/gmaps/putra-google-maps-19-pult-ve-slunci.webp" alt="Pult ve slunci – fotka z Google Maps" loading="lazy"></a>
+      <figcaption><b>Pult ve slunci</b><span>3024 × 4032 px · 1,5 MB</span><a class="dl" href="assets/gmaps-original/putra-google-maps-19-pult-ve-slunci.jpg" download="putra-google-maps-19-pult-ve-slunci.jpg">Stáhnout originál ↓</a></figcaption></figure>
+    <figure class="ph" data-own="false"><a href="assets/gmaps-original/putra-google-maps-20-kava-a-choux-u-okna.jpg" target="_blank" rel="noopener"><img src="shots/gmaps/putra-google-maps-20-kava-a-choux-u-okna.webp" alt="Káva a choux u okna – fotka z Google Maps" loading="lazy"></a>
+      <figcaption><b>Káva a choux u okna</b><span>3024 × 4032 px · 1,7 MB</span><a class="dl" href="assets/gmaps-original/putra-google-maps-20-kava-a-choux-u-okna.jpg" download="putra-google-maps-20-kava-a-choux-u-okna.jpg">Stáhnout originál ↓</a></figcaption></figure>
+    <figure class="ph" data-own="true"><a href="assets/gmaps-original/putra-google-maps-21-stoly-u-okna.jpg" target="_blank" rel="noopener"><img src="shots/gmaps/putra-google-maps-21-stoly-u-okna.webp" alt="Stolky u okna – fotka z Google Maps" loading="lazy"></a>
+      <figcaption><b>Stolky u okna</b><em class="own">od majitelky</em><span>7913 × 4450 px · 11,9 MB</span><a class="dl" href="assets/gmaps-original/putra-google-maps-21-stoly-u-okna.jpg" download="putra-google-maps-21-stoly-u-okna.jpg">Stáhnout originál ↓</a></figcaption></figure>
+    <figure class="ph" data-own="false"><a href="assets/gmaps-original/putra-google-maps-22-croissant-a-choux.jpg" target="_blank" rel="noopener"><img src="shots/gmaps/putra-google-maps-22-croissant-a-choux.webp" alt="Croissant a choux – fotka z Google Maps" loading="lazy"></a>
+      <figcaption><b>Croissant a choux</b><span>1536 × 2048 px · 445 kB</span><a class="dl" href="assets/gmaps-original/putra-google-maps-22-croissant-a-choux.jpg" download="putra-google-maps-22-croissant-a-choux.jpg">Stáhnout originál ↓</a></figcaption></figure>
+    <figure class="ph" data-own="false"><a href="assets/gmaps-original/putra-google-maps-23-vitrina-choux-a-rezy.jpg" target="_blank" rel="noopener"><img src="shots/gmaps/putra-google-maps-23-vitrina-choux-a-rezy.webp" alt="Vitrína: choux a řezy – fotka z Google Maps" loading="lazy"></a>
+      <figcaption><b>Vitrína: choux a řezy</b><span>4000 × 1848 px · 2,2 MB</span><a class="dl" href="assets/gmaps-original/putra-google-maps-23-vitrina-choux-a-rezy.jpg" download="putra-google-maps-23-vitrina-choux-a-rezy.jpg">Stáhnout originál ↓</a></figcaption></figure>
+    <figure class="ph" data-own="false"><a href="assets/gmaps-original/putra-google-maps-24-interier-s-kvetinami.jpg" target="_blank" rel="noopener"><img src="shots/gmaps/putra-google-maps-24-interier-s-kvetinami.webp" alt="Interiér s květinami – fotka z Google Maps" loading="lazy"></a>
+      <figcaption><b>Interiér s květinami</b><span>3024 × 4032 px · 1,7 MB</span><a class="dl" href="assets/gmaps-original/putra-google-maps-24-interier-s-kvetinami.jpg" download="putra-google-maps-24-interier-s-kvetinami.jpg">Stáhnout originál ↓</a></figcaption></figure>
+    <figure class="ph" data-own="false"><a href="assets/gmaps-original/putra-google-maps-25-cokoladovy-rez-a-kava.jpg" target="_blank" rel="noopener"><img src="shots/gmaps/putra-google-maps-25-cokoladovy-rez-a-kava.webp" alt="Čokoládový řez a káva – fotka z Google Maps" loading="lazy"></a>
+      <figcaption><b>Čokoládový řez a káva</b><span>2268 × 4032 px · 1,4 MB</span><a class="dl" href="assets/gmaps-original/putra-google-maps-25-cokoladovy-rez-a-kava.jpg" download="putra-google-maps-25-cokoladovy-rez-a-kava.jpg">Stáhnout originál ↓</a></figcaption></figure>
+    <figure class="ph" data-own="false"><a href="assets/gmaps-original/putra-google-maps-26-interier-okno-a-latky.jpg" target="_blank" rel="noopener"><img src="shots/gmaps/putra-google-maps-26-interier-okno-a-latky.webp" alt="Interiér s latěmi – fotka z Google Maps" loading="lazy"></a>
+      <figcaption><b>Interiér s latěmi</b><span>3024 × 4032 px · 1,7 MB</span><a class="dl" href="assets/gmaps-original/putra-google-maps-26-interier-okno-a-latky.jpg" download="putra-google-maps-26-interier-okno-a-latky.jpg">Stáhnout originál ↓</a></figcaption></figure>
+    <figure class="ph" data-own="false"><a href="assets/gmaps-original/putra-google-maps-27-brownie-a-pain-au-chocolat.jpg" target="_blank" rel="noopener"><img src="shots/gmaps/putra-google-maps-27-brownie-a-pain-au-chocolat.webp" alt="Brownie a pain au chocolat – fotka z Google Maps" loading="lazy"></a>
+      <figcaption><b>Brownie a pain au chocolat</b><span>1536 × 2048 px · 289 kB</span><a class="dl" href="assets/gmaps-original/putra-google-maps-27-brownie-a-pain-au-chocolat.jpg" download="putra-google-maps-27-brownie-a-pain-au-chocolat.jpg">Stáhnout originál ↓</a></figcaption></figure>
+    <figure class="ph" data-own="true"><a href="assets/gmaps-original/putra-google-maps-28-zidle-ve-svetle.jpg" target="_blank" rel="noopener"><img src="shots/gmaps/putra-google-maps-28-zidle-ve-svetle.webp" alt="Židle ve světle – fotka z Google Maps" loading="lazy"></a>
+      <figcaption><b>Židle ve světle</b><em class="own">od majitelky</em><span>7902 × 4444 px · 16,2 MB</span><a class="dl" href="assets/gmaps-original/putra-google-maps-28-zidle-ve-svetle.jpg" download="putra-google-maps-28-zidle-ve-svetle.jpg">Stáhnout originál ↓</a></figcaption></figure>
+  </div>
+  <p class="note">Autorská práva: fotky od zákazníků patří jejich autorům. Než je použijete na webu, ověřte si to s Petrou, případně požádejte autory o svolení. Fotky od majitelky jsou její.</p>
+</section>
+<script>
+(function(){var bs=[].slice.call(document.querySelectorAll('.gmf button')),cs=[].slice.call(document.querySelectorAll('.gm .ph'));
+bs.forEach(function(b){b.addEventListener('click',function(){bs.forEach(function(x){x.setAttribute('aria-pressed',x===b)});var f=b.dataset.f;cs.forEach(function(c){var o=c.dataset.own==='true';c.hidden=f==='own'?!o:f==='cust'?o:false})})})})();
+</script>
+
+<section id="reserse">
+  <p class="eyebrow">Co jsem sesbíral</p>
+  <h2>Rešerše</h2>
+  <div class="grid3">
+    <div class="box"><h3>putra.cz (Framer, 1 stránka)</h3>
+      <dl class="kv"><dt>H1</dt><dd>Místo plné poctivých chutí</dd><dt>Nabídka</dt><dd>Dort na objednávku, min. 3 dny předem</dd><dt>Formulář</dt><dd>Jméno, e-mail, varianta (dort/zákusky), den vyzvednutí, zpráva</dd><dt>Motto</dt><dd>putra (pod. jm.) = staročesky čerstvé máslo, z něm. „Butter“</dd><dt>Hodiny</dt><dd>Út 10–16, St–Čt 10–18, Pá 10–16, So–Po zavřeno</dd><dt>Adresa</dt><dd>Táborská 3238/102, 615 00 Brno-Židenice</dd><dt>Kontakt</dt><dd>Petra Kopalová, +420 773 558 819, IČO 21717435</dd></dl>
+      <p style="margin-top:10px">SEO dnes: žádné strukturované údaje, jen homepage v sitemapě, žádné fotky, font Poppins, obecný title.</p></div>
+    <div class="box"><h3>Instagram @putrabrno</h3>
+      <dl class="kv"><dt>Sledující</dt><dd>1 332</dd><dt>Bio</dt><dd>út 10–16 · st/čt 10–18 · pá 10–do vyprodání (16)</dd><dt>Hlas</dt><dd>osobní, v 1. osobě, jemný humor, ♡</dd></dl>
+      <ul style="margin-top:10px"><li>„Na začátku byl sen. Pak přišla výrobna, objednávky a účetnictví. Sen tam pořád někde je.“</li><li>„Pomalu se připravuju na novou verzi webu. Vánoční cukroví už si snad letos objednáte snáz. Bez mailů, sms, poštovních holubů.“</li><li>„Všude už se připravují na vánoční cukroví. Já už se připravuju taky. Psychicky.“</li><li>V létě zavírá kavárnu v horkách, objednávky jedou dál; letní zmrzlina (pistácie); pavlova dort; akce a festivaly (Tady to mám rád).</li></ul></div>
+    <div class="box"><h3>Google Maps</h3>
+      <dl class="kv"><dt>Kategorie</dt><dd>Cukrárna</dd><dt>Hodnocení</dt><dd>5,0 ★ (74 recenzí)</dd><dt>Fotky</dt><dd>32 (bez přihlášení dostupných 10)</dd></dl>
+      <ul style="margin-top:10px"><li>„Skvělý dezerty a pečivo, moc dobrá káva… milá majitelka… Tady je svět v pořádku!“ (Adam K.)</li><li>„Famózní dezerty, ten řez! … vodu volně k načepování ceníme.“ (Efflie)</li><li>„Menší útulná cukrárna/kavárna… vyšší ceny.“ (M. W.) → web by měl vysvětlit, proč (máslo, ruční práce).</li></ul></div>
+  </div>
+  <div class="box" style="margin-top:20px"><h3>Fotky použité v laboratoři (18, zoptimalizované do AVIF/WebP/JPEG)</h3>
+    <p>Zdroj: Google Maps (10) a Instagram @putrabrno (8). Vyřazeny: obrázky s nápisy („Tento týden zavřeno“, „V pátek bude otevřeno“), plakát Food Fest a karusel festivalu z cizího účtu.</p>
+    <div class="inv">
+      <figure><img src="shots/inv/okno-posezeni.webp" alt="" loading="lazy"><figcaption>okno-posezeni · Maps</figcaption></figure>
+      <figure><img src="shots/inv/slunce-na-okne.webp" alt="" loading="lazy"><figcaption>slunce-na-okne · Maps</figcaption></figure>
+      <figure><img src="shots/inv/vitrina-zakusky.webp" alt="" loading="lazy"><figcaption>vitrina · Maps</figcaption></figure>
+      <figure><img src="shots/inv/interier-pult.webp" alt="" loading="lazy"><figcaption>interier-pult · Maps</figcaption></figure>
+      <figure><img src="shots/inv/interier-svetlo.webp" alt="" loading="lazy"><figcaption>interier-svetlo · Maps</figcaption></figure>
+      <figure><img src="shots/inv/dort-cokoladovy.webp" alt="" loading="lazy"><figcaption>dort-cokoladovy · Maps</figcaption></figure>
+      <figure><img src="shots/inv/krabice-zakusku.webp" alt="" loading="lazy"><figcaption>krabice · Maps</figcaption></figure>
+      <figure><img src="shots/inv/kava-a-dezert.webp" alt="" loading="lazy"><figcaption>kava · Maps</figcaption></figure>
+      <figure><img src="shots/inv/tulipany-dezerty.webp" alt="" loading="lazy"><figcaption>tulipany · Maps</figcaption></figure>
+      <figure><img src="shots/inv/malinovy-dezert.webp" alt="" loading="lazy"><figcaption>malinovy · Maps</figcaption></figure>
+      <figure><img src="shots/inv/pusinky.webp" alt="" loading="lazy"><figcaption>pusinky · IG 3072px</figcaption></figure>
+      <figure><img src="shots/inv/mini-pavlova.webp" alt="" loading="lazy"><figcaption>mini-pavlova · IG 3700px</figcaption></figure>
+      <figure><img src="shots/inv/dort-zdobeni.webp" alt="" loading="lazy"><figcaption>dort-zdobeni · IG</figcaption></figure>
+      <figure><img src="shots/inv/pavlova-dort.webp" alt="" loading="lazy"><figcaption>pavlova-dort · reel 640px</figcaption></figure>
+      <figure><img src="shots/inv/tartaletka-jahoda.webp" alt="" loading="lazy"><figcaption>tartaletka · reel 640px</figcaption></figure>
+      <figure><img src="shots/inv/zmrzlina-pistacie.webp" alt="" loading="lazy"><figcaption>zmrzlina · reel 640px</figcaption></figure>
+      <figure><img src="shots/inv/levandule.webp" alt="" loading="lazy"><figcaption>levandule · reel 640px</figcaption></figure>
+      <figure><img src="shots/inv/trava-pred-putrou.webp" alt="" loading="lazy"><figcaption>trava · reel 640px</figcaption></figure>
+    </div>
+    <p style="margin-top:14px"><b>Mezery:</b> Maps bez přihlášení ukáže jen 10 z 32 fotek; Instagram bez přihlášení jen 12 posledních příspěvků a nepustí k highlightům („nabídka“, „vy!“); z reelů jsou jen obálky 640 px. Pro produkci doporučuji originály přímo od Petry, hlavně celé fotky dortů.</p>
+  </div>
+</section>
+
+<section id="smery">
+  <p class="eyebrow">Inspirační knihovna (49 webů)</p>
+  <h2>Směry, které sedí na pekárnu</h2>
+  <p class="lead">Pro teplou, řemeslnou a trochu hipsterskou pekárnu jsem hledal materiálnost (papír, dřevo, zrno), fotku jako hlavní rétoriku a lidský tón. Techno-noir, 3D rendery a aurora gradienty jsem vyřadil.</p>
+  <div class="dirs">
+    <div class="dir"><img src="shots/insp/graft.webp" alt="" loading="lazy" onerror="this.remove()"><div><span>→ V01</span><b>Graft · Warm Grain Overlay</b><p>Obrysové logo přes teplou interiérovou fotku = přesně Putra u okna.</p></div></div>
+    <div class="dir"><img src="shots/insp/daylight.webp" alt="" loading="lazy" onerror="this.remove()"><div><span>→ V02</span><b>Daylight · Print-Tech Paper</b><p>Papír, slunce, botanické kresby = příběh surovin.</p></div></div>
+    <div class="dir"><img src="shots/insp/omaivillas.webp" alt="" loading="lazy" onerror="this.remove()"><div><span>→ V03</span><b>Omai Villas · Editorial Serif Luxe</b><p>Jedna zlatá fotka, prostrkaný serif, pohostinnost.</p></div></div>
+    <div class="dir"><img src="shots/insp/aerodynamics.webp" alt="" loading="lazy" onerror="this.remove()"><div><span>→ V03</span><b>Aerodynamics · widget na horizontu</b><p>Rezervační lišta → poptávka dortu přímo v hero.</p></div></div>
+    <div class="dir"><img src="shots/insp/motiondev.webp" alt="" loading="lazy" onerror="this.remove()"><div><span>→ V04</span><b>Motion · Bright Terminal Gradient</b><p>Plochá žlutá = máslo; terminál a rastr = hipster twist.</p></div></div>
+    <div class="dir"><img src="shots/insp/tresmares.webp" alt="" loading="lazy" onerror="this.remove()"><div><span>→ V05</span><b>Tresmares · halftone na papíře</b><p>Obří grotesk + rastrová fotka mizející do papíru.</p></div></div>
+    <div class="dir"><img src="shots/insp/nrgdatacenter.webp" alt="" loading="lazy" onerror="this.remove()"><div><span>→ V05</span><b>NRG · billboard na kostním papíře</b><p>Dvouřádkový billboard + zaoblený mediální blok.</p></div></div>
+    <div class="dir rej"><img src="shots/insp/biograph.webp" alt="" loading="lazy" onerror="this.remove()"><div><span>zvažováno</span><b>Biograph · Nocturne</b><p>Krásné, ale Putra zavírá v 16–18 h; noc nesedí.</p></div></div>
+  </div>
+</section>
+
+<section id="zaklad">
+  <p class="eyebrow">Společné pro všech 10 verzí</p>
+  <h2>SEO a výkon</h2>
+  <div class="grid2">
+    <div class="box"><h3>SEO</h3><ul>
+      <li>JSON-LD <code>Bakery</code> + <code>CafeOrCoffeeShop</code>: adresa, GPS, otevírací doba, telefon, IČO, zakladatelka, Instagram, odkaz na mapu, <code>hasMenu</code></li>
+      <li>JSON-LD <code>FAQPage</code> (dort předem, cukroví, posezení, kde nás najdete)</li>
+      <li>Title „Putra – cukrárna a dorty na objednávku | Brno-Židenice“, popisek 150 znaků, canonical, Open Graph 1200×630, geo meta</li>
+      <li><code>lang="cs"</code>, jeden H1 s klíčovými slovy, sémantické sekce, česká alt textová pole u všech fotek, slugy fotek česky</li>
+      <li>Hodnocení 5,0 záměrně <i>není</i> ve schema.org (Google u vlastních LocalBusiness recenzí rich result nezobrazí a hrozí spam); je jen jako text</li>
+      <li>Do produkce: podstránky /dorty-na-objednavku, /vanocni-cukrovi-brno, /nabidka; Google Business Profile odkaz „Objednat“; absolutní URL v og:image</li></ul></div>
+    <div class="box"><h3>Výkon</h3><ul>
+      <li>100% statické HTML, CSS inline, žádný framework; JS jen pár set bajtů (stav otevřeno, záložky, krabička)</li><li><b>Lighthouse mobil (simulované 4G):</b> výkon 95–100, přístupnost/best practices/SEO 100 u všech patnácti verzí; LCP 1,5–2,3 s, TBT 0 ms, CLS ≤ 0,05</li>
+      <li>Fotky v AVIF → WebP → JPEG přes <code>&lt;picture&gt;</code> se <code>srcset</code>/<code>sizes</code>; hero s <code>fetchpriority="high"</code> a preloadem, ostatní lazy</li>
+      <li>Rozměry u všech obrázků (bez CLS), barevný placeholder z dominantní barvy</li>
+      <li>Písma self-hostovaná a osekaná jen na češtinu (latin-ext soubory −70 až −95 %), u variabilních písem zafixovaná optická velikost; max. 2 rodiny, <code>font-display: swap</code>, žádný render-blocking požadavek na Google</li>
+      <li>Mapa jako odkaz místo iframe (úspora ~500 kB)</li>
+      <li>Živý stav „Otevřeno · zavíráme v 16:00“ počítaný v čase Europe/Prague</li></ul></div>
+  </div>
+</section>
+
+<section id="vymysleno">
+  <p class="eyebrow">Pozor, fikce</p>
+  <h2>Co je vymyšlené (k ověření s Petrou)</h2>
+  <div class="box"><ul>
+    <li><b>Celý lístek a ceny</b>: větrník 89, pistáciový řez 95, mini pavlova 99, choux 85, tartaletka 89, pusinky 45, šnek 65, croissant 55, babka 75, espresso 55, flat white 79…</li>
+    <li><b>Dorty od 1 290 Kč</b>, velikosti Ø 18/22 cm a počty porcí</li>
+    <li><b>Vánoční cukroví</b>: 690 Kč / 0,5 kg, 1 290 Kč / 1 kg, uzávěrka 10. 12., výdej 18.–22. 12., druhy</li>
+    <li><b>Dodavatelé</b>: vejce z farmy na Vysočině, moravský mlýn, ovoce ze Zelného trhu, brněnská pražírna, máslo 82 %</li>
+    <li><b>Služba „odložíme k vyzvednutí“</b> (V08) a časové okno vyzvednutí</li>
+    <li>Příklady vět ve slovníku (V06) a text dopisu (V09), který vychází z jejích IG popisků</li>
+    <li>Formuláře nic neodesílají (lab), jen ukážou potvrzení</li></ul></div>
+</section>
+
+<footer>Putra Lab · září 2026 · lokální složka <code>~/putra-lab</code> · zdroj stránek v <code>src/</code>, build <code>node tools/build.js</code></footer>
+</div>
+<script>
+fetch('lh/scores.json').then(function(r){return r.json()}).then(function(s){document.querySelectorAll('[data-lh]').forEach(function(el){var x=s[el.dataset.lh];if(!x)return;
+el.innerHTML=[['Výkon',x.p],['Přístupnost',x.a],['Best practices',x.b],['SEO',x.s]].map(function(k){return '<span class="'+(k[1]<90?'warn':'')+'">'+k[0]+' '+k[1]+'</span>'}).join('')+'<span>LCP '+x.lcp+'</span><span>CLS '+x.cls+'</span>'})}).catch(function(){});
+</script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="cs">
+<head>
+{{head}}
+{{fonts:https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Courier+Prime&display=swap}}
+<style>
+:root{--desk:#d9c7ab;--paper:#fdf9f1;--ink:#2b2420;--ink2:#6e6258;--blue:#2c4a8c;--red:#b33a2a;--hand:"Caveat",cursive;--serif:"Lora",Georgia,serif;--mono:"Courier Prime",ui-monospace,monospace}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font:400 18px/1.7 var(--serif);color:var(--ink);background:var(--desk);-webkit-font-smoothing:antialiased;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.5' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .33 0 0 0 0 .2 0 0 0 .12 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E")}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{color:var(--blue)}
+.skip{position:absolute;left:-999px}.skip:focus{left:16px;top:16px;z-index:99;background:#fff;padding:8px 12px}
+.desk{max-width:1200px;margin:0 auto;padding:clamp(16px,3vw,40px) clamp(12px,3vw,32px) 80px;position:relative}
+nav.top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:6px 4px 20px}
+nav.top .logo{width:84px;height:auto;color:var(--ink)}
+nav.top ul{display:flex;gap:22px;list-style:none;padding:0;font:700 24px var(--hand)}
+nav.top ul a{color:var(--ink);text-decoration:none}nav.top ul a:hover{color:var(--red)}
+/* polaroids + tape */
+.pol{position:relative;background:#fff;padding:10px 10px 44px;box-shadow:0 12px 24px -10px rgba(60,40,20,.45);width:min(260px,70vw)}
+.pol .ph{aspect-ratio:1;overflow:hidden;background:#eee}
+.pol figcaption{position:absolute;left:0;right:0;bottom:6px;text-align:center;font:700 22px/1 var(--hand);color:var(--ink)}
+.tape::before{content:"";position:absolute;top:-14px;left:50%;width:96px;height:28px;transform:translateX(-50%) rotate(-4deg);background:rgba(240,213,150,.75);box-shadow:0 1px 2px rgba(0,0,0,.12);z-index:2}
+.tape.pink::before{background:rgba(236,170,170,.7)}
+.tape.blue::before{background:rgba(160,190,220,.7)}
+/* hero letter */
+.hero{display:grid;grid-template-columns:1fr 1.25fr .9fr;gap:24px;align-items:start}
+.hero .l1{transform:rotate(-5deg);margin-top:40px;justify-self:end}
+.hero .l2{transform:rotate(4deg);margin-top:120px}
+.hero .l3{transform:rotate(-2deg);margin:14px 0 0 30px}
+.letter{background:var(--paper);padding:clamp(28px,4vw,52px) clamp(22px,4vw,48px);box-shadow:0 20px 40px -20px rgba(60,40,20,.5);position:relative;
+background-image:repeating-linear-gradient(180deg,transparent 0 33px,rgba(44,74,140,.12) 33px 34px);background-position:0 20px}
+.letter::before{content:"";position:absolute;top:0;bottom:0;left:40px;width:1px;background:rgba(179,58,42,.3)}
+.letter h1{font:700 clamp(40px,4.4vw,60px)/1 var(--hand);color:var(--blue);margin-bottom:14px}
+.letter h1 span{display:block;font:italic 400 17px var(--serif);color:var(--ink2);margin-top:8px}
+.letter p{margin-bottom:14px;line-height:34px}
+.letter .hand{font:500 28px/1.1 var(--hand);color:var(--blue)}
+.sig{font:700 44px/1 var(--hand);color:var(--blue);margin-top:6px}
+.st{font:700 24px var(--hand);color:var(--red)}.st[data-open=true]{color:#2f7a3f}
+/* section titles */
+h2.hand{font:700 clamp(40px,5vw,64px)/1 var(--hand);color:var(--ink);margin:clamp(70px,9vw,120px) 0 24px;text-align:center}
+h2.hand small{display:block;font:italic 400 17px var(--serif);color:var(--ink2);margin-top:6px}
+/* menu index card */
+.menurow{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:start}
+.card{background:#fffdf7;padding:28px 30px 30px;box-shadow:0 16px 30px -16px rgba(60,40,20,.5);transform:rotate(-1deg);position:relative;
+background-image:linear-gradient(180deg,transparent 58px,rgba(179,58,42,.5) 58px 60px,transparent 60px),repeating-linear-gradient(180deg,transparent 0 31px,rgba(44,74,140,.16) 31px 32px);background-position:0 0,0 60px}
+.card h3{font:700 34px/1 var(--hand);margin-bottom:22px;color:var(--red)}
+.card li{list-style:none;display:flex;justify-content:space-between;gap:12px;font:500 25px/32px var(--hand)}
+.card ul{padding:0}
+.card li b{font-weight:700;color:var(--blue);white-space:nowrap}
+.card .note{font:italic 400 15px var(--serif);color:var(--ink2);margin-top:14px}
+.stack{display:grid;gap:30px;justify-items:center}
+.stack .pol:nth-child(1){transform:rotate(3deg)}
+.stack .pol:nth-child(2){transform:rotate(-4deg)}
+/* post-it + receipt */
+.orderrow{display:grid;grid-template-columns:.8fr 1.2fr .8fr;gap:30px;align-items:start}
+.postit{background:#fbe27c;padding:22px 24px 26px;box-shadow:0 14px 20px -12px rgba(60,40,20,.5);transform:rotate(-3deg);font:500 26px/1.25 var(--hand)}
+.postit h3{font:700 32px var(--hand);margin-bottom:8px}
+.postit.green{background:#cfe8b8;transform:rotate(2deg);margin-top:30px}
+.receipt{background:#fff;font:400 15px/1.5 var(--mono);padding:26px 26px 34px;box-shadow:0 20px 30px -18px rgba(60,40,20,.5);position:relative;
+-webkit-mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/16px 51% repeat-x,linear-gradient(#000 0 0) top/100% calc(100% - 8px) no-repeat;
+mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/16px 51% repeat-x,linear-gradient(#000 0 0) top/100% calc(100% - 8px) no-repeat}
+.receipt h3{text-align:center;font:700 17px var(--mono);letter-spacing:.12em}
+.receipt .c{text-align:center;color:#666;font-size:13px}
+.receipt hr{border:0;border-top:1px dashed #999;margin:14px 0}
+.receipt label{display:grid;grid-template-columns:120px 1fr;gap:8px;align-items:baseline;padding:4px 0;text-transform:uppercase;font-size:13px}
+.receipt input,.receipt select,.receipt textarea{font:400 15px var(--mono);border:0;border-bottom:1px dotted #777;background:transparent;padding:3px 0;color:var(--ink);min-width:0}
+.receipt input:focus,.receipt select:focus,.receipt textarea:focus{outline:none;background:#fff6d8}
+.receipt button{display:block;width:100%;margin-top:18px;font:700 15px var(--mono);letter-spacing:.1em;text-transform:uppercase;background:var(--ink);color:#fff;border:0;padding:14px;cursor:pointer}
+.receipt.done{animation:print .9s steps(8)}
+@keyframes print{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
+/* xmas gift tag */
+.tag{margin:clamp(70px,9vw,110px) auto 0;max-width:760px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;background:#f4e3c3;padding:30px 36px 30px 60px;position:relative;clip-path:polygon(38px 0,100% 0,100% 100%,38px 100%,0 50%);box-shadow:0 10px 20px rgba(0,0,0,.1)}
+.tag::before{content:"";position:absolute;left:24px;top:50%;width:16px;height:16px;border-radius:50%;background:var(--desk);transform:translateY(-50%);box-shadow:inset 0 1px 2px rgba(0,0,0,.3)}
+.tag h2{font:700 44px/1 var(--hand);color:var(--red)}
+.tag p{font-size:16px;margin-top:6px}
+.tag a{font:700 26px var(--hand);white-space:nowrap}
+/* visit */
+.visit{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;margin-top:clamp(70px,9vw,110px)}
+.env{background:#f7efe0;padding:34px 38px;box-shadow:0 16px 30px -16px rgba(60,40,20,.5);position:relative;transform:rotate(1deg)}
+.env .stamp{position:absolute;right:22px;top:20px;width:92px;height:92px;border:3px double var(--red);border-radius:50%;display:grid;place-items:center;text-align:center;font:700 12px/1.2 var(--mono);color:var(--red);transform:rotate(12deg);opacity:.85}
+.env address{font:500 32px/1.25 var(--hand);font-style:normal;margin-top:40px}
+.env p{font-size:15px;color:var(--ink2);margin-top:12px}
+footer{text-align:center;margin-top:70px;font:500 24px var(--hand);color:var(--ink2)}
+@media (max-width:900px){
+ nav.top ul{display:none}
+ .hero{grid-template-columns:1fr}.hero .l1,.hero .l2{display:none}.hero .l3{margin:10px auto 0;transform:rotate(-2deg)}
+ .menurow,.orderrow,.visit{grid-template-columns:1fr}
+ .stack{grid-template-columns:1fr 1fr}.stack .pol{width:100%}
+ .tag{grid-template-columns:1fr;padding-left:56px}
+ .postit.green{margin-top:0}
+ .receipt label{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){.receipt.done{animation:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<a class="skip" href="#obsah">Přeskočit na obsah</a>
+<div class="desk">
+<nav class="top" aria-label="Hlavní">
+  <a href="#" aria-label="Putra – domů">{{logo}}</a>
+  <ul><li><a href="#vitrina">co peču</a></li><li><a href="#objednavka">objednat</a></li><li><a href="#cukrovi">cukroví</a></li><li><a href="#navsteva">kde jsem</a></li></ul>
+</nav>
+
+<header class="hero">
+  <figure class="pol tape l1"><div class="ph">{{pic:pusinky|260px}}</div><figcaption>ranní pusinky</figcaption></figure>
+  <article class="letter" aria-labelledby="h1">
+    <h1 id="h1">Ahoj, tady Petra. <span>Putra – cukrárna a dorty na objednávku, Táborská 102, Brno-Židenice</span></h1>
+    <p>Na začátku byl sen. Pak přišla výrobna, objednávky a účetnictví. <span class="hand">Sen tam pořád někde je.</span></p>
+    <p>Putra je staročesky čerstvé máslo — a přesně z toho peču. Zákusky do vitríny, dorty na objednávku, buchty a v zimě cukroví. Žádné polotovary, žádné zkratky. Jen máslo, vejce, dobrá mouka a ovoce, které zrovna voní.</p>
+    <p>Přijďte si sednout k oknu na kávu, nebo si napište o dort. Ráda vám upeču něco, na co se nezapomíná.</p>
+    <p class="sig">Petra ♡</p>
+    <p class="st" data-status>Út–Pá od 10:00</p>
+  </article>
+  <div>
+    <figure class="pol tape pink l2"><div class="ph">{{pic:okno-posezeni|260px||eager}}</div><figcaption>moje okno</figcaption></figure>
+    <figure class="pol tape blue l3"><div class="ph">{{pic:mini-pavlova|260px}}</div><figcaption>pavlova ☺</figcaption></figure>
+  </div>
+</header>
+
+<main id="obsah">
+<h2 class="hand" id="vitrina">Co tento týden peču <small>vitrína se mění podle sezóny i nálady</small></h2>
+<div class="menurow">
+  <div class="card">
+    <h3>Vitrína · podzim 2026</h3>
+    <ul>
+      <li>větrník s karamelem <b>89,-</b></li><li>pistáciový řez <b>95,-</b></li><li>mini pavlova <b>99,-</b></li><li>malinové choux <b>85,-</b></li><li>tartaletka s jahodou <b>89,-</b></li><li>skořicový šnek <b>65,-</b></li><li>čokoládová babka <b>75,-</b></li><li>flat white <b>79,-</b></li><li>voda z kohoutku <b>zdarma</b></li>
+    </ul>
+    <p class="note">V pátek peču do vyprodání. Když něco dojde, nezlobte se — zítra bude znova.</p>
+  </div>
+  <div class="stack">
+    <figure class="pol tape"><div class="ph">{{pic:malinovy-dezert|(max-width:900px) 46vw, 260px}}</div><figcaption>maliny!</figcaption></figure>
+    <figure class="pol tape blue"><div class="ph">{{pic:kava-a-dezert|(max-width:900px) 46vw, 260px}}</div><figcaption>kafe u okna</figcaption></figure>
+  </div>
+</div>
+
+<h2 class="hand" id="objednavka">Dort na objednávku <small>stačí mi to říct 3 dny předem · od 1 290 Kč</small></h2>
+<div class="orderrow">
+  <div class="postit"><h3>Jak to funguje</h3>1. napíšete, co slavíte<br>2. já navrhnu chuť a cenu<br>3. vy si dort vyzvednete<br>4. všichni brečí štěstím</div>
+  <form class="receipt" aria-label="Objednávkový formulář" onsubmit="event.preventDefault();this.classList.remove('done');void this.offsetWidth;this.classList.add('done');this.querySelector('button').textContent='*** DĚKUJI, OZVU SE ***'">
+    <h3>PUTRA · OBJEDNÁVKA</h3>
+    <p class="c">Táborská 3238/102, Brno · IČO 21717435</p>
+    <hr>
+    <label>Jméno<input name="jmeno" autocomplete="name" required></label>
+    <label>E-mail<input type="email" name="email" autocomplete="email" required></label>
+    <label>Varianta<select name="varianta"><option>Dort</option><option>Zákusky</option><option>Vánoční cukroví</option></select></label>
+    <label>Vyzvednutí<input type="date" name="den" required></label>
+    <label>Přání<textarea name="zprava" rows="2" placeholder="porce, chuť, nápis…"></textarea></label>
+    <hr>
+    <p class="c">ODPOVÍDÁM DO 24 H · DÍKY ZA DŮVĚRU</p>
+    <button type="submit">Odeslat objednávku</button>
+  </form>
+  <figure class="pol tape pink" style="transform:rotate(3deg);justify-self:center"><div class="ph">{{pic:dort-zdobeni|(max-width:900px) 70vw, 260px}}</div><figcaption>zdobím váš dort</figcaption></figure>
+</div>
+
+<section class="tag" id="cukrovi" aria-labelledby="h-x">
+  <div><h2 id="h-x">Cukroví 2026</h2><p>Všude už se připravují na vánoční cukroví. Já už se připravuju taky. Psychicky. Letos ho objednáte tady — bez mailů, SMS a poštovních holubů. 0,5 kg / 690 Kč, 1 kg / 1 290 Kč, objednávky do 10. 12., výdej 18.–22. 12.</p></div>
+  <a href="#objednavka">zamluvit →</a>
+</section>
+
+<section class="visit" id="navsteva" aria-labelledby="h-v">
+  <div class="env">
+    <div class="stamp" aria-hidden="true">PUTRA<br>BRNO<br>★ 5,0 ★</div>
+    <h2 id="h-v" style="font:italic 400 17px var(--serif);color:var(--ink2)">Najdete mě tady:</h2>
+    <address>Putra<br>Táborská 3238/102<br>615 00 Brno-Židenice</address>
+    <p><a href="https://maps.google.com/?cid=6744509639000696065" rel="noopener">otevřít v mapách</a> · <a href="tel:+420773558819">773 558 819</a> · <a href="https://www.instagram.com/putrabrno/" rel="noopener">@putrabrno</a></p>
+  </div>
+  <div class="postit green"><h3>Otevřeno</h3>út 10–16<br>st 10–18<br>čt 10–18<br>pá 10–16 (do vyprodání)<br>so–po zavřeno ☺</div>
+</section>
+</main>
+<footer>s láskou a máslem, Petra Kopalová · Putra 2026</footer>
+</div>
+{{status}}
+</body>
+</html>

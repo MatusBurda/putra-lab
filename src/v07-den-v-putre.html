@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="cs">
+<head>
+{{head:Den v Putře – cukrárna a dorty na objednávku, Brno-Židenice|Od prvního másla v 7 ráno po poslední choux v 16:00. Malá cukrárna a kavárna na Táborské v Brně: zákusky, dorty na objednávku, vánoční cukroví a káva u okna.}}
+{{preload:okno-posezeni|100vw}}
+{{fonts:https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,500;12..96,700&display=swap}}
+<style>
+:root{--cream:#fbf4e8;--ink:#1c1612;--warm:#f0b35b;--f:"Bricolage Grotesque",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0}
+html{scroll-snap-type:y proximity;scroll-behavior:smooth}
+body{font:400 17px/1.5 var(--f);color:var(--cream);background:var(--ink);-webkit-font-smoothing:antialiased}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{color:inherit}
+.skip{position:absolute;left:-999px}.skip:focus{left:16px;top:16px;z-index:99;background:#fff;color:#000;padding:8px 12px}
+/* chrome */
+.chrome{position:fixed;inset:0 0 auto;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:18px clamp(16px,3vw,36px);pointer-events:none}
+.chrome>*{pointer-events:auto}
+.chrome .logo{width:76px;height:auto;color:var(--cream);filter:drop-shadow(0 1px 8px rgba(0,0,0,.35))}
+.clock{display:flex;align-items:center;gap:12px;background:rgba(20,14,10,.35);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:8px 16px 8px 8px;border-radius:99px;font:500 15px var(--f);font-variant-numeric:tabular-nums}
+.clock svg{width:30px;height:30px}
+.clock .h,.clock .m{transform-origin:15px 15px;transition:transform .9s cubic-bezier(.3,.7,.2,1)}
+.order{background:var(--cream);color:var(--ink);text-decoration:none;font-weight:500;padding:10px 18px;border-radius:99px;font-size:15px}
+.bar{position:fixed;left:0;bottom:0;height:3px;background:var(--warm);z-index:20;width:0;transition:width .2s}
+/* frames */
+.f{position:relative;height:100svh;min-height:520px;scroll-snap-align:start;overflow:hidden;display:grid}
+.f.duo{grid-template-columns:1fr 1fr;gap:4px;background:var(--ink)}
+.f picture{position:relative;height:100%;min-height:0}
+.f.one picture{position:absolute;inset:0}
+.f::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(18,12,8,.62));pointer-events:none}
+.cap{position:absolute;z-index:2;left:clamp(16px,4vw,56px);bottom:clamp(28px,6vh,64px);max-width:min(640px,86vw);text-shadow:0 1px 20px rgba(0,0,0,.3)}
+.cap time{display:block;font:300 clamp(56px,9vw,132px)/.9 var(--f);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.cap h2,.cap h1{font:500 clamp(22px,2.6vw,36px)/1.15 var(--f);letter-spacing:-.015em;margin-top:10px}
+.cap p{margin-top:10px;font-size:17px;opacity:.9;max-width:44ch}
+.cap.r{left:auto;right:clamp(16px,4vw,56px);text-align:right}
+.hero .cap h1{font-size:clamp(40px,6vw,92px);line-height:.95;letter-spacing:-.04em;font-weight:700}
+.hero .cap time{font-size:clamp(20px,2vw,26px);font-weight:500;letter-spacing:0;opacity:.85}
+.hint{position:absolute;z-index:2;right:clamp(16px,3vw,36px);bottom:28px;font-size:14px;opacity:.85;display:flex;gap:10px;align-items:center}
+.hint::after{content:"";width:1px;height:36px;background:currentColor;animation:drop 2s ease-in-out infinite}
+@keyframes drop{0%,100%{transform:scaleY(.3);transform-origin:top}50%{transform:scaleY(1)}}
+.tag{position:absolute;z-index:2;top:84px;right:clamp(16px,4vw,56px);background:var(--cream);color:var(--ink);font-weight:500;font-size:14px;padding:6px 12px;border-radius:99px}
+/* closing frame with info */
+.close{position:relative;min-height:100svh;scroll-snap-align:start;display:grid;align-items:end}
+.close picture{position:absolute;inset:0}
+.close::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,12,8,.2),rgba(18,12,8,.75));z-index:1}
+.panel{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:20px;padding:120px clamp(16px,4vw,56px) 40px}
+.card{background:rgba(251,244,232,.94);color:var(--ink);border-radius:20px;padding:26px;backdrop-filter:blur(8px)}
+.card h2{font:700 30px/1 var(--f);letter-spacing:-.03em;margin-bottom:10px}
+.card p{font-size:16px;color:#5c5047}
+.card dl{display:grid;grid-template-columns:auto 1fr;gap:4px 18px;margin:10px 0;font-size:17px}
+.card dt{color:#7a6d62}
+.st{display:inline-block;margin-top:8px;font-weight:500}.st::before{content:"● ";color:#d27b2c}.st[data-open=true]::before{color:#2f8f4b}
+form{display:grid;gap:10px;margin-top:12px}
+input,select,textarea{font:inherit;font-size:16px;padding:12px 14px;border:1px solid rgba(28,22,18,.18);border-radius:12px;background:#fff;color:var(--ink);width:100%}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+button{font:500 16px var(--f);border:0;border-radius:99px;padding:14px;background:var(--ink);color:var(--cream);cursor:pointer}
+.pill{display:inline-block;margin-top:14px;background:var(--warm);color:var(--ink);text-decoration:none;font-weight:500;padding:12px 18px;border-radius:99px}
+footer{position:relative;z-index:2;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:0 clamp(16px,4vw,56px) 24px;font-size:14px;opacity:.85}
+@media (max-width:800px){
+ .f.duo{grid-template-columns:1fr;grid-template-rows:1fr 1fr}
+ .panel{grid-template-columns:1fr;padding-top:90px}
+ .clock span{display:none}.clock{padding:6px}
+ .tag{top:74px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.hint::after{animation:none}.clock .h,.clock .m{transition:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#info">Přeskočit na objednávku a kontakt</a>
+<div class="chrome">
+  <a href="#" aria-label="Putra – domů">{{logo}}</a>
+  <div class="clock" aria-hidden="true"><svg viewBox="0 0 30 30"><circle cx="15" cy="15" r="14" fill="rgba(251,244,232,.95)"/><line class="h" x1="15" y1="15" x2="15" y2="8" stroke="#1c1612" stroke-width="2.2" stroke-linecap="round"/><line class="m" x1="15" y1="15" x2="15" y2="5" stroke="#d27b2c" stroke-width="1.6" stroke-linecap="round"/></svg><span id="ct">07:00</span></div>
+  <a class="order" href="#info">Objednat dort</a>
+</div>
+<div class="bar" id="bar"></div>
+
+<main>
+<header class="f one hero" data-t="06:50">
+  {{pic:okno-posezeni|100vw||eager}}
+  <div class="cap"><time>Brno-Židenice, Táborská 102</time><h1>Den v Putře.</h1><p>Malá cukrárna a kavárna, kde se peče z pravého másla. Projděte si s námi jeden obyčejný den — od prvního plechu po poslední choux.</p></div>
+  <span class="hint">Posouvejte</span>
+</header>
+
+<section class="f duo" data-t="07:00" aria-labelledby="t1">
+  {{pic:dort-zdobeni|(max-width:800px) 100vw, 50vw}}{{pic:pusinky|(max-width:800px) 100vw, 50vw}}
+  <div class="cap"><time>07:00</time><h2 id="t1">Nejdřív máslo. Vždycky.</h2><p>Putra je staročesky čerstvé máslo. Pusinky jdou do trouby, dorty na objednávku dostávají první vrstvu krému.</p></div>
+</section>
+
+<section class="f one" data-t="09:30" aria-labelledby="t2">
+  {{pic:vitrina-zakusky|100vw}}
+  <div class="cap r"><time>09:30</time><h2 id="t2">Vitrína se plní.</h2><p>Větrníky s karamelem, pistáciový řez, choux, tartaletky. Každý týden trochu jinak — podle toho, co voní na Zelňáku.</p></div>
+</section>
+
+<section class="f one" data-t="10:00" aria-labelledby="t3">
+  {{pic:interier-svetlo|100vw}}
+  <span class="tag" data-status>Út–Pá od 10:00</span>
+  <div class="cap"><time>10:00</time><h2 id="t3">Otevíráme.</h2><p>Úterý a pátek do 16:00, středa a čtvrtek do 18:00.</p></div>
+</section>
+
+<section class="f duo" data-t="11:20" aria-labelledby="t4">
+  {{pic:kava-a-dezert|(max-width:800px) 100vw, 50vw}}{{pic:tulipany-dezerty|(max-width:800px) 100vw, 50vw}}
+  <div class="cap"><time>11:20</time><h2 id="t4">První flat white u okna.</h2><p>Káva z brněnské pražírny, voda z kohoutku zdarma. Nikdo nespěchá.</p></div>
+</section>
+
+<section class="f one" data-t="13:30" aria-labelledby="t5">
+  {{pic:slunce-na-okne|100vw}}
+  <div class="cap r"><time>13:30</time><h2 id="t5">Slunce se opře do parapetu.</h2></div>
+</section>
+
+<section class="f duo" data-t="14:45" aria-labelledby="t6">
+  {{pic:krabice-zakusku|(max-width:800px) 100vw, 50vw}}{{pic:mini-pavlova|(max-width:800px) 100vw, 50vw}}
+  <div class="cap"><time>14:45</time><h2 id="t6">Někdo si odnáší krabici na oslavu.</h2><p>Zákusky s sebou balíme do krabic, dorty na objednávku vydáváme po domluvě.</p></div>
+</section>
+
+<section class="f duo" data-t="15:50" aria-labelledby="t7">
+  {{pic:malinovy-dezert|(max-width:800px) 100vw, 50vw}}{{pic:tartaletka-jahoda|(max-width:800px) 100vw, 50vw}}
+  <div class="cap"><time>15:50</time><h2 id="t7">Poslední malinové choux.</h2><p>V pátek pečeme do vyprodání. Kdo dřív přijde…</p></div>
+</section>
+
+<section class="f duo" data-t="16:00" aria-labelledby="t8">
+  {{pic:trava-pred-putrou|(max-width:800px) 100vw, 50vw}}{{pic:levandule|(max-width:800px) 100vw, 50vw}}
+  <div class="cap r"><time>16:00</time><h2 id="t8">Vyprodáno. Zítra znovu.</h2><p>A mezitím se v zadní místnosti chystá vánoční cukroví.</p></div>
+</section>
+
+<section class="close" id="info" data-t="16:05" aria-label="Objednávky a kontakt">
+  {{pic:dort-cokoladovy|100vw}}
+  <div class="panel">
+    <div class="card">
+      <h2>Dort na objednávku</h2>
+      <p>Od 1 290 Kč, nejméně 3 dny předem. Ozveme se do 24 hodin.</p>
+      <form onsubmit="event.preventDefault();this.querySelector('button').textContent='Odesláno ♡'">
+        <div class="two"><input name="jmeno" placeholder="Jméno" aria-label="Jméno" autocomplete="name" required><input type="email" name="email" placeholder="E-mail" aria-label="E-mail" autocomplete="email" required></div>
+        <div class="two"><select name="varianta" aria-label="Varianta"><option>Dort</option><option>Zákusky</option><option>Vánoční cukroví</option></select><input type="date" name="den" aria-label="Den vyzvednutí" required></div>
+        <textarea name="zprava" rows="2" placeholder="Pro kolik lidí, jaká chuť…" aria-label="Zpráva"></textarea>
+        <button type="submit">Odeslat</button>
+      </form>
+    </div>
+    <div class="card" id="cukrovi">
+      <h2>Vánoční cukroví 2026</h2>
+      <p>Linecké, vanilkové rohlíčky, pracny, kokosky. 0,5 kg za 690 Kč, 1 kg za 1 290 Kč. Objednávky do 10. 12., výdej 18.–22. 12.</p>
+      <a class="pill" href="#info">Zamluvit krabici</a>
+      <h2 style="margin-top:22px;font-size:22px">Ve vitríně</h2>
+      <p>Větrník 89 Kč · pistáciový řez 95 Kč · mini pavlova 99 Kč · choux 85 Kč · skořicový šnek 65 Kč · flat white 79 Kč</p>
+    </div>
+    <div class="card" id="navsteva">
+      <h2>Táborská 3238/102</h2>
+      <p>615 00 Brno-Židenice · <a href="tel:+420773558819">773 558 819</a></p>
+      <dl><dt>Út</dt><dd>10:00–16:00</dd><dt>St–Čt</dt><dd>10:00–18:00</dd><dt>Pá</dt><dd>10:00–16:00, do vyprodání</dd><dt>So–Po</dt><dd>zavřeno</dd></dl>
+      <span class="st" data-status></span><br>
+      <a class="pill" href="https://maps.google.com/?cid=6744509639000696065" rel="noopener">Navigovat</a>
+    </div>
+  </div>
+  <footer><span>Putra – výrobna a sladké pečení · Petra Kopalová · IČO 21717435</span><span>5,0 ★ na Google · <a href="https://www.instagram.com/putrabrno/" rel="noopener">@putrabrno</a></span></footer>
+</section>
+</main>
+<script>
+(function(){var ct=document.getElementById('ct'),h=document.querySelector('.clock .h'),m=document.querySelector('.clock .m'),bar=document.getElementById('bar');
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&e.intersectionRatio>.5){var t=e.target.dataset.t.split(':'),H=+t[0],M=+t[1];ct.textContent=e.target.dataset.t;h.style.transform='rotate('+((H%12)*30+M/2)+'deg)';m.style.transform='rotate('+(M*6)+'deg)'}})},{threshold:[.5,.6]});
+document.querySelectorAll('[data-t]').forEach(function(s){io.observe(s)});
+addEventListener('scroll',function(){var d=document.documentElement;bar.style.width=(d.scrollTop/(d.scrollHeight-d.clientHeight)*100)+'%'},{passive:true});})();
+</script>
+{{status}}
+</body>
+</html>

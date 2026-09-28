@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="cs">
+<head>
+{{head}}
+{{fonts:https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Work+Sans:wght@400;500;700&display=swap}}
+<style>
+:root{--paper:#f6f0e3;--pink:#ff4fa7;--blue:#2d5bd8;--yellow:#ffd900;--ink:#1f1b3a;--d:"Bagel Fat One",system-ui,sans-serif;--f:"Work Sans",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font:400 17px/1.55 var(--f);color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased;overflow-x:hidden;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 .2 0 0 0 0 .15 0 0 0 0 .3 0 0 0 .08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E")}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{color:inherit}
+.skip{position:absolute;left:-999px}.skip:focus{left:16px;top:16px;z-index:99;background:#fff;padding:8px 12px}
+.wrap{max-width:1280px;margin:0 auto;padding:0 clamp(16px,3vw,40px)}
+/* ink duotone */
+.duo{position:relative;overflow:hidden;background:var(--pink)}
+.duo img{filter:grayscale(1) contrast(1.35) brightness(1.08);mix-blend-mode:multiply}
+.duo::after{content:"";position:absolute;inset:0;background:radial-gradient(circle,rgba(31,27,58,.22) 30%,transparent 34%) 0 0/4px 4px;mix-blend-mode:multiply;pointer-events:none}
+.duo.b{background:var(--blue)}.duo.b img{filter:grayscale(1) contrast(1.2) brightness(1.35)}
+.duo.y{background:var(--yellow)}
+.duo:hover img{filter:none;mix-blend-mode:normal}
+.mis{position:relative;display:inline-block;color:var(--blue);mix-blend-mode:multiply}
+.mis::after{content:attr(data-t);position:absolute;left:.04em;top:.03em;white-space:nowrap;color:var(--pink);mix-blend-mode:multiply;pointer-events:none}
+/* masthead */
+.mast{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 0;border-bottom:3px solid var(--ink);font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.06em}
+.mast .logo{width:80px;height:auto;color:var(--ink)}
+.mast nav{display:flex;gap:18px}
+.mast nav a{text-decoration:none}.mast nav a:hover{background:var(--yellow)}
+/* cover */
+.cover{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(20px,4vw,48px);align-items:center;padding:clamp(28px,5vw,64px) 0}
+.cover h1{font:400 clamp(64px,10.5vw,168px)/.84 var(--d);letter-spacing:-.02em}
+.cover h1 small{display:block;font:700 clamp(17px,1.5vw,21px)/1.35 var(--f);letter-spacing:0;color:var(--ink);margin-top:38px;max-width:36ch}
+.issue{display:inline-block;background:var(--ink);color:var(--paper);font:700 13px var(--f);letter-spacing:.14em;text-transform:uppercase;padding:6px 10px;margin-bottom:18px}
+.cov{position:relative}
+.cov .duo{aspect-ratio:4/5;border-radius:6px;transform:rotate(2deg)}
+.stk{position:absolute;display:grid;place-items:center;text-align:center;font:400 20px/1 var(--d);border-radius:50%;width:124px;height:124px;z-index:3;box-shadow:3px 4px 0 var(--ink)}
+.stk.s1{background:var(--yellow);left:-26px;top:30px;transform:rotate(-14deg)}
+.stk.s2{background:var(--blue);color:var(--paper);right:-10px;bottom:40px;transform:rotate(10deg);width:110px;height:110px;font-size:17px}
+.st{display:inline-block;margin-top:18px;background:var(--yellow);padding:4px 10px;font-weight:700;font-size:15px}
+.st[data-open=true]{background:#8fe3a2}
+/* marquee */
+.mq{overflow:hidden;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);background:var(--pink);color:var(--ink)}
+.mq div{display:flex;gap:28px;width:max-content;animation:mq 26s linear infinite;font:400 clamp(28px,3.4vw,44px)/1.3 var(--d);padding:6px 0}
+@keyframes mq{to{transform:translateX(-50%)}}
+/* pages */
+.pg{position:relative;padding:clamp(60px,8vw,110px) 0}
+.pn{position:absolute;top:22px;right:clamp(16px,3vw,40px);font:700 13px var(--f);letter-spacing:.14em}
+h2{font:400 clamp(44px,6.4vw,100px)/.88 var(--d);letter-spacing:-.015em}
+.collage{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:40px}
+.collage figure{position:relative}
+.collage figcaption{position:absolute;left:10px;bottom:10px;background:var(--paper);font-weight:700;font-size:14px;padding:3px 8px;border:2px solid var(--ink)}
+.c1{grid-column:1/6;aspect-ratio:4/5;transform:rotate(-1.5deg)}
+.c2{grid-column:6/10;aspect-ratio:1;margin-top:60px;transform:rotate(2deg)}
+.c3{grid-column:10/13;aspect-ratio:3/4;transform:rotate(-2deg)}
+.c4{grid-column:7/13;aspect-ratio:16/10;margin-top:-80px;transform:rotate(1deg)}
+.c5{grid-column:2/7;aspect-ratio:16/11;margin-top:-10px;transform:rotate(-1deg)}
+.collage .duo{height:100%}
+/* manifesto */
+.mani{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
+.mani div{border:3px solid var(--ink);padding:22px;background:var(--paper);box-shadow:6px 6px 0 var(--ink)}
+.mani div:nth-child(2){background:var(--yellow);transform:rotate(1deg)}
+.mani div:nth-child(3){background:#ffd3ea;transform:rotate(-1deg)}
+.mani b{display:block;font:400 34px/1 var(--d);margin-bottom:8px}
+/* coupons */
+.coupons{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:40px}
+.cp{position:relative;border:3px dashed var(--ink);padding:26px;background:var(--paper)}
+.cp::before{content:"✂";position:absolute;top:-19px;left:24px;font-size:26px;background:var(--paper);padding:0 6px;line-height:1}
+.cp h3{font:400 30px/1 var(--d);margin-bottom:14px;color:var(--blue)}
+.cp li{list-style:none;display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:2px dotted rgba(31,27,58,.35);font-weight:500}
+.cp ul{padding:0}
+.cp li b{font-weight:700}
+.cp.order{background:var(--yellow)}
+.cp form{display:grid;gap:10px}
+.cp .r{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cp input,.cp select,.cp textarea{font:inherit;font-weight:500;border:2px solid var(--ink);background:var(--paper);padding:11px 12px;border-radius:0;min-width:0;color:var(--ink)}
+.cp input:focus,.cp select:focus,.cp textarea:focus{outline:3px solid var(--pink);outline-offset:0}
+.cp button{font:400 24px var(--d);background:var(--ink);color:var(--yellow);border:0;padding:14px;cursor:pointer;box-shadow:4px 4px 0 var(--pink)}
+.cp button:hover{transform:translate(-1px,-1px);box-shadow:6px 6px 0 var(--pink)}
+/* xmas */
+.xm{background:var(--blue);color:var(--paper);border-top:3px solid var(--ink);border-bottom:3px solid var(--ink)}
+.xm .wrap{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center}
+.xm h2{color:var(--yellow)}
+.xm p{font-size:19px;margin-top:18px;max-width:40ch}
+.xm a{display:inline-block;margin-top:24px;background:var(--pink);color:var(--ink);text-decoration:none;font:400 24px var(--d);padding:12px 20px;box-shadow:4px 4px 0 var(--ink)}
+.xm .duo{aspect-ratio:1;border-radius:50%;border:3px solid var(--ink)}
+/* map */
+.visit{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.map{border:3px solid var(--ink);background:var(--paper);aspect-ratio:4/3;box-shadow:8px 8px 0 var(--pink)}
+.map svg{width:100%;height:100%}
+.visit dl{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:19px;margin:18px 0}
+.visit dt{font-weight:700}
+.visit address{font-style:normal;font-size:19px}
+footer{border-top:3px solid var(--ink);padding:18px 0;font-size:14px;font-weight:500}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media (max-width:860px){
+ .mast nav{display:none}
+ .cover,.xm .wrap,.visit,.coupons{grid-template-columns:1fr}
+ .mani{grid-template-columns:1fr}
+ .collage{grid-template-columns:1fr 1fr}.collage>*{grid-column:auto!important;margin-top:0!important}.c4{grid-column:1/-1!important}
+ .stk{width:96px;height:96px;font-size:16px}.stk.s1{left:-6px}
+ .cp .r{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){.mq div{animation:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<a class="skip" href="#obsah">Přeskočit na obsah</a>
+<div class="wrap">
+  <header class="mast">
+    <a href="#" aria-label="Putra – domů">{{logo}}</a>
+    <nav aria-label="Hlavní"><a href="#vitrina">Vitrína</a><a href="#objednavka">Objednat</a><a href="#cukrovi">Cukroví</a><a href="#navsteva">Kde?</a></nav>
+    <span>Zin č. 1 · podzim 2026</span>
+  </header>
+  <section class="cover" aria-labelledby="h1">
+    <div>
+      <span class="issue">Sladká tiskovina z Táborské</span>
+      <h1 id="h1"><span class="mis" data-t="Putra">Putra</span> <span class="mis" data-t="peče!">peče!</span>
+        <small>Malá cukrárna a kavárna v Brně-Židenicích. Zákusky z pravého másla, dorty na objednávku, vánoční cukroví a káva, u které se nikam nespěchá.</small></h1>
+      <span class="st" data-status>Út–Pá od 10:00</span>
+    </div>
+    <div class="cov">
+      <div class="stk s1">pravé<br>máslo!</div>
+      <div class="stk s2">5,0 ★<br>Google</div>
+      <div class="duo">{{pic:mini-pavlova|(max-width:860px) 92vw, 44vw||eager}}</div>
+    </div>
+  </section>
+</div>
+<div class="mq" aria-hidden="true"><div><span>cukroví ✺ dorty ✺ káva ✺ pusinky ✺ větrníky ✺ pavlova ✺ choux ✺ Židenice ✺</span><span>cukroví ✺ dorty ✺ káva ✺ pusinky ✺ větrníky ✺ pavlova ✺ choux ✺ Židenice ✺</span></div></div>
+
+<main id="obsah">
+<section class="pg wrap" id="vitrina" aria-labelledby="h-v">
+  <span class="pn">STR. 02–03</span>
+  <h2 id="h-v"><span class="mis" data-t="Co je">Co je</span><br>ve vitríně</h2>
+  <div class="collage">
+    <figure class="c1"><div class="duo">{{pic:vitrina-zakusky|(max-width:860px) 46vw, 40vw}}</div><figcaption>vitrína, 10:00</figcaption></figure>
+    <figure class="c2"><div class="duo b">{{pic:malinovy-dezert|(max-width:860px) 46vw, 32vw}}</div><figcaption>choux 85,-</figcaption></figure>
+    <figure class="c3"><div class="duo y">{{pic:tartaletka-jahoda|(max-width:860px) 46vw, 24vw}}</div><figcaption>tartaletka 89,-</figcaption></figure>
+    <figure class="c4"><div class="duo">{{pic:kava-a-dezert|(max-width:860px) 92vw, 48vw}}</div><figcaption>flat white 79,-</figcaption></figure>
+    <figure class="c5"><div class="duo b">{{pic:pusinky|(max-width:860px) 46vw, 40vw}}</div><figcaption>pusinky 45,-</figcaption></figure>
+  </div>
+  <div class="mani">
+    <div><b>Máslo.</b>Putra je staročesky čerstvé máslo. Tuk na pečení k nám nesmí.</div>
+    <div><b>Sezóna.</b>Ovoce ze Zelňáku, takže vitrína je každý týden jiná.</div>
+    <div><b>Voda zdarma.</b>Z kohoutku, kdykoli. Pohostinnost se neúčtuje.</div>
+  </div>
+</section>
+
+<section class="pg wrap" id="objednavka" aria-labelledby="h-o">
+  <span class="pn">STR. 04</span>
+  <h2 id="h-o">Vystřihni<br><span class="mis" data-t="&amp; ochutnej">&amp; ochutnej</span></h2>
+  <div class="coupons">
+    <div class="cp">
+      <h3>Ceník · podzim</h3>
+      <ul><li>Větrník s karamelem<b>89 Kč</b></li><li>Pistáciový řez<b>95 Kč</b></li><li>Mini pavlova<b>99 Kč</b></li><li>Malinové choux<b>85 Kč</b></li><li>Skořicový šnek<b>65 Kč</b></li><li>Čokoládová babka<b>75 Kč</b></li><li>Flat white<b>79 Kč</b></li><li>Dort na objednávku<b>od 1 290 Kč</b></li></ul>
+    </div>
+    <div class="cp order">
+      <h3>Kupón: dort na míru</h3>
+      <form onsubmit="event.preventDefault();this.querySelector('button').textContent='Hotovo! ♥'">
+        <div class="r"><input name="jmeno" placeholder="Jméno" aria-label="Jméno" autocomplete="name" required><input type="email" name="email" placeholder="E-mail" aria-label="E-mail" autocomplete="email" required></div>
+        <div class="r"><select name="varianta" aria-label="Varianta"><option>Dort</option><option>Zákusky</option><option>Vánoční cukroví</option></select><input type="date" name="den" aria-label="Den vyzvednutí" required></div>
+        <textarea name="zprava" rows="3" placeholder="Co slavíme? Kolik nás bude?" aria-label="Zpráva"></textarea>
+        <button type="submit">Poslat Petře →</button>
+        <p style="font-size:14px;font-weight:500">Minimálně 3 dny předem. Odpověď do 24 h.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="pg xm" id="cukrovi" aria-labelledby="h-x">
+  <div class="wrap">
+    <div><h2 id="h-x">Vánoční<br>cukroví!</h2><p>Letos bez mailů, SMS a poštovních holubů. 0,5 kg za 690 Kč, 1 kg za 1 290 Kč. Objednávky do 10. 12., výdej 18.–22. 12.</p><a href="#objednavka">Chci krabici</a></div>
+    <div class="duo y">{{pic:krabice-zakusku|(max-width:860px) 80vw, 40vw}}</div>
+  </div>
+</section>
+
+<section class="pg wrap visit" id="navsteva" aria-labelledby="h-n">
+  <div class="map" role="img" aria-label="Náčrt mapy: Putra na Táborské 102 v Brně-Židenicích">
+    <svg viewBox="0 0 400 300" fill="none" stroke="#1f1b3a" stroke-linecap="round">
+      <path d="M-10 170 C 100 160, 250 175, 410 150" stroke-width="18" stroke="#ffd900"/>
+      <path d="M-10 170 C 100 160, 250 175, 410 150" stroke-width="2.5"/>
+      <path d="M120 -10 C 125 80, 118 200, 130 310" stroke-width="2"/>
+      <path d="M300 -10 C 290 100, 305 200, 290 310" stroke-width="2"/>
+      <path d="M-10 60 L 410 80 M-10 260 L 410 245" stroke-width="1.5" stroke-dasharray="6 6"/>
+      <text x="30" y="200" font-family="Work Sans" font-weight="700" font-size="15" fill="#1f1b3a" stroke="none">TÁBORSKÁ</text>
+      <text x="306" y="40" font-family="Work Sans" font-size="12" fill="#1f1b3a" stroke="none" transform="rotate(88 306 40)">→ centrum</text>
+      <circle cx="218" cy="166" r="16" fill="#ff4fa7" stroke-width="3"/>
+      <text x="205" y="132" font-family="Bagel Fat One" font-size="22" fill="#2d5bd8" stroke="none">Putra!</text>
+      <text x="140" y="118" font-family="Work Sans" font-size="12" fill="#1f1b3a" stroke="none">tram Táborská ↓</text>
+    </svg>
+  </div>
+  <div>
+    <span class="pn" style="position:static">STR. 05</span>
+    <h2 id="h-n" style="margin-top:10px">Stav se!</h2>
+    <address>Táborská 3238/102, 615 00 Brno-Židenice<br><a href="tel:+420773558819">773 558 819</a> · <a href="https://maps.google.com/?cid=6744509639000696065" rel="noopener">mapa</a></address>
+    <dl><dt>Út</dt><dd>10–16</dd><dt>St–Čt</dt><dd>10–18</dd><dt>Pá</dt><dd>10–16, do vyprodání</dd><dt>So–Po</dt><dd>zavřeno (pečeme sny)</dd></dl>
+  </div>
+</section>
+</main>
+<footer><div class="wrap"><span>Tiskne a peče Petra Kopalová · Putra · IČO 21717435</span><a href="https://www.instagram.com/putrabrno/" rel="noopener">IG @putrabrno</a></div></footer>
+{{status}}
+</body>
+</html>

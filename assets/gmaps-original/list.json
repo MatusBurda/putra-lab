@@ -1,0 +1,170 @@
+[
+ {
+  "f": "putra-google-maps-01-okno-posezeni.jpg",
+  "key": "okno-posezeni",
+  "label": "Posezení u okna",
+  "own": true
+ },
+ {
+  "f": "putra-google-maps-02-dort-cokoladovy.jpg",
+  "key": "dort-cokoladovy",
+  "label": "Čokoládový dort",
+  "own": false
+ },
+ {
+  "f": "putra-google-maps-03-krabice-zakusku.jpg",
+  "key": "krabice-zakusku",
+  "label": "Krabice zákusků",
+  "own": false
+ },
+ {
+  "f": "putra-google-maps-04-vitrina-zakusky.jpg",
+  "key": "vitrina-zakusky",
+  "label": "Vitrína se zákusky",
+  "own": false
+ },
+ {
+  "f": "putra-google-maps-05-interier-pult.jpg",
+  "key": "interier-pult",
+  "label": "Interiér s pultem",
+  "own": false
+ },
+ {
+  "f": "putra-google-maps-06-kava-a-dezert.jpg",
+  "key": "kava-a-dezert",
+  "label": "Káva a dezerty",
+  "own": false
+ },
+ {
+  "f": "putra-google-maps-07-interier-svetlo.jpg",
+  "key": "interier-svetlo",
+  "label": "Světlý interiér",
+  "own": true
+ },
+ {
+  "f": "putra-google-maps-08-slunce-na-okne.jpg",
+  "key": "slunce-na-okne",
+  "label": "Slunce na parapetu",
+  "own": true
+ },
+ {
+  "f": "putra-google-maps-09-tulipany-dezerty.jpg",
+  "key": "tulipany-dezerty",
+  "label": "Dezerty s tulipány",
+  "own": false
+ },
+ {
+  "f": "putra-google-maps-10-malinovy-dezert.jpg",
+  "key": "malinovy-dezert",
+  "label": "Malinový dezert",
+  "own": false
+ },
+ {
+  "f": "putra-google-maps-11-cokoladovy-zakusek-venku.jpg",
+  "key": "cokoladovy-zakusek-venku",
+  "label": "Čokoládový zákusek venku",
+  "own": false
+ },
+ {
+  "f": "putra-google-maps-12-krabice-choux-a-pusinek.jpg",
+  "key": "krabice-choux-a-pusinek",
+  "label": "Krabice choux a pusinek",
+  "own": false
+ },
+ {
+  "f": "putra-google-maps-13-pult-a-kavovar.jpg",
+  "key": "pult-a-kavovar",
+  "label": "Pult a kávovar",
+  "own": true
+ },
+ {
+  "f": "putra-google-maps-14-vitrina-s-cedulkami.jpg",
+  "key": "vitrina-s-cedulkami",
+  "label": "Vitrína s cedulkami",
+  "own": false
+ },
+ {
+  "f": "putra-google-maps-15-posezeni-u-okna-den.jpg",
+  "key": "posezeni-u-okna-den",
+  "label": "Posezení u okna ve dne",
+  "own": false
+ },
+ {
+  "f": "putra-google-maps-16-okno-s-polstari.jpg",
+  "key": "okno-s-polstari",
+  "label": "Okno s polštáři",
+  "own": true
+ },
+ {
+  "f": "putra-google-maps-17-vchod-a-tabule.jpg",
+  "key": "vchod-a-tabule",
+  "label": "Vchod a tabule",
+  "own": false
+ },
+ {
+  "f": "putra-google-maps-18-vitrina-shora.jpg",
+  "key": "vitrina-shora",
+  "label": "Vitrína shora",
+  "own": false
+ },
+ {
+  "f": "putra-google-maps-19-pult-ve-slunci.jpg",
+  "key": "pult-ve-slunci",
+  "label": "Pult ve slunci",
+  "own": false
+ },
+ {
+  "f": "putra-google-maps-20-kava-a-choux-u-okna.jpg",
+  "key": "kava-a-choux-u-okna",
+  "label": "Káva a choux u okna",
+  "own": false
+ },
+ {
+  "f": "putra-google-maps-21-stoly-u-okna.jpg",
+  "key": "stoly-u-okna",
+  "label": "Stolky u okna",
+  "own": true
+ },
+ {
+  "f": "putra-google-maps-22-croissant-a-choux.jpg",
+  "key": "croissant-a-choux",
+  "label": "Croissant a choux",
+  "own": false
+ },
+ {
+  "f": "putra-google-maps-23-vitrina-choux-a-rezy.jpg",
+  "key": "vitrina-choux-a-rezy",
+  "label": "Vitrína: choux a řezy",
+  "own": false
+ },
+ {
+  "f": "putra-google-maps-24-interier-s-kvetinami.jpg",
+  "key": "interier-s-kvetinami",
+  "label": "Interiér s květinami",
+  "own": false
+ },
+ {
+  "f": "putra-google-maps-25-cokoladovy-rez-a-kava.jpg",
+  "key": "cokoladovy-rez-a-kava",
+  "label": "Čokoládový řez a káva",
+  "own": false
+ },
+ {
+  "f": "putra-google-maps-26-interier-okno-a-latky.jpg",
+  "key": "interier-okno-a-latky",
+  "label": "Interiér s latěmi",
+  "own": false
+ },
+ {
+  "f": "putra-google-maps-27-brownie-a-pain-au-chocolat.jpg",
+  "key": "brownie-a-pain-au-chocolat",
+  "label": "Brownie a pain au chocolat",
+  "own": false
+ },
+ {
+  "f": "putra-google-maps-28-zidle-ve-svetle.jpg",
+  "key": "zidle-ve-svetle",
+  "label": "Židle ve světle",
+  "own": true
+ }
+]

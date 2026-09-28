@@ -1,0 +1,11 @@
+# local toolchains / deps
+tools/.node/
+tools/.venv/
+tools/node_modules/
+node_modules/
+__pycache__/
+
+# photo bundles (>100 MB, GitHub limit) — originals live in assets/gmaps-original
+assets/*.zip
+
+.DS_Store
