@@ -46,8 +46,9 @@ button{font:inherit;color:inherit}
 /* the butter curl: draws itself from the left tails, round the bottom, up to the top */
 .markw{display:block;overflow:visible}
 .hero-mark{width:clamp(76px,7.4vw,118px);height:auto;margin-bottom:22px;filter:drop-shadow(0 2px 18px rgba(0,0,0,.3))}
-/* closing mark: right edge lines up with the right edge of the last info card */
-.end-mark{flex:none;width:clamp(56px,7vw,124px);height:auto}
+/* small curl in the footer, drawn when the footer comes into view */
+.fl{display:inline-flex;align-items:center;gap:8px}
+.end-mark{flex:none;width:22px;height:auto}
 /* dash 1, gap 2, offset just past 1: nothing (not even a round-cap dot) is painted before a stroke starts */
 .draw .gd{stroke-dasharray:1 2;stroke-dashoffset:1.01}
 .draw{transform-origin:55% 50%;will-change:transform}
@@ -162,7 +163,7 @@ html.at-info .more,html.at-info .dir{opacity:0;pointer-events:none}
 .close>picture{position:absolute;inset:0}
 .close::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(14,10,7,.3),rgba(14,10,7,.55))}
 .close>*:not(picture){position:relative;z-index:2}
-.close .lead{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:96px calc(var(--rw) + 3 * var(--gap)) 0 var(--g)}
+.close .lead{padding:96px var(--g) 0;max-width:calc(100vw - var(--rw) - 2 * var(--gap))}
 .close .lead h2{font:700 clamp(40px,5.6vw,88px)/1.05 var(--f);letter-spacing:-.04em}
 .close .lead p{margin-top:10px;font-size:18px;max-width:46ch}
 .panel{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--gap);padding:28px calc(var(--rw) + 3 * var(--gap)) 20px var(--g)}
@@ -232,7 +233,8 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
  .cap p{font-size:16px}
  .hero .cap{bottom:76px}
  .hero .cap h1{font-size:clamp(50px,15vw,76px)}
- .dir{bottom:calc(26px + env(safe-area-inset-bottom))}.dir .x{width:34px;height:34px}
+ .dir{bottom:calc(26px + env(safe-area-inset-bottom))}
+ html.at-hero .dir{bottom:calc(12px + env(safe-area-inset-bottom))}.dir .x{width:34px;height:34px}
  .more{display:none}
  html{scroll-snap-type:none;scroll-behavior:auto}
  main{position:fixed;inset:0;overflow-x:hidden;overflow-y:auto;scroll-snap-type:y mandatory;scroll-behavior:smooth;overscroll-behavior:none}
@@ -243,7 +245,7 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
  .menu{display:block}
  html.at-info .dir,html.at-info .more{opacity:0;pointer-events:none}
  .play{top:84px;left:18px}
- .close .lead{padding:100px var(--g) 0}
+ .close .lead{padding-top:100px;max-width:none}
  .panel,footer{padding-left:var(--g);padding-right:var(--g)}
  .panel{grid-template-columns:1fr}
 }
@@ -422,7 +424,7 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
 
 <section class="close" id="info" aria-labelledby="hinfo">
   {{pic:p-okno-polstare|100vw}}
-  <div class="lead"><div class="lt"><h2 id="hinfo">Zítra zase od rána.</h2><p>Dort na oslavu, krabice cukroví nebo jen místo u okna — tady je všechno, co k tomu potřebujete.</p></div>{{markw:draw end-mark}}</div>
+  <div class="lead"><h2 id="hinfo">Zítra zase od rána.</h2><p>Dort na oslavu, krabice cukroví nebo jen místo u okna — tady je všechno, co k tomu potřebujete.</p></div>
   <div class="panel">
     <div class="card glass">
       <h3>Dort na objednávku</h3>
@@ -451,7 +453,7 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
       <a class="pill" href="https://maps.google.com/?cid=6744509639000696065" rel="noopener">Navigovat</a>
     </div>
   </div>
-  <footer><span>Putra – výrobna a sladké pečení · Petra Kopalová · IČO 21717435</span><span>5,0 ★ na Google · <a href="https://www.instagram.com/putrabrno/" rel="noopener">@putrabrno</a></span></footer>
+  <footer><span class="fl">{{markw:draw end-mark}}Putra – výrobna a sladké pečení · Petra Kopalová · IČO 21717435</span><span>5,0 ★ na Google · <a href="https://www.instagram.com/putrabrno/" rel="noopener">@putrabrno</a></span></footer>
 </section>
 </main>
 
@@ -571,7 +573,7 @@ function dirUpd(){
   if(!bU)return;
   var i=cur(),s=screens[i],g=null;galleries.forEach(function(x){if(x.sc===s)g=x});
   bU.disabled=i===0;bD.disabled=i===screens.length-1;bL.disabled=!(g&&g.canL);bR.disabled=!(g&&g.canR);
-  lb.textContent=i===0?'Posouvejte':'';
+  lb.textContent=i===0?'Posouvejte':'';root.classList.toggle('at-hero',i===0);
   root.classList.toggle('at-info',s.id==='info');
 }
 function toScreen(i){screens[i].scrollIntoView({behavior:beh()})}
