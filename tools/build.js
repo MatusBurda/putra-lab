@@ -100,6 +100,51 @@ function head(extra = {}) {
 <script type="application/ld+json">${JSON.stringify(faq)}</script>`;
 }
 
+// White mark. With class "draw" it sits under a mask whose brush strokes follow the spiral
+// (left tails -> bottom -> up the right -> over the top, then into the inner curls). Guides were fitted on a 1000 px render.
+const MARK_T = 'translate(-81.700472 -129.84707) matrix(.98221306 0 0 .98221306 -8.216881 6.2322907)';
+// split the mark into its 13 closed shapes (all commands in the file are relative: m c l h v z)
+function markSubs(d) {
+  const toks = d.match(/[a-zA-Z]|-?(?:\d+\.?\d*|\.\d+)(?:e-?\d+)?/g);
+  let i = 0, cx = 0, cy = 0, sx = 0, sy = 0, cmd = ''; const subs = [], num = () => parseFloat(toks[i++]);
+  while (i < toks.length) {
+    if (/^[a-zA-Z]$/.test(toks[i])) cmd = toks[i++];
+    if (cmd === 'm') { cx += num(); cy += num(); sx = cx; sy = cy; subs.push(`M${cx.toFixed(5)} ${cy.toFixed(5)}`); cmd = 'l'; continue; }
+    if (cmd === 'z') { subs[subs.length - 1] += 'z'; cx = sx; cy = sy; continue; }
+    let seg;
+    if (cmd === 'c') { const a = [num(), num(), num(), num(), num(), num()]; seg = 'c' + a.join(' '); cx += a[4]; cy += a[5]; }
+    else if (cmd === 'l') { const x = num(), y = num(); seg = `l${x} ${y}`; cx += x; cy += y; }
+    else if (cmd === 'h') { const x = num(); seg = 'h' + x; cx += x; }
+    else if (cmd === 'v') { const y = num(); seg = 'v' + y; cy += y; }
+    else throw new Error('mark path: unsupported command ' + cmd);
+    subs[subs.length - 1] += seg;
+  }
+  return subs;
+}
+const MARKW_SUBS = markSubs(MARKW);
+const CURLS = [5, 6, 7, 8];
+const K = 46.599 / 1000;
+// brush strokes [path, width] in the order they are drawn (timings in src/index.html .gd1–.gd5):
+// 1 tails + bottom, 2 the small loose piece beside the tails (with 1), 3 right side (wide: thick outer band),
+// 4 over the top to the end of the innermost arc, 5 the inner curls. The four inner curls (shapes 5–8) have their own
+// mask with stroke 5 only, so the wide outer strokes can never uncover them early; each group is covered 100 %.
+const GUIDES = [
+  ['M 30 270 C 70 480 200 700 480 765', 330],
+  ['M 290 470 L 430 585', 120],
+  ['M 480 765 C 700 815 840 640 830 380 C 825 230 790 110 700 50', 520],
+  ['M 720 60 C 640 10 500 15 390 72', 150],
+  ['M 470 90 C 400 180 400 300 430 360 C 450 410 480 450 500 480', 440],
+].map(([d, w]) => [d.replace(/-?\d+(\.\d+)?/g, (n) => (+n * K).toFixed(3)), (w * K).toFixed(2)]);
+let markN = 0;
+function markw(cls = '') {
+  const c = `markw${cls ? ' ' + cls : ''}`;
+  if (!/\bdraw\b/.test(cls)) return `<svg class="${c}" viewBox="0 0 46.599 37.306" aria-hidden="true"><path fill="currentColor" transform="${MARK_T}" d="${MARKW}"/></svg>`;
+  const id = 'curl' + ++markN, g = GUIDES.map(([d, w], i) => `<path class="gd gd${i + 1}" d="${d}" fill="none" stroke="#fff" stroke-width="${w}" stroke-linecap="round" pathLength="1"/>`);
+  const outer = MARKW_SUBS.filter((_, i) => !CURLS.includes(i)).join(''), curls = CURLS.map((i) => MARKW_SUBS[i]).join('');
+  const m = (n, strokes) => `<mask id="${id}${n}" maskUnits="userSpaceOnUse" x="-5" y="-5" width="60" height="50">${strokes.join('')}</mask>`;
+  return `<svg class="${c}" viewBox="0 0 46.599 37.306" aria-hidden="true">${m('a', g.slice(0, 4))}${m('b', g.slice(4))}<g mask="url(#${id}a)"><path fill="currentColor" transform="${MARK_T}" d="${outer}"/></g><g mask="url(#${id}b)"><path fill="currentColor" transform="${MARK_T}" d="${curls}"/></g></svg>`;
+}
+
 function markSvg(fill = 'currentColor') {
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46.599 37.397"><g fill="${fill}" transform="translate(-129.614 -294.667) scale(.5401)">${MARK.map((d) => `<path d="${d}"/>`).join('')}</g></svg>`;
 }
@@ -181,7 +226,7 @@ async function build(file) {
       `<link rel="preload" as="image" type="image/avif" imagesrcset="${srcset(s, 'avif')}" imagesizes="${sizes}" fetchpriority="high">`)
     .replace(/\{\{logo\}\}/g, `<svg class="logo" viewBox="0 0 46.599 16.528" role="img" aria-label="Putra"><path fill="currentColor" transform="translate(-89.918 -154.96) scale(.98221)" d="${WORD}"/></svg>`)
     .replace(/\{\{logo-outline\}\}/g, `<svg class="logo" viewBox="0 0 46.599 16.528" role="img" aria-label="Putra"><path fill="none" stroke="currentColor" stroke-width=".09" vector-effect="non-scaling-stroke" transform="translate(-89.918 -154.96) scale(.98221)" d="${WORD}"/></svg>`)
-    .replace(/\{\{markw(?::([\w -]+))?\}\}/g, (_, cls) => `<svg class="markw${cls ? ' ' + cls : ''}" viewBox="0 0 46.599 37.306" aria-hidden="true"><path fill="currentColor" transform="translate(-81.700472 -129.84707) matrix(.98221306 0 0 .98221306 -8.216881 6.2322907)" d="${MARKW}"/></svg>`)
+    .replace(/\{\{markw(?::([\w -]+))?\}\}/g, (_, cls) => markw(cls))
     .replace(/\{\{mark\}\}/g, markSvg().replace('<svg ', '<svg class="mark" aria-hidden="true" '))
     .replace(/\{\{status\}\}/g, STATUS);
   const out = path.join(ROOT, 'index.html');
