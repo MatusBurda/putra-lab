@@ -258,6 +258,7 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
  .panel,footer{padding-left:var(--g);padding-right:var(--g)}
  .panel{grid-template-columns:1fr}
  .fs{display:none}.fp{display:block}
+ footer{display:grid;grid-template-columns:1fr auto;align-items:center;row-gap:14px}.fbr{display:contents}.frt{grid-column:2;grid-row:1;display:flex;flex-direction:column;align-items:center;line-height:1}.frn{font-size:1.9em;font-weight:700;letter-spacing:-.01em;font-variant-numeric:tabular-nums}footer{font-size:clamp(12px,3.4vw,14px)}.fl{gap:.7em}.fl>span:not(.fs){white-space:nowrap}.fl .end-mark{width:3.3em}.fst{font-size:.65em;vertical-align:.24em;margin-left:-.04em}.frl{font-size:.78em;line-height:1;margin-top:.15em;opacity:.85}.ig{grid-column:1/-1;grid-row:2;justify-self:center}
 }
 @media (max-width:480px){.two{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){
@@ -464,7 +465,7 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
       <a class="pill" href="https://maps.google.com/?cid=6744509639000696065" rel="noopener">Navigovat</a>
     </div>
   </div>
-  <footer><span class="fl">{{markw:draw end-mark}}<span>Putra – výrobna a sladké pečení<span class="fs"> · </span><span class="fp">Petra Kopalová · IČO 21717435</span></span></span><span>5,0 ★ na Google · <a href="https://www.instagram.com/putrabrno/" rel="noopener">@putrabrno</a></span></footer>
+  <footer><span class="fl">{{markw:draw end-mark}}<span>Putra – výrobna a sladké pečení<span class="fs"> · </span><span class="fp">Petra Kopalová · IČO 21717435</span></span></span><span class="fbr"><span class="frt" role="img" aria-label="Hodnocení 5,0 z 5 na Google"><span class="frn" aria-hidden="true">5,0 <span class="fst">★</span></span><span class="frl" aria-hidden="true"> na Google</span></span><span class="fs" aria-hidden="true"> · </span><a class="ig" href="https://www.instagram.com/putrabrno/" rel="noopener">@putrabrno</a></span></footer>
 </section>
 </main>
 
@@ -672,7 +673,17 @@ function drawCurl(m){
    requestAnimationFrame(function(){requestAnimationFrame(function(){v.classList.add('on')})});
   });
  }
- function clear(x,y,r,f){for(var j=0;j<placed.length;j++)if(Math.hypot(x-placed[j].x,y-placed[j].y)<(r+placed[j].r)*f)return false;return true}
+ /* only a few overlapping pairs per load (1 on phones, 1–2 on desktop); every other mark keeps a clear gap,
+    so nothing else reads as a pair. Never almost on top of each other. */
+ var pairs=PH.matches?1:1+(Math.random()<.5?1:0);
+ function fits(x,y,r,list){
+  var hits=0;
+  for(var j=0;j<list.length;j++){var d=Math.hypot(x-list[j].x,y-list[j].y),rs=r+list[j].r;
+   if(d<rs*.45||(d>=rs*.95&&d<rs*1.3))return false;if(d<rs*.95)hits++}
+  if(!hits)return true;
+  if(hits===1&&pairs>0&&Math.random()<.5){pairs--;return true}
+  return false;
+ }
  /* first wave (2 s): 3–4 marks behind the caption and the hero logo on the left */
  function behind(){
   var ph=PH.matches,hr=hero.getBoundingClientRect(),cr=cap.getBoundingClientRect(),
@@ -680,7 +691,7 @@ function drawCurl(m){
   var n=ph?3:4,smin=ph?54:80,smax=ph?96:170,out=[],tries=0;
   while(out.length<n&&tries++<400){
    var s=rnd(smin,smax),r=s*.62,x=rnd(L+r*.4,R-r*.4),y=rnd(T+r*.3,B-r*.3);
-   if(clear(x,y,r,.9)){var m={x:x,y:y,r:r,s:s};placed.push(m);out.push(m)}
+   if(fits(x,y,r,placed)){var m={x:x,y:y,r:r,s:s};placed.push(m);out.push(m)}
   }
   placed.length-=out.length;spawn(out,[.06,.12],front);
  }
@@ -694,8 +705,7 @@ function drawCurl(m){
   while(out.length<n&&tries++<600){
    var s=rnd(smin,smax)*(1-tries/1400),r=s*.62,x=rnd(r,W-r),y=rnd(r,H-r),ok=true;
    for(var i=0;i<ex.length&&ok;i++){var e=ex[i],cx=Math.max(e[0],Math.min(x,e[2])),cy=Math.max(e[1],Math.min(y,e[3]));if(Math.hypot(x-cx,y-cy)<r)ok=false}
-   for(var j=0;j<out.length&&ok;j++)if(Math.hypot(x-out[j].x,y-out[j].y)<(r+out[j].r)*1.05)ok=false;
-   if(ok&&clear(x,y,r,1.05))out.push({x:x,y:y,r:r,s:s});
+   if(ok&&fits(x,y,r,placed.concat(out)))out.push({x:x,y:y,r:r,s:s});
   }
   spawn(out,[.06,.14]);
  }
