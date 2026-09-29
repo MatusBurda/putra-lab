@@ -1,19 +1,40 @@
-# Putra Lab
+# Putra – Den v Putře
 
-> Since the macOS 27 update the x64 `/usr/local/bin/node` and `python3` no longer run. Use the bundled arm64 Node:
-> `export PATH=$PWD/tools/.node/bin:$PATH` (checksum-verified nodejs.org v24.10.0), and `/usr/bin/python3` for the server/venv.
+Website for Putra, a small bakery and café at Táborská 3238/102, Brno-Židenice (@putrabrno).
+One page: a day in the bakery from 06:50 to 16:30. Each hour is a full-screen photo scene, some with a sideways gallery. A glass time panel with a rolling digital clock sits on the right, and the page ends with order and contact info.
 
-Design lab for Putra (bakery/café, Táborská 102, Brno-Židenice): research + 10 static site versions.
+> Menu, prices, cukroví dates and the order form are placeholders. Verify them with Petra before going live.
+> Some photos come from other Instagram accounts (reposts or collaborations), so confirm the rights before publishing.
 
-- `index.html` – lab hub (research, library directions, 10 versions with live Lighthouse scores, what is invented)
-- `src/vNN-*.html` – page sources with macros → `node tools/build.js [vNN]` → `vNN-*/index.html`
-- `tools/build-images.js` – source photos (`assets/gmaps`, `assets/ig`) → AVIF/WebP/JPEG in `assets/img`
-- fonts: build downloads Google fonts into `assets/fonts`; then `tools/.venv/bin/python tools/subset-fonts.py` (Czech subset)
-- `node tools/shoot.js [vNN]` – screenshots into `shots/` (needs server on :4410); `node tools/peek.js <slug> <selector|y> [out] [w] [h]` – single viewport after scrolling
-- `v07f-den-v-putre-plus` (round 3): broader V07 – 54 photos from ~/Downloads/Putra (IG full-res copied to `assets/ig-full`, Maps from `assets/gmaps-original`, reel in `assets/video`), slugs `p-*` in build-images.js (re-runs skip already-built files); sticky rolling digital clock + horizontal scroll-snap strips
-- V07 variations: `v07a-film`, `v07b-kontaktni-arch`, `v07c-horizontalni-den`, `v07d-okna`, `v07e-makro` (07A index thumbs are scene peeks, not the title card)
-- Lighthouse: start native Chrome with `--remote-debugging-port=9555`, then `node tools/lh.mjs [vNN ...]` (merges into lh/scores.json)
-- serve: `/usr/bin/python3 tools/serve.py 4410` (sends Cache-Control: no-store; the stdlib server lets browsers show a stale index.html)
-- Google Maps originals (all 28 photos, fetched signed-in, full resolution via `=s0`): `assets/gmaps-original/` + `list.json` (owner flag), ZIPs `assets/putra-google-maps-fotky.zip` and `assets/putra-google-maps-od-majitelky.zip` (7 owner photos), previews `shots/gmaps/`, source URLs `assets/gmaps-all/list.tsv`; lab section `#fotky`
-- `v07g-den-v-putre-sklo` (round 4): V07 art direction (every hour = one full-bleed screen, no gaps) + 07F content; liquid-glass right rail with rolling digital clock appears after the hero (mobile: glass navbar); full-bleed horizontal galleries: free sideways scroll that glides (160 ms after the last scroll event) to the nearest "screen" = position where the view starts and ends on photo edges; direction sign fades in only after 10 s idle, arms have chevron tips and y snap mandatory; photo picks/order chosen by the user (48 photos), no arrows: fixed bottom-centre direction glyph (↓ ⊢ ✚ ⊣, clickable) + "Více informací" in the rail (mobile: bottom-right); no photo caption tags; pills are hairline outlines (.ln), glass only on rail/navbar/cards; screens that fit (cukroví trio) don't scroll. Strip image widths (C/L presets) raised to 1600/2400 for this.
-- Brand files: `assets/logo/` (white + contrast-black mark and wordmark SVGs from the owner). `{{markw[:classes]}}` inlines the light-on-dark mark (tools/logo-mark-white.txt). 07G: mark+wordmark lockup top-left/navbar; `.draw` = conic-gradient mask swept via @property --sw (left tails → bottom → right → top), hero on load, closing screen on view; skipped with reduced motion or no @property.
+## Structure
+- `index.html` – the built page (static, no runtime dependencies)
+- `src/index.html` – page source with build macros
+- `assets/img/` – responsive AVIF/WebP/JPEG set + `manifest.json`, generated
+- `assets/ig-full/`, `assets/gmaps-original/` – source photos (Instagram full-res, Google Maps originals)
+- `assets/video/pavlova-reel.mp4`, `assets/fonts/` (self-hosted Bricolage Grotesque, Czech subset), `assets/logo/` (owner's logo SVGs)
+- `tools/` – build scripts
+
+## Build
+Since the macOS 27 update, the x64 `/usr/local/bin/node` no longer runs. Use the bundled arm64 Node (not in git; any Node ≥ 20 works):
+
+```bash
+cd tools && npm install          # sharp
+node tools/build-images.js       # photos -> assets/img (skips files already built)
+node tools/build.js              # src/index.html -> index.html
+/usr/bin/python3 tools/serve.py 4410
+```
+
+Macros in `src/index.html`: `{{head:title|desc}}`, `{{pic:slug|sizes|class|eager}}`, `{{src:slug:width}}`, `{{preload:slug|sizes}}`, `{{logo}}` (wordmark), `{{markw[:classes]}}` (white logo mark), `{{status}}` (live open/closed), `{{fonts:google-url}}` (downloads + self-hosts).
+To add a photo, put the file in `assets/ig-full` or `assets/gmaps-original`, add a slug to `PHOTOS` in `tools/build-images.js`, and use `{{pic:slug|…}}`.
+
+## Behaviour notes
+- Up/down scrolling is snapped: it always rests on a whole hour. Sideways, galleries move freely, then glide (160 ms after scrolling stops) to the nearest "screen", meaning a position that starts and ends on photo edges.
+- The direction sign at the bottom centre fades in after 6 s without input (3 s on the first screen). It shows only the directions that screen allows.
+- The logo curl draws itself: a conic-gradient mask swept via `@property --sw`. It's skipped with reduced motion or when `@property` isn't supported.
+
+## History
+The full design lab (versions v01–v10, the v07a–g variations, the research hub and screenshots) is preserved at git tag `lab-archive-2026-09-29`:
+
+```bash
+git checkout lab-archive-2026-09-29
+```
