@@ -125,7 +125,9 @@ html.on .rail{transform:none;opacity:1}
 
 /* caption – the V07 voice: huge light numerals, calm headline */
 .cap{position:absolute;z-index:3;left:var(--g);bottom:clamp(30px,7vh,72px);max-width:min(640px,calc(100vw - var(--rw) - 2 * var(--gap) - 2 * var(--g)));text-shadow:0 1px 22px rgba(0,0,0,.35);pointer-events:none}
-.cap>*{pointer-events:auto}
+/* captions let swipes and drags fall through to the photos; only links stay tappable */
+.cap *{pointer-events:none}
+.cap a,.cap button{pointer-events:auto}
 .cap time{display:block;font:300 clamp(64px,9.5vw,148px)/.9 var(--f);letter-spacing:-.045em;font-variant-numeric:tabular-nums}
 .cap h2,.cap h1{font:500 clamp(25px,2.7vw,40px)/1.16 var(--f);letter-spacing:-.018em;margin-top:12px}
 .cap p{margin-top:10px;font-size:17px;max-width:44ch;color:rgba(251,244,232,.95)}
