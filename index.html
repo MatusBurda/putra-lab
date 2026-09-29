@@ -27,7 +27,7 @@
 <link rel="preload" as="image" type="image/avif" imagesrcset="assets/img/p-okno-hero-640.avif 640w, assets/img/p-okno-hero-1024.avif 1024w, assets/img/p-okno-hero-1600.avif 1600w, assets/img/p-okno-hero-2400.avif 2400w" imagesizes="100vw" fetchpriority="high">
 <style>@font-face { font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 300; font-stretch: 100%; font-display: swap; src: url(assets/fonts/BricolageGrotesque-normal-latin-ext-6441e9.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }@font-face { font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 300; font-stretch: 100%; font-display: swap; src: url(assets/fonts/BricolageGrotesque-normal-latin-4efd1a.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }@font-face { font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 500; font-stretch: 100%; font-display: swap; src: url(assets/fonts/BricolageGrotesque-normal-latin-ext-6441e9.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }@font-face { font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 500; font-stretch: 100%; font-display: swap; src: url(assets/fonts/BricolageGrotesque-normal-latin-4efd1a.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }@font-face { font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 700; font-stretch: 100%; font-display: swap; src: url(assets/fonts/BricolageGrotesque-normal-latin-ext-6441e9.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }@font-face { font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 700; font-stretch: 100%; font-display: swap; src: url(assets/fonts/BricolageGrotesque-normal-latin-4efd1a.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }</style>
 <style>
-:root{--tb:0px;--cream:#fbf4e8;--ink:#1c1612;--warm:#f0b35b;--dawn:#a9bfdc;--dusk:#e98b6d;--p:0;
+:root{--cream:#fbf4e8;--ink:#1c1612;--warm:#f0b35b;--dawn:#a9bfdc;--dusk:#e98b6d;--p:0;
  --rw:clamp(226px,17vw,258px);--gap:16px;--g:clamp(18px,4vw,60px);--f:"Bricolage Grotesque",system-ui,sans-serif;
  --acc:color-mix(in oklab,color-mix(in oklab,var(--dawn),var(--warm) clamp(0%,calc(var(--p) * 250%),100%)),var(--dusk) clamp(0%,calc((var(--p) - .62) * 260%),100%))}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -105,7 +105,7 @@ html.on .rail{transform:none;opacity:1}
 .nav,.menu{display:none}
 
 /* ---------- scenes: every hour is one full-bleed screen ---------- */
-.sc{position:relative;height:100vh;height:100lvh;min-height:520px;overflow:hidden;scroll-snap-align:start;background:var(--ink)}
+.sc{position:relative;height:100vh;height:100svh;min-height:520px;overflow:hidden;scroll-snap-align:start;background:var(--ink)}
 .sc::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
  background:linear-gradient(180deg,rgba(14,10,7,.34),rgba(14,10,7,0) 17%,rgba(14,10,7,0) 46%,rgba(14,10,7,.7))}
 .track{list-style:none;position:absolute;inset:0;display:flex;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scrollbar-width:none;cursor:grab;outline-offset:-4px}
@@ -113,11 +113,8 @@ html.on .rail{transform:none;opacity:1}
 .track.drag{cursor:grabbing;user-select:none}
 .track>li{flex:none;height:100%;width:100%;overflow:hidden}
 .track>li.h{width:50%}
+.track>li.t{width:calc(100% / 3)}
 .track img,.track video{pointer-events:none;-webkit-user-drag:none}
-.fit .track{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;overflow:hidden;cursor:auto}
-.fit .track>li{width:auto}
-/* height of the browser toolbars when they are showing: keep captions above them */
-@supports (height:100lvh){:root{--tb:calc(100lvh - 100svh)}}
 @supports (animation-timeline:view()){
  .sc.one img{animation:settle linear both;animation-timeline:view();animation-range:entry 0% cover 50%}
  @keyframes settle{from{transform:scale(1.08)}to{transform:scale(1)}}
@@ -180,7 +177,7 @@ html.at-info .more{opacity:0;pointer-events:none}
 @keyframes armDrop{0%,100%{transform:none}50%{transform:translateY(3px)}}
 
 /* ---------- closing: order + visit, glass on the window photo ---------- */
-.close{position:relative;min-height:100vh;min-height:100lvh;display:flex;flex-direction:column;justify-content:flex-end;scroll-snap-align:start}
+.close{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;scroll-snap-align:start}
 .close>picture{position:absolute;inset:0}
 .close::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(14,10,7,.3),rgba(14,10,7,.55))}
 .close>*:not(picture){position:relative;z-index:2}
@@ -241,23 +238,27 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
  .menu ol{list-style:none;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(6,auto);grid-auto-flow:column;gap:0 16px}
  .menu ol a{display:flex;gap:8px;white-space:nowrap;align-items:baseline;padding:9px 2px;text-decoration:none;font-size:15px;color:rgba(251,244,232,.86);border-bottom:1px solid rgba(251,244,232,.12)}
  .menu ol a[aria-current]{color:#fff}.menu ol a[aria-current] time{color:var(--acc)}
- .menu time{font-variant-numeric:tabular-nums;font-weight:500;min-width:3.05em}
+ .menu time,.menu .i{font-variant-numeric:tabular-nums;font-weight:500;min-width:3.05em}
+ .menu .i{color:var(--acc)}
  .menu .acts{display:grid;gap:8px;margin-top:16px}
  .menu .ln,.menu .btn{display:flex;justify-content:center;align-items:center;gap:8px;height:48px;padding:0 18px;font-size:15px;font-weight:500;border:1px solid transparent;box-sizing:border-box}
  .menu .ln{border-color:rgba(251,244,232,.62)}
  .nav .bar{position:absolute;left:22px;right:22px;bottom:0;height:2px;border-radius:2px;background:var(--acc);transform-origin:left;transform:scaleX(var(--prog,0))}
- .track>li.h{width:100%}
- .fit.duo .track{grid-auto-flow:row;grid-auto-rows:1fr;grid-auto-columns:auto}
- .fit.trio .track{grid-template-columns:1fr 1fr;grid-template-rows:1.25fr 1fr;grid-auto-flow:row}
- .fit.trio .track>li:first-child{grid-column:1/-1}
- .cap{max-width:calc(100vw - 2 * var(--g));bottom:calc(84px + var(--tb))}
+ .track>li.h,.track>li.t{width:100%}
+ .cap{max-width:calc(100vw - 2 * var(--g));bottom:76px}
  .cap time{font-size:clamp(56px,17vw,84px)}
  .cap h2{font-size:clamp(24px,6.6vw,30px)}
  .cap p{font-size:16px}
- .hero .cap{bottom:calc(84px + var(--tb))}
+ .hero .cap{bottom:76px}
  .hero .cap h1{font-size:clamp(50px,15vw,76px)}
  .dir{bottom:calc(26px + env(safe-area-inset-bottom))}.dir .x{width:34px;height:34px}
  .more{display:none}
+ html{scroll-snap-type:none;scroll-behavior:auto}
+ main{position:fixed;inset:0;overflow-x:hidden;overflow-y:auto;scroll-snap-type:y mandatory;scroll-behavior:smooth;overscroll-behavior:none}
+ .sc{height:100%;min-height:0}
+ .close{min-height:100%}
+ .close .card{scroll-snap-align:start;scroll-margin-top:80px}
+ .close footer{scroll-snap-align:end}
  .menu{display:block}
  html.at-info .dir,html.at-info .more{opacity:0;pointer-events:none}
  .play{top:84px;left:18px}
@@ -267,7 +268,7 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
 }
 @media (max-width:480px){.two{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){
- html{scroll-behavior:auto}
+ html,main{scroll-behavior:auto}
  .rl,.dg.fast .rl{transition:none}
  .colon,.dir button,.more span{animation:none!important}
  .sc.one img,.sc.tease .track>li{animation:none}
@@ -303,8 +304,9 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
     <li><a href="#s1550"><time>15:50</time>Poslední choux</a></li>
     <li><a href="#s1600"><time>16:00</time>Vyprodáno</a></li>
     <li><a href="#s1630"><time>16:30</time>Cukroví</a></li>
+    <li><a href="#info"><span class="i" aria-hidden="true">↓</span>Více informací</a></li>
   </ol>
-  <div class="acts"><a class="ln" href="#info">Více informací <span aria-hidden="true">↓</span></a><a class="btn" href="#info">Objednat dort</a></div>
+  <div class="acts"><a class="btn" href="#info">Objednat dort</a></div>
 </nav>
 
 <aside class="rail glass" aria-label="Časová osa dne" inert>
@@ -429,11 +431,11 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
   <div class="cap"><time>16:00</time><h2 id="h1600">Vyprodáno. Zítra znovu.</h2><p>Židle ve slunci, prázdná vitrína. Ve středu a ve čtvrtek máme otevřeno do 18:00.</p></div>
 </section>
 
-<section class="sc fit trio" id="s1630" data-t="16:30" aria-labelledby="h1630">
-  <ul class="track" role="presentation">
-    <li><picture><source type="image/avif" srcset="assets/img/p-vceli-uly-640.avif 640w, assets/img/p-vceli-uly-1024.avif 1024w, assets/img/p-vceli-uly-1440.avif 1440w" sizes="(max-width:900px) 100vw, 34vw"><source type="image/webp" srcset="assets/img/p-vceli-uly-640.webp 640w, assets/img/p-vceli-uly-1024.webp 1024w, assets/img/p-vceli-uly-1440.webp 1440w" sizes="(max-width:900px) 100vw, 34vw"><img src="assets/img/p-vceli-uly-1024.jpg" srcset="assets/img/p-vceli-uly-640.jpg 640w, assets/img/p-vceli-uly-1024.jpg 1024w, assets/img/p-vceli-uly-1440.jpg 1440w" sizes="(max-width:900px) 100vw, 34vw" width="1440" height="1920" alt="Řady čokoládových včelích úlků" loading="lazy" decoding="async" style="background:rgb(24,8,8)"></picture></li>
-    <li><picture><source type="image/avif" srcset="assets/img/p-linecke-640.avif 640w, assets/img/p-linecke-1024.avif 1024w, assets/img/p-linecke-1440.avif 1440w" sizes="(max-width:900px) 50vw, 34vw"><source type="image/webp" srcset="assets/img/p-linecke-640.webp 640w, assets/img/p-linecke-1024.webp 1024w, assets/img/p-linecke-1440.webp 1440w" sizes="(max-width:900px) 50vw, 34vw"><img src="assets/img/p-linecke-1024.jpg" srcset="assets/img/p-linecke-640.jpg 640w, assets/img/p-linecke-1024.jpg 1024w, assets/img/p-linecke-1440.jpg 1440w" sizes="(max-width:900px) 50vw, 34vw" width="1440" height="1920" alt="Ruce skládají linecké hvězdičky na plech" loading="lazy" decoding="async" style="background:rgb(168,152,120)"></picture></li>
-    <li><picture><source type="image/avif" srcset="assets/img/p-cukrovi-krabice-640.avif 640w, assets/img/p-cukrovi-krabice-1024.avif 1024w, assets/img/p-cukrovi-krabice-1200.avif 1200w" sizes="(max-width:900px) 50vw, 34vw"><source type="image/webp" srcset="assets/img/p-cukrovi-krabice-640.webp 640w, assets/img/p-cukrovi-krabice-1024.webp 1024w, assets/img/p-cukrovi-krabice-1200.webp 1200w" sizes="(max-width:900px) 50vw, 34vw"><img src="assets/img/p-cukrovi-krabice-1024.jpg" srcset="assets/img/p-cukrovi-krabice-640.jpg 640w, assets/img/p-cukrovi-krabice-1024.jpg 1024w, assets/img/p-cukrovi-krabice-1200.jpg 1200w" sizes="(max-width:900px) 50vw, 34vw" width="1200" height="1600" alt="Krabice vánočního cukroví mezi větvičkami jedle" loading="lazy" decoding="async" style="background:rgb(184,152,120)"></picture></li>
+<section class="sc" id="s1630" data-t="16:30" aria-labelledby="h1630">
+  <ul class="track" tabindex="0" aria-label="Fotky z 16:30, listujte do strany">
+    <li class="t"><picture><source type="image/avif" srcset="assets/img/p-vceli-uly-640.avif 640w, assets/img/p-vceli-uly-1024.avif 1024w, assets/img/p-vceli-uly-1440.avif 1440w" sizes="(max-width:900px) 100vw, 34vw"><source type="image/webp" srcset="assets/img/p-vceli-uly-640.webp 640w, assets/img/p-vceli-uly-1024.webp 1024w, assets/img/p-vceli-uly-1440.webp 1440w" sizes="(max-width:900px) 100vw, 34vw"><img src="assets/img/p-vceli-uly-1024.jpg" srcset="assets/img/p-vceli-uly-640.jpg 640w, assets/img/p-vceli-uly-1024.jpg 1024w, assets/img/p-vceli-uly-1440.jpg 1440w" sizes="(max-width:900px) 100vw, 34vw" width="1440" height="1920" alt="Řady čokoládových včelích úlků" loading="lazy" decoding="async" style="background:rgb(24,8,8)"></picture></li>
+    <li class="t"><picture><source type="image/avif" srcset="assets/img/p-linecke-640.avif 640w, assets/img/p-linecke-1024.avif 1024w, assets/img/p-linecke-1440.avif 1440w" sizes="(max-width:900px) 100vw, 34vw"><source type="image/webp" srcset="assets/img/p-linecke-640.webp 640w, assets/img/p-linecke-1024.webp 1024w, assets/img/p-linecke-1440.webp 1440w" sizes="(max-width:900px) 100vw, 34vw"><img src="assets/img/p-linecke-1024.jpg" srcset="assets/img/p-linecke-640.jpg 640w, assets/img/p-linecke-1024.jpg 1024w, assets/img/p-linecke-1440.jpg 1440w" sizes="(max-width:900px) 100vw, 34vw" width="1440" height="1920" alt="Ruce skládají linecké hvězdičky na plech" loading="lazy" decoding="async" style="background:rgb(168,152,120)"></picture></li>
+    <li class="t"><picture><source type="image/avif" srcset="assets/img/p-cukrovi-krabice-640.avif 640w, assets/img/p-cukrovi-krabice-1024.avif 1024w, assets/img/p-cukrovi-krabice-1200.avif 1200w" sizes="(max-width:900px) 100vw, 34vw"><source type="image/webp" srcset="assets/img/p-cukrovi-krabice-640.webp 640w, assets/img/p-cukrovi-krabice-1024.webp 1024w, assets/img/p-cukrovi-krabice-1200.webp 1200w" sizes="(max-width:900px) 100vw, 34vw"><img src="assets/img/p-cukrovi-krabice-1024.jpg" srcset="assets/img/p-cukrovi-krabice-640.jpg 640w, assets/img/p-cukrovi-krabice-1024.jpg 1024w, assets/img/p-cukrovi-krabice-1200.jpg 1200w" sizes="(max-width:900px) 100vw, 34vw" width="1200" height="1600" alt="Krabice vánočního cukroví mezi větvičkami jedle" loading="lazy" decoding="async" style="background:rgb(184,152,120)"></picture></li>
   </ul>
   <div class="cap"><time>16:30</time><h2 id="h1630">Mezitím vzadu: vánoční cukroví.</h2><p>Linecké hvězdičky, včelí úlky, vanilkové rohlíčky. Krabice se plní až do prosince.</p><a class="pill" href="#cukrovi">Zamluvit krabici</a></div>
 </section>
@@ -487,6 +489,17 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
 <script>
 (function(){
 var RM=matchMedia('(prefers-reduced-motion: reduce)'),root=document.documentElement;
+/* phones scroll <main> (pinned to the screen), desktop scrolls the document */
+var PH=matchMedia('(max-width: 900px)'),mainEl=document.querySelector('main');
+function scroller(){return PH.matches?mainEl:document.scrollingElement}
+function onScroll(fn){document.addEventListener('scroll',fn,{passive:true,capture:true})}
+/* in-page links scroll whichever element scrolls (works on repeat taps too) */
+document.addEventListener('click',function(e){
+  var a=e.target.closest('a[href^="#"]');if(!a)return;var id=a.getAttribute('href').slice(1),el=id?document.getElementById(id):null;
+  if(id&&!el)return;e.preventDefault();
+  if(el)el.scrollIntoView({behavior:beh(),block:'start'});else scroller().scrollTo({top:0,behavior:beh()});
+  if(id&&history.replaceState)history.replaceState(null,'','#'+id);
+});
 function beh(){return RM.matches?'auto':'smooth'}
 
 /* --- rolling digital clock --- */
@@ -518,18 +531,18 @@ function tick(){
   var a=Math.max(0,i);
   if(a!==act){act=a;[links,mlinks].forEach(function(ls){ls.forEach(function(l,j){if(j===a)l.setAttribute('aria-current','step');else l.removeAttribute('aria-current')})})}
   tlw.style.setProperty('--tp',(a/(stops.length-1)).toFixed(3));
-  var max=root.scrollHeight-innerHeight;nav.style.setProperty('--prog',max>0?(scrollY/max).toFixed(4):0);
+  var sc=scroller(),sy=sc.scrollTop,max=sc.scrollHeight-sc.clientHeight;nav.style.setProperty('--prog',max>0?(sy/max).toFixed(4):0);
   /* the rail only joins after the opening screen */
-  var o=scrollY>innerHeight*.55;
+  var o=sy>innerHeight*.55;
   if(o!==on){on=o;root.classList.toggle('on',o);if(o)rail.removeAttribute('inert');else rail.setAttribute('inert','')}
 }
 var ticking=false;
 function req(){if(!ticking){ticking=true;requestAnimationFrame(tick)}}
-addEventListener('scroll',req,{passive:true});addEventListener('resize',req);tick();
+onScroll(req);addEventListener('resize',req);tick();
 
 /* --- full-bleed horizontal galleries: move freely, then glide to the nearest whole screen --- */
 var galleries=[];
-[].forEach.call(document.querySelectorAll('.sc:not(.fit):not(.one)'),function(sc){
+[].forEach.call(document.querySelectorAll('.sc:not(.one)'),function(sc){
   var row=sc.querySelector('.track'),cards=[].slice.call(row.children),stopsX=[];
   /* a "screen" = a scroll position where the view starts at a photo edge and ends at a photo edge (only whole photos) */
   function layout(){
@@ -556,13 +569,18 @@ var galleries=[];
     clearTimeout(idleT);idleT=setTimeout(settle,160); /* trackpad momentum keeps firing scroll; settle once it goes quiet */
   },{passive:true});
   addEventListener('resize',function(){layout();row.scrollLeft=nearest(row.scrollLeft);upd()});layout();upd();
+  /* trackpad/wheel: a mostly-sideways swipe only moves the photos, never the page (touch is axis-locked by the browser) */
+  row.addEventListener('wheel',function(e){
+    var dx=e.deltaX,dy=e.deltaY;if(e.deltaMode===1){dx*=16;dy*=16}
+    if(Math.abs(dx)>Math.abs(dy)){e.preventDefault();row.scrollLeft+=dx}
+  },{passive:false});
   /* mouse drag (touch and trackpad scroll natively) */
   var down=false,sx=0,ss=0,moved=false;
   row.addEventListener('pointerdown',function(e){if(e.pointerType!=='mouse'||e.button!==0)return;down=true;moved=false;sx=e.clientX;ss=row.scrollLeft});
   addEventListener('pointermove',function(e){if(!down)return;var dx=e.clientX-sx;if(!moved&&Math.abs(dx)>4){moved=true;row.classList.add('drag')}if(moved)row.scrollLeft=ss-dx});
   addEventListener('pointerup',function(){if(!down)return;down=false;row.classList.remove('drag');if(moved)settle()});
   /* first time the hour is on screen: lean the strip left once, so it reads as "there is more" */
-  new IntersectionObserver(function(es,o){es.forEach(function(e){if(e.intersectionRatio>=.7){o.disconnect();if(!RM.matches&&row.scrollLeft<2){sc.classList.add('tease');setTimeout(function(){sc.classList.remove('tease')},1600)}}})},{threshold:[.7]}).observe(sc);
+  new IntersectionObserver(function(es,o){es.forEach(function(e){if(e.intersectionRatio>=.7){o.disconnect();if(!RM.matches&&row.scrollLeft<2&&row.scrollWidth>row.clientWidth+2){sc.classList.add('tease');setTimeout(function(){sc.classList.remove('tease')},1600)}}})},{threshold:[.7]}).observe(sc);
 });
 
 /* --- bottom glyph: shows (and offers) only the directions this screen allows: ↓ on the first, ⊢ ✚ ⊣ in galleries --- */
@@ -581,7 +599,7 @@ bU.addEventListener('click',function(){toScreen(Math.max(0,cur()-1))});
 bD.addEventListener('click',function(){toScreen(Math.min(screens.length-1,cur()+1))});
 bL.addEventListener('click',function(){galleries.forEach(function(g){if(g.sc===screens[cur()])g.go(-1)})});
 bR.addEventListener('click',function(){galleries.forEach(function(g){if(g.sc===screens[cur()])g.go(1)})});
-addEventListener('scroll',function(){requestAnimationFrame(dirUpd)},{passive:true});dirUpd();
+onScroll(function(){requestAnimationFrame(dirUpd)});dirUpd();
 /* the sign only shows after 6 s without scrolling, swiping or keys (3 s on the opening screen); any of those hides it again */
 var idle=0;function wake(){root.classList.remove('idle');clearTimeout(idle);idle=setTimeout(function(){root.classList.add('idle')},cur()===0?3000:6000)}
 ['scroll','wheel','touchstart','keydown','pointerdown'].forEach(function(ev){addEventListener(ev,wake,{passive:true,capture:true})});wake();

@@ -28,6 +28,7 @@ Macros in `src/index.html`: `{{head:title|desc}}`, `{{pic:slug|sizes|class|eager
 To add a photo, put the file in `assets/ig-full` or `assets/gmaps-original`, add a slug to `PHOTOS` in `tools/build-images.js`, and use `{{pic:slug|…}}`.
 
 ## Behaviour notes
+- On phones (≤ 900 px) `<main>` is the scroller (position: fixed, inset 0), so Safari's bars never collapse mid-gesture and each screen is exactly the visible height; JS uses `scroller()` and captures scroll events on `document`. Wheel/trackpad: horizontal-dominant deltas over a gallery are applied to the gallery only. Touch is left to the browser (toggling overflow mid-swipe cancels iOS gestures). The tall info screen has extra snap stops at each card on phones.
 - Up/down scrolling is snapped: it always rests on a whole hour. Sideways, galleries move freely, then glide (160 ms after scrolling stops) to the nearest "screen", meaning a position that starts and ends on photo edges.
 - The direction sign at the bottom centre fades in after 6 s without input (3 s on the first screen). It shows only the directions that screen allows.
 - The logo curl draws itself: a conic-gradient mask swept via `@property --sw`. It's skipped with reduced motion or when `@property` isn't supported.
