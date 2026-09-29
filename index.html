@@ -27,7 +27,7 @@
 <link rel="preload" as="image" type="image/avif" imagesrcset="assets/img/p-okno-hero-640.avif 640w, assets/img/p-okno-hero-1024.avif 1024w, assets/img/p-okno-hero-1600.avif 1600w, assets/img/p-okno-hero-2400.avif 2400w" imagesizes="100vw" fetchpriority="high">
 <style>@font-face { font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 300; font-stretch: 100%; font-display: swap; src: url(assets/fonts/BricolageGrotesque-normal-latin-ext-6441e9.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }@font-face { font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 300; font-stretch: 100%; font-display: swap; src: url(assets/fonts/BricolageGrotesque-normal-latin-4efd1a.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }@font-face { font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 500; font-stretch: 100%; font-display: swap; src: url(assets/fonts/BricolageGrotesque-normal-latin-ext-6441e9.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }@font-face { font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 500; font-stretch: 100%; font-display: swap; src: url(assets/fonts/BricolageGrotesque-normal-latin-4efd1a.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }@font-face { font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 700; font-stretch: 100%; font-display: swap; src: url(assets/fonts/BricolageGrotesque-normal-latin-ext-6441e9.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }@font-face { font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 700; font-stretch: 100%; font-display: swap; src: url(assets/fonts/BricolageGrotesque-normal-latin-4efd1a.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }</style>
 <style>
-:root{--cream:#fbf4e8;--ink:#1c1612;--warm:#f0b35b;--dawn:#a9bfdc;--dusk:#e98b6d;--p:0;
+:root{--tb:0px;--cream:#fbf4e8;--ink:#1c1612;--warm:#f0b35b;--dawn:#a9bfdc;--dusk:#e98b6d;--p:0;
  --rw:clamp(226px,17vw,258px);--gap:16px;--g:clamp(18px,4vw,60px);--f:"Bricolage Grotesque",system-ui,sans-serif;
  --acc:color-mix(in oklab,color-mix(in oklab,var(--dawn),var(--warm) clamp(0%,calc(var(--p) * 250%),100%)),var(--dusk) clamp(0%,calc((var(--p) - .62) * 260%),100%))}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -102,10 +102,10 @@ html.on .rail{transform:none;opacity:1}
 .st::before{content:"● ";color:#e0893a}.st[data-open=true]::before{color:#5bd07c}
 .btn{display:block;text-align:center;background:var(--cream);color:var(--ink);text-decoration:none;font-weight:500;padding:12px 18px;border-radius:99px;font-size:15px;transition:background .2s}
 .btn:hover{background:#fff}
-.nav{display:none}
+.nav,.menu{display:none}
 
 /* ---------- scenes: every hour is one full-bleed screen ---------- */
-.sc{position:relative;height:100vh;height:100svh;min-height:520px;overflow:hidden;scroll-snap-align:start;background:var(--ink)}
+.sc{position:relative;height:100vh;height:100lvh;min-height:520px;overflow:hidden;scroll-snap-align:start;background:var(--ink)}
 .sc::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
  background:linear-gradient(180deg,rgba(14,10,7,.34),rgba(14,10,7,0) 17%,rgba(14,10,7,0) 46%,rgba(14,10,7,.7))}
 .track{list-style:none;position:absolute;inset:0;display:flex;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scrollbar-width:none;cursor:grab;outline-offset:-4px}
@@ -116,6 +116,8 @@ html.on .rail{transform:none;opacity:1}
 .track img,.track video{pointer-events:none;-webkit-user-drag:none}
 .fit .track{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;overflow:hidden;cursor:auto}
 .fit .track>li{width:auto}
+/* height of the browser toolbars when they are showing: keep captions above them */
+@supports (height:100lvh){:root{--tb:calc(100lvh - 100svh)}}
 @supports (animation-timeline:view()){
  .sc.one img{animation:settle linear both;animation-timeline:view();animation-range:entry 0% cover 50%}
  @keyframes settle{from{transform:scale(1.08)}to{transform:scale(1)}}
@@ -143,7 +145,7 @@ a.ln:hover,button.ln:hover{background:var(--cream);color:var(--ink);border-color
 .play{position:absolute;z-index:4;top:96px;left:24px;cursor:pointer;font-family:inherit}
 
 /* ---------- bottom row: allowed scroll directions + "více informací" ---------- */
-.dir{position:fixed;z-index:31;left:50%;bottom:14px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:2px;filter:drop-shadow(0 1px 6px rgba(0,0,0,.45));transition:opacity .8s;opacity:0;pointer-events:none}
+.dir{position:fixed;z-index:31;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:2px;filter:drop-shadow(0 1px 6px rgba(0,0,0,.45));transition:opacity .8s;opacity:0;pointer-events:none}
 html.idle .dir,.dir:focus-within{opacity:1;pointer-events:auto}
 html:not(.idle) .dir{transition-duration:.25s}
 .dir .x{position:relative;width:36px;height:36px}
@@ -178,7 +180,7 @@ html.at-info .more{opacity:0;pointer-events:none}
 @keyframes armDrop{0%,100%{transform:none}50%{transform:translateY(3px)}}
 
 /* ---------- closing: order + visit, glass on the window photo ---------- */
-.close{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;scroll-snap-align:start}
+.close{position:relative;min-height:100vh;min-height:100lvh;display:flex;flex-direction:column;justify-content:flex-end;scroll-snap-align:start}
 .close>picture{position:absolute;inset:0}
 .close::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(14,10,7,.3),rgba(14,10,7,.55))}
 .close>*:not(picture){position:relative;z-index:2}
@@ -209,6 +211,8 @@ html.at-info .more{opacity:0;pointer-events:none}
 .card h4{font:500 12px/1 var(--f);letter-spacing:.16em;text-transform:uppercase;color:rgba(251,244,232,.75);margin:18px 0 0;padding-top:16px;border-top:1px solid rgba(251,244,232,.22)}
 form{display:grid;gap:10px;margin-top:14px}
 input,select,textarea{font:inherit;font-size:16px;padding:12px 14px;border:1px solid rgba(251,244,232,.28);border-radius:14px;background:rgba(251,244,232,.1);color:var(--cream);width:100%;min-width:0;color-scheme:dark}
+input[type=date]{-webkit-appearance:none;appearance:none;display:block;min-height:48px;line-height:1.3}
+input[type=date]::-webkit-date-and-time-value{text-align:left;margin:0}
 input::placeholder,textarea::placeholder{color:rgba(251,244,232,.72)}
 select option{color:var(--ink);background:var(--cream)}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -227,20 +231,34 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
  .nav .mid{display:flex;flex-direction:column;align-items:center;gap:2px}
  .nav .clock{font-size:27px;font-weight:500}
  .nav .part{font-size:9.5px;letter-spacing:.14em}
- .nav .btn{justify-self:end;padding:9px 15px;font-size:14px}
+ .burger{justify-self:end;width:46px;height:46px;border:1px solid rgba(251,244,232,.5);border-radius:50%;background:none;cursor:pointer;position:relative}
+ .burger i{position:absolute;left:14px;right:14px;height:1.5px;background:var(--cream);border-radius:1px;transition:transform .35s cubic-bezier(.2,.8,.2,1),top .35s cubic-bezier(.2,.8,.2,1)}
+ .burger i:first-child{top:18px}.burger i:last-child{top:25px}
+ .burger[aria-expanded=true] i:first-child{top:21.5px;transform:rotate(45deg)}.burger[aria-expanded=true] i:last-child{top:21.5px;transform:rotate(-45deg)}
+ .menu{position:fixed;z-index:29;top:76px;left:10px;right:10px;border-radius:24px;padding:18px 18px 16px;max-height:calc(100svh - 96px);overflow:auto;
+  opacity:0;transform:translateY(-8px) scale(.98);transform-origin:top center;pointer-events:none;transition:opacity .3s,transform .35s cubic-bezier(.2,.8,.2,1)}
+ .menu.open{opacity:1;transform:none;pointer-events:auto}
+ .menu ol{list-style:none;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(6,auto);grid-auto-flow:column;gap:0 16px}
+ .menu ol a{display:flex;gap:8px;white-space:nowrap;align-items:baseline;padding:9px 2px;text-decoration:none;font-size:15px;color:rgba(251,244,232,.86);border-bottom:1px solid rgba(251,244,232,.12)}
+ .menu ol a[aria-current]{color:#fff}.menu ol a[aria-current] time{color:var(--acc)}
+ .menu time{font-variant-numeric:tabular-nums;font-weight:500;min-width:3.05em}
+ .menu .acts{display:grid;gap:8px;margin-top:16px}
+ .menu .ln,.menu .btn{display:flex;justify-content:center;align-items:center;gap:8px;height:48px;padding:0 18px;font-size:15px;font-weight:500;border:1px solid transparent;box-sizing:border-box}
+ .menu .ln{border-color:rgba(251,244,232,.62)}
  .nav .bar{position:absolute;left:22px;right:22px;bottom:0;height:2px;border-radius:2px;background:var(--acc);transform-origin:left;transform:scaleX(var(--prog,0))}
  .track>li.h{width:100%}
  .fit.duo .track{grid-auto-flow:row;grid-auto-rows:1fr;grid-auto-columns:auto}
  .fit.trio .track{grid-template-columns:1fr 1fr;grid-template-rows:1.25fr 1fr;grid-auto-flow:row}
  .fit.trio .track>li:first-child{grid-column:1/-1}
- .cap{max-width:calc(100vw - 2 * var(--g));bottom:76px}
+ .cap{max-width:calc(100vw - 2 * var(--g));bottom:calc(84px + var(--tb))}
  .cap time{font-size:clamp(56px,17vw,84px)}
  .cap h2{font-size:clamp(24px,6.6vw,30px)}
  .cap p{font-size:16px}
- .hero .cap{bottom:76px}
+ .hero .cap{bottom:calc(84px + var(--tb))}
  .hero .cap h1{font-size:clamp(50px,15vw,76px)}
- .dir{bottom:10px}.dir .x{width:34px;height:34px}
- .more,html.on .more{opacity:1;pointer-events:auto;right:12px;bottom:26px;font-size:12.5px;padding:7px 12px}
+ .dir{bottom:calc(26px + env(safe-area-inset-bottom))}.dir .x{width:34px;height:34px}
+ .more{display:none}
+ .menu{display:block}
  html.at-info .dir,html.at-info .more{opacity:0;pointer-events:none}
  .play{top:84px;left:18px}
  .close .lead{padding-top:100px;max-width:none}
@@ -269,9 +287,25 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
 <header class="nav glass">
   <a class="lock" href="#" aria-label="Putra – domů"><svg class="markw" viewBox="0 0 46.599 37.306" aria-hidden="true"><path fill="currentColor" transform="translate(-81.700472 -129.84707) matrix(.98221306 0 0 .98221306 -8.216881 6.2322907)" d="m 124.68545,125.85374 c -1.04286,3e-5 -2.10988,0.0699 -3.1823,0.19535 4.78359,2.43452 8.09663,7.34265 8.18562,13.0254 v 0.002 c 5.5e-4,0.0193 0.007,0.0838 0.007,0.1945 0.0299,12.4139 -9.64981,22.56921 -21.92115,23.442 1.33483,0.44247 2.72391,0.76619 4.15329,0.96675 11.4803,-2.58913 20.00786,-12.75244 19.97881,-24.93932 v -0.001 -0.001 c 0,-0.0259 0,-0.0883 -0.008,-0.18706 v -0.006 -0.007 c -0.0821,-5.29555 -2.83931,-9.94171 -6.98491,-12.67903 -0.076,-0.001 -0.15132,-0.006 -0.22764,-0.006 h -2.8e-4 z m 3.61187,0.47336 c 3.23943,3.08514 5.28749,7.39719 5.36171,12.18422 0,0.0455 0.009,0.11679 0.009,0.22595 0.0266,11.24483 -6.79523,20.89542 -16.55575,25.09749 1.97571,-0.14503 3.80985,-0.51556 5.51392,-1.06086 8.01587,-5.26282 13.28437,-14.29141 13.25958,-24.56949 v -0.001 -0.001 c 0,-0.0381 0,-0.11057 -0.008,-0.21623 v -0.008 -0.007 c -0.0543,-3.48286 -1.11476,-6.72023 -2.8997,-9.44756 -1.39644,-0.99396 -2.97293,-1.75266 -4.68069,-2.19636 z m -10.12974,0.30604 c -1.01537,0.23639 -2.02144,0.5188 -3.00061,0.85635 5.90357,0.96672 10.45774,6.02566 10.55299,12.15247 v 0.007 0.006 c 0,-0.007 0.006,0.0408 0.006,0.14273 v 0.004 0.003 c 0.026,10.88051 -8.86537,19.69656 -19.82179,19.67138 -1.91124,-0.004 -3.75843,-0.28262 -5.5096,-0.78798 1.01626,0.8197 2.10186,1.55669 3.24662,2.20121 0.77826,0.0845 1.56791,0.13202 2.3688,0.13386 12.15638,0.0279 21.9583,-9.69974 21.92952,-21.74789 v -0.001 -0.001 c 0,-0.008 -0.007,-0.064 -0.007,-0.1676 v -0.001 -0.001 c -0.0927,-5.97471 -4.20498,-10.97226 -9.76478,-12.4708 z m 18.61137,5.89947 c 0.52637,1.71457 0.82774,3.52616 0.85751,5.4038 0,0.002 -5e-5,0.004 0,0.006 0,0.0582 0.009,0.14132 0.009,0.25856 0.0188,7.9943 -2.99838,15.28015 -7.96657,20.79888 1.23034,-0.97999 2.34401,-2.06798 3.33386,-3.2389 3.97207,-4.69831 5.97546,-10.68532 5.97585,-15.6056 0,-2.80839 -0.81451,-5.41811 -2.20951,-7.62303 z m -23.63728,-3.45512 c -0.69678,-5.5e-4 -1.37662,0.0641 -2.03449,0.18819 -0.33768,0.18355 -0.67066,0.37148 -0.99334,0.56833 -0.26219,0.15994 -0.51879,0.32388 -0.76968,0.49167 0.73071,-0.16893 1.4912,-0.26068 2.27355,-0.26142 v -2.9e-4 c 5.58216,0.002 10.13976,4.54771 10.21349,10.12486 v 0.001 0.001 0.004 0.006 0.0108 10e-4 c -0.006,8.854 -7.19883,16.12583 -16.05949,16.12586 -4.38032,4e-5 -8.353514,-1.76228 -11.253224,-4.61294 0.73968,1.30607 1.59094,2.53875 2.54105,3.67823 2.61228,1.46468 5.626004,2.30768 8.844894,2.31505 10.01357,0.023 18.08231,-7.98508 18.05962,-17.9072 0,-0.003 -0.006,-0.0557 -0.006,-0.14272 -0.0912,-5.8609 -4.89939,-10.57568 -10.81844,-10.59165 h -2.8e-4 z m -3.82557,3.06385 c -3.36728,0.9514 -5.8755,3.9303 -6.12225,7.55209 -0.007,0.15377 -0.0188,0.30651 -0.0188,0.46222 v 0.25542 c 0.0569,2.54406 1.24313,4.93169 3.25776,6.49439 l 0.005,0.001 v 0.002 c 0.81987,0.64579 1.80125,1.13166 2.83389,1.44154 -0.0254,-0.0197 -0.0537,-0.0366 -0.079,-0.0566 v -0.002 c -0.005,-0.001 -0.005,-0.002 -0.005,-0.002 -2.47379,-1.9215 -3.92968,-4.87358 -3.94794,-8.00601 v -0.0509 l 0.006,-0.0495 c 0,-0.01 0.005,-0.0579 0.0149,-0.14501 l 0.0271,-0.20108 c 0.13671,-3.13914 1.68812,-5.91221 4.02886,-7.69539 z m 3.80697,0.0217 c -3.49724,1.0026 -6.06556,4.18248 -6.11571,8.00458 v 0.18477 c 0.0399,2.56627 1.23227,4.97818 3.26262,6.55303 l 0.005,0.001 v 0.002 c 0.81733,0.64378 1.79483,1.12752 2.82387,1.43582 -0.0233,-0.0178 -0.0482,-0.0329 -0.071,-0.0509 v -0.002 c -0.005,-0.001 -0.005,-0.002 -0.005,-0.002 -2.27487,-1.76699 -3.63251,-4.41665 -3.85928,-7.2655 l -0.0875,-0.001 0.009,-0.65613 c -5.4e-4,-0.0283 -0.01,-0.055 -0.01,-0.0832 v -0.0509 l 0.005,-0.0495 c 0,-0.01 0.005,-0.0579 0.0149,-0.14501 l 0.0271,-0.20108 c 0.13616,-3.12636 1.67551,-5.8897 4.00031,-7.67365 z m 2.32845,0.58891 c -2.46842,1.27445 -4.21782,3.73913 -4.52107,6.64799 l 0.0238,0.003 -0.11159,0.81945 v 0.12957 c 0.0393,2.56628 1.23234,4.97849 3.26267,6.55331 l 0.006,0.001 v 0.002 c 0.82049,0.64627 1.80148,1.13451 2.83473,1.44383 -0.0266,-0.0205 -0.0554,-0.0382 -0.0818,-0.0589 v -0.002 c -0.005,-0.001 -0.005,-0.002 -0.005,-0.002 -2.27488,-1.76699 -3.63251,-4.41665 -3.85927,-7.26551 l -0.0875,-10e-4 0.009,-0.65614 c -5.4e-4,-0.0283 -0.01,-0.055 -0.01,-0.0832 v -0.0509 l 0.005,-0.0495 c 0,-0.01 0.005,-0.0579 0.0149,-0.14501 l 0.0271,-0.20108 c 0.11557,-2.65393 1.243,-5.046 3.00264,-6.80014 -0.16615,-0.10038 -0.33585,-0.19559 -0.50914,-0.28459 z m 1.92496,1.35946 c -1.43225,1.35401 -2.39343,3.20607 -2.6105,5.28853 l 0.0238,0.003 -0.11131,0.81058 v 0.13844 c 0.0393,2.56627 1.23211,4.97848 3.26234,6.55331 v 0.001 l 0.005,0.002 c 0.0978,0.077 0.20308,0.14621 0.3052,0.21881 0.16555,-0.29498 0.3182,-0.59771 0.46332,-0.90469 -1.08079,-1.5138 -1.73003,-3.31189 -1.8803,-5.19929 l -0.0878,-0.001 0.009,-0.65613 c -5.4e-4,-0.0283 -0.009,-0.055 -0.01,-0.0832 v -0.0509 l 0.005,-0.0495 c 0,-0.01 0.005,-0.0579 0.0149,-0.14502 l 0.0271,-0.20107 c 0.0762,-1.7486 0.59256,-3.38295 1.43812,-4.79714 -0.26207,-0.3301 -0.548,-0.64052 -0.85519,-0.92814 z m -25.830814,6.92314 c 0.30713,5.79956 4.02533,10.67936 9.200134,12.63155 -4.138794,-2.74741 -6.934774,-7.35955 -7.179974,-12.63155 z m 3.77858,0 c 0.30171,5.81658 4.06629,10.70082 9.275124,12.6427 -4.14802,-2.7461 -6.951374,-7.36325 -7.196844,-12.6427 z m 3.8367,2.9e-4 c 0.3016,5.81431 4.063454,10.69597 9.268804,12.63984 -4.14575,-2.74636 -6.94737,-7.36219 -7.19284,-12.63984 z m 6.342544,7.36961 c 1.49241,2.16039 3.56432,3.88685 5.99295,4.95932 0.0641,-0.0283 0.12636,-0.0598 0.18996,-0.0889 -1.1021,-0.80053 -2.10153,-1.73374 -2.96662,-2.78241 l -0.53257,-0.64498 c -0.95967,-0.34841 -1.87171,-0.82909 -2.68372,-1.44298 z"/></svg><svg class="logo" viewBox="0 0 46.599 16.528" role="img" aria-label="Putra"><path fill="currentColor" transform="translate(-89.918 -154.96) scale(.98221)" d="M96.054 161.556v-.233c0-.593-.317-1.143-1.058-1.143h-.953c-.635 0-1.121.508-1.121 1.143v11.24c0 .592-.233.719-.55.719a.375.375 0 0 1-.382-.36h-.444c0 1.46 1.1 1.672 2.413 1.672s2.138-.635 2.138-2.032v-4.55c.402.635.952 1.1 1.65 1.1 5.864 0 5.822-8.975.085-8.932-.783 0-1.375.592-1.778 1.376m1.736-.91c1.588 0 1.63 8-.042 8-.783 0-1.418-.91-1.651-1.777v-3.684c0-.867.677-2.54 1.693-2.54zm11.24.677-.085 5.884c-.042.127 0 .254 0 .402-.402.635-1.08 1.143-1.948 1.143-.508 0-.698-.38-.698-2.519v-5.143a.85.85 0 0 0-.847-.847h-1.418a.854.854 0 0 0-.868.847v5.419c0 2.053 1.376 2.688 3.323 2.688 1.186 0 2.096-.36 2.689-1.037.317.72.994 1.037 1.947 1.037 1.333 0 2.413-.233 2.413-1.672h-.445a.37.37 0 0 1-.36.36c-.317 0-.55-.149-.55-.741v-5.821c0-.635-.55-1.143-1.143-1.143h-.952c-.72 0-1.059.55-1.059 1.143zm4.783-1.99v.445h.593l-.042 7.323c0 1.419.825 2.054 2.137 2.054s2.413-.233 2.413-1.694h-.465c0 .19-.127.381-.36.381-.318 0-.55-.148-.55-.74v-7.324h.592v-.445h-.592v-1.566h-.445c0 1.566-2.18 1.566-3.28 1.566zm10.647 1.312c.953 0 .826 1.588.318 2.329-.657.931.465 1.672 1.545 1.672.804 0 1.587-.402 1.587-1.46 0-1.63-.804-2.943-3.408-2.943-.72 0-1.185.318-1.46.847-.318-.593-.995-.847-1.863-.847-1.312 0-2.413.254-2.413 1.672h.466c0-.19.127-.36.36-.36.317 0 .55.128.55.72v5.694c0 .635.487 1.143 1.122 1.143h.974c.72 0 1.037-.55 1.037-1.143v-4.276c.084-2.413.508-3.048 1.185-3.048m14.528 7.007h-.444c0 .19-.148.36-.36.36-.317 0-.55-.127-.55-.72v-3.874c0-2.476-2.477-3.513-4.869-3.513-2.222 0-4.381.91-4.381 2.413 0 .825.593 1.29 1.587 1.29 1.016 0 1.61-.465 1.61-1.227 0-.698-.424-.783-.424-1.143s.592-.783 1.29-.783c.932 0 2.033.783 2.033 3.556-.402-.275-1.037-.36-1.757-.36-5.567 0-6.52 5.588-.508 5.588.953 0 1.82-.592 2.223-1.545.19 1.143.952 1.651 2.137 1.651 1.334 0 2.413-.275 2.413-1.693m-4.508-2.964c0 .466-.042.783-.042 1.1-.085.996-.72 2.732-2.18 2.732-1.355 0-1.503-4.319 1.1-4.382.402.063.804.19 1.122.55"/></svg></a>
   <div class="mid" aria-hidden="true"><div class="clock" data-clock></div><span class="part" data-part>ráno</span></div>
-  <a class="btn" href="#info">Objednat</a>
+  <button class="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
   <span class="bar" aria-hidden="true"></span>
 </header>
+<nav class="menu glass" id="menu" aria-label="Menu" inert>
+  <ol>
+    <li><a href="#s0650"><time>06:50</time>Ještě zavřeno</a></li>
+    <li><a href="#s0700"><time>07:00</time>Výrobna</a></li>
+    <li><a href="#s0930"><time>09:30</time>Vitrína</a></li>
+    <li><a href="#s1000"><time>10:00</time>Otevíráme</a></li>
+    <li><a href="#s1120"><time>11:20</time>Káva u okna</a></li>
+    <li><a href="#s1230"><time>12:30</time>Pavlova</a></li>
+    <li><a href="#s1330"><time>13:30</time>Parapet</a></li>
+    <li><a href="#s1445"><time>14:45</time>Na oslavu</a></li>
+    <li><a href="#s1550"><time>15:50</time>Poslední choux</a></li>
+    <li><a href="#s1600"><time>16:00</time>Vyprodáno</a></li>
+    <li><a href="#s1630"><time>16:30</time>Cukroví</a></li>
+  </ol>
+  <div class="acts"><a class="ln" href="#info">Více informací <span aria-hidden="true">↓</span></a><a class="btn" href="#info">Objednat dort</a></div>
+</nav>
 
 <aside class="rail glass" aria-label="Časová osa dne" inert>
   <div aria-hidden="true"><span class="part" data-part>ráno</span><div class="clock" data-clock></div></div>
@@ -462,7 +496,7 @@ var dig='<span class="dg"><span class="rl">'+reel+'</span></span>';
 clocks.forEach(function(c){c.innerHTML=dig+dig+'<span class="colon">:</span>'+dig+dig.replace('dg','dg fast')});
 var reels=clocks.map(function(c){return c.querySelectorAll('.rl')});
 var stops=[].slice.call(document.querySelectorAll('[data-t]')),mins=stops.map(function(s){var t=s.dataset.t.split(':');return t[0]*60+ +t[1]});
-var links=[].slice.call(document.querySelectorAll('.tl a')),tlw=document.querySelector('.tlw'),rail=document.querySelector('.rail'),nav=document.querySelector('.nav');
+var links=[].slice.call(document.querySelectorAll('.tl a')),mlinks=[].slice.call(document.querySelectorAll('.menu ol a')),tlw=document.querySelector('.tlw'),rail=document.querySelector('.rail'),nav=document.querySelector('.nav');
 function partOf(m){return m<420?'před otevřením':m<540?'ráno':m<600?'dopoledne':m<690?'dopoledne':m<780?'poledne':m<945?'odpoledne':m<975?'zavíráme':'podvečer'}
 var shown=-1,act=-1,on=null;
 function show(m){
@@ -482,7 +516,7 @@ function tick(){
   else{var f=(y-tops[i])/(tops[i+1]-tops[i]);m=Math.round(mins[i]+Math.max(0,Math.min(1,f))*(mins[i+1]-mins[i]))}
   show(m);
   var a=Math.max(0,i);
-  if(a!==act){act=a;links.forEach(function(l,j){if(j===a)l.setAttribute('aria-current','step');else l.removeAttribute('aria-current')})}
+  if(a!==act){act=a;[links,mlinks].forEach(function(ls){ls.forEach(function(l,j){if(j===a)l.setAttribute('aria-current','step');else l.removeAttribute('aria-current')})})}
   tlw.style.setProperty('--tp',(a/(stops.length-1)).toFixed(3));
   var max=root.scrollHeight-innerHeight;nav.style.setProperty('--prog',max>0?(scrollY/max).toFixed(4):0);
   /* the rail only joins after the opening screen */
@@ -551,6 +585,16 @@ addEventListener('scroll',function(){requestAnimationFrame(dirUpd)},{passive:tru
 /* the sign only shows after 6 s without scrolling, swiping or keys (3 s on the opening screen); any of those hides it again */
 var idle=0;function wake(){root.classList.remove('idle');clearTimeout(idle);idle=setTimeout(function(){root.classList.add('idle')},cur()===0?3000:6000)}
 ['scroll','wheel','touchstart','keydown','pointerdown'].forEach(function(ev){addEventListener(ev,wake,{passive:true,capture:true})});wake();
+
+/* --- phone menu: hours + both actions behind the burger --- */
+(function(){
+  var b=document.querySelector('.burger'),m=document.getElementById('menu');
+  function set(o){b.setAttribute('aria-expanded',o);m.classList.toggle('open',o);if(o)m.removeAttribute('inert');else m.setAttribute('inert','')}
+  b.addEventListener('click',function(){set(b.getAttribute('aria-expanded')!=='true')});
+  m.addEventListener('click',function(e){if(e.target.closest('a'))set(false)});
+  addEventListener('keydown',function(e){if(e.key==='Escape'&&m.classList.contains('open')){set(false);b.focus()}});
+  addEventListener('pointerdown',function(e){if(m.classList.contains('open')&&!m.contains(e.target)&&!b.contains(e.target))set(false)});
+})();
 
 /* --- logo curl: draw the hero one on load, the closing one when it comes into view --- */
 [].forEach.call(document.querySelectorAll('.draw'),function(m){
