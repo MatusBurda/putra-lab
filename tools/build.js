@@ -95,7 +95,9 @@ function head(extra = {}) {
 <meta name="geo.placename" content="Brno-Židenice">
 <meta name="geo.position" content="49.1949326;16.6433761">
 <meta name="ICBM" content="49.1949326, 16.6433761">
-<link rel="icon" href="data:image/svg+xml,${encodeURIComponent(markSvg('#8a5a2b'))}">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <script type="application/ld+json">${JSON.stringify(schema)}</script>
 <script type="application/ld+json">${JSON.stringify(faq)}</script>`;
 }
@@ -143,6 +145,23 @@ function markw(cls = '') {
   const outer = MARKW_SUBS.filter((_, i) => !CURLS.includes(i)).join(''), curls = CURLS.map((i) => MARKW_SUBS[i]).join('');
   const m = (n, strokes) => `<mask id="${id}${n}" maskUnits="userSpaceOnUse" x="-5" y="-5" width="60" height="50">${strokes.join('')}</mask>`;
   return `<svg class="${c}" viewBox="0 0 46.599 37.306" aria-hidden="true">${m('a', g.slice(0, 4))}${m('b', g.slice(4))}<g mask="url(#${id}a)"><path fill="currentColor" transform="${MARK_T}" d="${outer}"/></g><g mask="url(#${id}b)"><path fill="currentColor" transform="${MARK_T}" d="${curls}"/></g></svg>`;
+}
+
+// Browser-tab icon: black mark (contrast cut) in light mode, white mark (thinner light-on-dark cut) in dark mode.
+// Square viewBox so the wide mark sits centred. PNGs are the fallback for browsers that ignore SVG icons (Safari).
+function faviconSvg() {
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -4.6 46.6 46.6"><style>.w{display:none}@media (prefers-color-scheme:dark){.b{display:none}.w{display:inline}}</style>` +
+    `<g class="b" fill="#000" transform="translate(-129.614 -294.667) scale(.5401)">${MARK.map((d) => `<path d="${d}"/>`).join('')}</g>` +
+    `<path class="w" fill="#fff" transform="${MARK_T}" d="${MARKW}"/></svg>`;
+}
+async function writeIcons() {
+  fs.writeFileSync(path.join(ROOT, 'favicon.svg'), faviconSvg());
+  let sharp; try { sharp = require('sharp'); } catch { return; } // tools/node_modules; skip PNGs if missing
+  const black = Buffer.from(faviconSvg().replace(/<style>.*?<\/style>/, '').replace(/<path class="w"[^>]*\/>/, ''));
+  await sharp(black, { density: 600 }).resize(64, 64, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } }).png().toFile(path.join(ROOT, 'favicon.png'));
+  // iOS home-screen icon: black mark on the site's cream, with padding
+  await sharp(black, { density: 1200 }).resize(140, 140, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+    .extend({ top: 20, bottom: 20, left: 20, right: 20, background: '#fbf4e8' }).flatten({ background: '#fbf4e8' }).png().toFile(path.join(ROOT, 'apple-touch-icon.png'));
 }
 
 function markSvg(fill = 'currentColor') {
@@ -238,6 +257,7 @@ async function build(file) {
 
 const only = process.argv[2];
 (async () => {
+  await writeIcons();
   for (const f of fs.readdirSync(path.join(ROOT, 'src')).filter((f) => f.endsWith('.html'))) {
     if (only && !f.startsWith(only)) continue;
     const [o, b] = await build(f);
