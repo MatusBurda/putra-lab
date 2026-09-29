@@ -34,7 +34,7 @@ const PHOTOS = {
 
 // 07F „Den v Putře+“: the full Downloads/Putra set (Instagram full-res + all Maps originals).
 // M = main timeline frame, C = horizontal-strip card.
-const M = [640, 1024, 1600, 2400], C = [400, 800], L = [400, 800, 1200]; // L = landscape strip card
+const M = [640, 1024, 1600, 2400], C = [400, 800, 1200, 1600], L = [400, 800, 1200, 1600, 2400]; // L = landscape strip card; C/L widened for 07G full-bleed panels
 Object.assign(PHOTOS, {
   'p-okno-hero':        ['gmaps-original/putra-google-maps-01-okno-posezeni.jpg', 'Posezení u velkého okna v Putře – dřevěná křesla, polštáře a pohled do Táborské', M],
   'p-croissanty-plech': ['ig-full/ig-croissanty-plech.jpg', 'Plech čerstvě upečených croissantů s vrstvami listového těsta', M],
@@ -91,6 +91,7 @@ Object.assign(PHOTOS, {
   'p-cukrovi-krabice':  ['ig-full/ig-krabice-cukrovi.jpg', 'Krabice vánočního cukroví mezi větvičkami jedle', M],
   'p-linecke':          ['ig-full/ig-linecke-hvezdy.jpg', 'Ruce skládají linecké hvězdičky na plech', M],
   'p-vceli-uly':        ['ig-full/ig-vceli-uly.jpg', 'Řady čokoládových včelích úlků', M],
+  'p-kuchyne-vajicko': ['ig-full/ig-kuchyne-vajicko.jpg', 'Cukrářka s vajíčkem v ruce ukazuje v ranní výrobně véčko', M],
   'p-okno-polstare':    ['gmaps-original/putra-google-maps-16-okno-s-polstari.jpg', 'Okno s polštáři a košíkem, venku rozmazaná ulice', M],
 });
 

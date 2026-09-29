@@ -254,7 +254,9 @@
     "alt": "Croissanty na dřevěném prkénku zblízka",
     "widths": [
       400,
-      800
+      800,
+      1200,
+      1440
     ],
     "ratio": 0.8,
     "w": 1440,
@@ -265,7 +267,9 @@
     "alt": "Potírání lesního ovoce na krémovém dortu štětečkem",
     "widths": [
       400,
-      800
+      800,
+      1200,
+      1402
     ],
     "ratio": 0.7998,
     "w": 1402,
@@ -276,7 +280,9 @@
     "alt": "Váza s kvetoucí větví a pohled do výrobny s regály plechů",
     "widths": [
       400,
-      800
+      800,
+      1200,
+      1440
     ],
     "ratio": 0.8,
     "w": 1440,
@@ -287,7 +293,9 @@
     "alt": "Čokoládový choux s krémovou korunkou na dřevěném pultu ve slunci",
     "widths": [
       400,
-      800
+      800,
+      1200,
+      1440
     ],
     "ratio": 0.75,
     "w": 1440,
@@ -312,7 +320,9 @@
     "widths": [
       400,
       800,
-      1200
+      1200,
+      1600,
+      2400
     ],
     "ratio": 2.1645,
     "w": 4000,
@@ -323,7 +333,9 @@
     "alt": "Vitrína se zákusky a papírovými cedulkami s názvy",
     "widths": [
       400,
-      800
+      800,
+      1200,
+      1600
     ],
     "ratio": 0.75,
     "w": 3024,
@@ -334,7 +346,9 @@
     "alt": "Větrník s karamelem na keramickém talířku v šikmém světle",
     "widths": [
       400,
-      800
+      800,
+      1200,
+      1440
     ],
     "ratio": 1.7778,
     "w": 1440,
@@ -346,7 +360,8 @@
     "widths": [
       400,
       800,
-      1200
+      1200,
+      1440
     ],
     "ratio": 1.3346,
     "w": 1440,
@@ -357,7 +372,9 @@
     "alt": "Choux s křupavou krustou a vanilkovým krémem",
     "widths": [
       400,
-      800
+      800,
+      1200,
+      1440
     ],
     "ratio": 1.7778,
     "w": 1440,
@@ -368,7 +385,9 @@
     "alt": "Kousek cheesecaku s borůvkami na talířku",
     "widths": [
       400,
-      800
+      800,
+      1200,
+      1440
     ],
     "ratio": 1.7778,
     "w": 1440,
@@ -380,7 +399,8 @@
     "widths": [
       400,
       800,
-      1200
+      1200,
+      1440
     ],
     "ratio": 1.3358,
     "w": 1440,
@@ -391,7 +411,9 @@
     "alt": "Tři světlé makronky na keramickém talířku",
     "widths": [
       400,
-      800
+      800,
+      1200,
+      1440
     ],
     "ratio": 1.7778,
     "w": 1440,
@@ -414,7 +436,9 @@
     "alt": "Dva lidé v zástěrách se smějí u zelených dveří Putry",
     "widths": [
       400,
-      800
+      800,
+      1200,
+      1440
     ],
     "ratio": 1,
     "w": 1440,
@@ -426,7 +450,9 @@
     "widths": [
       400,
       800,
-      1200
+      1200,
+      1600,
+      2400
     ],
     "ratio": 1.3333,
     "w": 4032,
@@ -437,7 +463,9 @@
     "alt": "Interiér s papírovou lampou, vitrínou a místem u okna",
     "widths": [
       400,
-      800
+      800,
+      1200,
+      1600
     ],
     "ratio": 0.75,
     "w": 3000,
@@ -448,7 +476,9 @@
     "alt": "Vitrína, dřevěné lamely a kytice na pultu",
     "widths": [
       400,
-      800
+      800,
+      1200,
+      1600
     ],
     "ratio": 0.75,
     "w": 3024,
@@ -495,7 +525,8 @@
     "alt": "Oranžový keramický hrnek s vyraženým logem na stolku",
     "widths": [
       400,
-      800
+      800,
+      1200
     ],
     "ratio": 0.8001,
     "w": 1365,
@@ -506,7 +537,9 @@
     "alt": "Dvě kávy s latte art a dva dezerty na dřevěném stole",
     "widths": [
       400,
-      800
+      800,
+      1200,
+      1600
     ],
     "ratio": 0.75,
     "w": 3024,
@@ -517,7 +550,9 @@
     "alt": "Ledový nápoj s citronem na kulatém stolku ve slunci",
     "widths": [
       400,
-      800
+      800,
+      1200,
+      1440
     ],
     "ratio": 0.8,
     "w": 1440,
@@ -564,7 +599,9 @@
     "alt": "Mini pavlova s jahodou a ostružinou na talíři v ruce",
     "widths": [
       400,
-      800
+      800,
+      1200,
+      1440
     ],
     "ratio": 0.8004,
     "w": 1440,
@@ -576,7 +613,8 @@
     "widths": [
       400,
       800,
-      1200
+      1200,
+      1440
     ],
     "ratio": 1.4371,
     "w": 1440,
@@ -587,7 +625,9 @@
     "alt": "Choux s ostružinovým krémem a vidličkou u okna",
     "widths": [
       400,
-      800
+      800,
+      1200,
+      1440
     ],
     "ratio": 0.8353,
     "w": 1440,
@@ -598,7 +638,9 @@
     "alt": "Nakousnutý malinový dezert na talíři ve slunci",
     "widths": [
       400,
-      800
+      800,
+      1200,
+      1600
     ],
     "ratio": 0.75,
     "w": 3024,
@@ -623,7 +665,9 @@
     "widths": [
       400,
       800,
-      1200
+      1200,
+      1600,
+      2400
     ],
     "ratio": 1.7778,
     "w": 4000,
@@ -635,7 +679,9 @@
     "widths": [
       400,
       800,
-      1200
+      1200,
+      1600,
+      2400
     ],
     "ratio": 1.7782,
     "w": 7913,
@@ -646,7 +692,9 @@
     "alt": "Místo u okna s polštáři za dřevěnými lamelami",
     "widths": [
       400,
-      800
+      800,
+      1200,
+      1600
     ],
     "ratio": 0.75,
     "w": 3024,
@@ -657,7 +705,8 @@
     "alt": "Tři lahve matcha limonády na stolku",
     "widths": [
       400,
-      800
+      800,
+      1170
     ],
     "ratio": 0.5625,
     "w": 1170,
@@ -668,7 +717,8 @@
     "alt": "Lahve limonád na dřevěném stole s pruhovanou látkou",
     "widths": [
       400,
-      800
+      800,
+      1170
     ],
     "ratio": 0.5625,
     "w": 1170,
@@ -703,7 +753,9 @@
     "alt": "Nápis na růžových dortících v krabici s sebou",
     "widths": [
       400,
-      800
+      800,
+      1200,
+      1440
     ],
     "ratio": 0.8824,
     "w": 1440,
@@ -714,7 +766,9 @@
     "alt": "Čokoládový dort shora, nakrájený na dílky se šlehačkou",
     "widths": [
       400,
-      800
+      800,
+      1200,
+      1440
     ],
     "ratio": 0.8,
     "w": 1440,
@@ -725,7 +779,9 @@
     "alt": "Čokoládový dort na objednávku zdobený kousky čokolády",
     "widths": [
       400,
-      800
+      800,
+      1200,
+      1600
     ],
     "ratio": 0.5625,
     "w": 2268,
@@ -760,7 +816,9 @@
     "alt": "Croissant a růžový choux na stole se sklenicemi vody",
     "widths": [
       400,
-      800
+      800,
+      1200,
+      1536
     ],
     "ratio": 0.75,
     "w": 1536,
@@ -771,7 +829,9 @@
     "alt": "Pain au chocolat a kousek brownie na stole po odpoledni",
     "widths": [
       400,
-      800
+      800,
+      1200,
+      1536
     ],
     "ratio": 0.75,
     "w": 1536,
@@ -782,7 +842,9 @@
     "alt": "Čokoládový řez s pekanem a káva v oranžovém hrnku",
     "widths": [
       400,
-      800
+      800,
+      1200,
+      1600
     ],
     "ratio": 0.5625,
     "w": 2268,
@@ -849,6 +911,18 @@
     "w": 1440,
     "h": 1920,
     "color": "rgb(24,8,8)"
+  },
+  "p-kuchyne-vajicko": {
+    "alt": "Cukrářka s vajíčkem v ruce ukazuje v ranní výrobně véčko",
+    "widths": [
+      640,
+      1024,
+      1440
+    ],
+    "ratio": 1.326,
+    "w": 1440,
+    "h": 1086,
+    "color": "rgb(24,24,24)"
   },
   "p-okno-polstare": {
     "alt": "Okno s polštáři a košíkem, venku rozmazaná ulice",

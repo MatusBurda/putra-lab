@@ -16,6 +16,8 @@ const ROOT = path.resolve(__dirname, '..');
 const IMG = '../assets/img/';
 const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'assets/img/manifest.json'), 'utf8'));
 const WORD = fs.readFileSync(path.join(__dirname, 'logo-word.txt'), 'utf8').trim();
+// butter-curl mark, light-on-dark cut (thinner stripes) from the brand files: assets/logo/logo_l_white.svg
+const MARKW = fs.readFileSync(path.join(__dirname, 'logo-mark-white.txt'), 'utf8').trim();
 const MARK = fs.readFileSync(path.join(__dirname, 'logo-mark.txt'), 'utf8').trim().split('\n');
 
 const SITE = 'https://www.putra.cz/';
@@ -179,6 +181,7 @@ async function build(file) {
       `<link rel="preload" as="image" type="image/avif" imagesrcset="${srcset(s, 'avif')}" imagesizes="${sizes}" fetchpriority="high">`)
     .replace(/\{\{logo\}\}/g, `<svg class="logo" viewBox="0 0 46.599 16.528" role="img" aria-label="Putra"><path fill="currentColor" transform="translate(-89.918 -154.96) scale(.98221)" d="${WORD}"/></svg>`)
     .replace(/\{\{logo-outline\}\}/g, `<svg class="logo" viewBox="0 0 46.599 16.528" role="img" aria-label="Putra"><path fill="none" stroke="currentColor" stroke-width=".09" vector-effect="non-scaling-stroke" transform="translate(-89.918 -154.96) scale(.98221)" d="${WORD}"/></svg>`)
+    .replace(/\{\{markw(?::([\w -]+))?\}\}/g, (_, cls) => `<svg class="markw${cls ? ' ' + cls : ''}" viewBox="0 0 46.599 37.306" aria-hidden="true"><path fill="currentColor" transform="translate(-81.700472 -129.84707) matrix(.98221306 0 0 .98221306 -8.216881 6.2322907)" d="${MARKW}"/></svg>`)
     .replace(/\{\{mark\}\}/g, markSvg().replace('<svg ', '<svg class="mark" aria-hidden="true" '))
     .replace(/\{\{status\}\}/g, STATUS);
   const out = path.join(ROOT, file.replace('.html', ''), 'index.html');

@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="cs">
+<head>
+{{head:Den v Putře – cukrárna a dorty na objednávku, Brno-Židenice|Od prvního plechu v 7 ráno po vánoční cukroví v zadní místnosti. Malá cukrárna a kavárna na Táborské v Brně: zákusky z pravého másla, dorty na objednávku, káva u okna.}}
+{{preload:p-okno-hero|100vw}}
+{{fonts:https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,500;12..96,700&display=swap}}
+<style>
+:root{--cream:#fbf4e8;--ink:#1c1612;--warm:#f0b35b;--dawn:#a9bfdc;--dusk:#e98b6d;--p:0;
+ --rw:clamp(226px,17vw,258px);--gap:16px;--g:clamp(18px,4vw,60px);--f:"Bricolage Grotesque",system-ui,sans-serif;
+ --acc:color-mix(in oklab,color-mix(in oklab,var(--dawn),var(--warm) clamp(0%,calc(var(--p) * 250%),100%)),var(--dusk) clamp(0%,calc((var(--p) - .62) * 260%),100%))}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-snap-type:y mandatory;scroll-behavior:smooth;background:var(--ink)}
+body{font:400 17px/1.5 var(--f);color:var(--cream);background:var(--ink);-webkit-font-smoothing:antialiased}
+img,video{display:block;width:100%;height:100%;object-fit:cover;object-position:var(--op,50% 50%)}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--warm);outline-offset:3px}
+.skip{position:absolute;left:-999px}.skip:focus{left:16px;top:16px;z-index:99;background:#fff;color:#000;padding:8px 12px}
+
+/* ---------- liquid glass ---------- */
+.glass{position:relative;isolation:isolate;
+ background:linear-gradient(165deg,rgba(255,255,255,.17),rgba(255,255,255,.04) 34%,rgba(255,255,255,0) 62%,rgba(255,255,255,.07)),rgba(26,19,14,.34);
+ backdrop-filter:blur(22px) saturate(1.8) brightness(.88);-webkit-backdrop-filter:blur(22px) saturate(1.8) brightness(.88);
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.42),inset 0 -14px 26px -20px rgba(255,255,255,.3),0 22px 60px -18px rgba(0,0,0,.55)}
+/* rim light: brighter top-left and bottom-right edge, like a thick pane catching the window */
+.glass::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;
+ background:linear-gradient(135deg,rgba(255,255,255,.62),rgba(255,255,255,.08) 32%,rgba(255,255,255,.03) 64%,rgba(255,255,255,.34));
+ -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
+.glass::before{content:"";position:absolute;inset:0;border-radius:inherit;z-index:-1;pointer-events:none;background:radial-gradient(120% 55% at 18% 0%,rgba(255,255,255,.16),transparent 60%)}
+
+/* ---------- digital clock (rolling digits) ---------- */
+.clock{display:flex;align-items:baseline;font-weight:300;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.dg{display:inline-block;height:1em;width:.6em;overflow:hidden;text-align:center}
+.rl{display:block;transition:transform .6s cubic-bezier(.2,.75,.2,1)}
+.rl span{display:block;height:1em;line-height:1}
+.dg.fast .rl{transition-duration:.22s}
+.colon{width:.28em;text-align:center;color:var(--acc);animation:blink 2s steps(1) infinite;transform:translateY(-.06em)}
+@keyframes blink{50%{opacity:.4}}
+.part{font-size:12px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--acc)}
+
+/* ---------- chrome: logo + hero order button (desktop) ---------- */
+.brand{position:fixed;z-index:30;top:22px;left:var(--g);color:var(--cream);filter:drop-shadow(0 1px 10px rgba(0,0,0,.4))}
+.brand{display:flex;align-items:center;gap:10px}
+.brand .logo{width:84px;height:auto;display:block}
+.brand .markw{width:38px;height:auto;display:block;margin-top:-4px}
+/* the butter curl: draws itself from the left tails, round the bottom, up to the top */
+.markw{display:block;overflow:visible}
+.hero-mark{width:clamp(76px,7.4vw,118px);height:auto;margin-bottom:22px;filter:drop-shadow(0 2px 18px rgba(0,0,0,.3))}
+.end-mark{width:clamp(64px,5.6vw,92px);height:auto;margin-bottom:18px}
+@property --sw{syntax:'<angle>';inherits:false;initial-value:0deg}
+.draw{--m:conic-gradient(from calc(275deg - var(--sw)) at 56% 47%,transparent 0deg,#000 14deg,#000 calc(var(--sw) + 14deg),transparent calc(var(--sw) + 14deg));-webkit-mask-image:var(--m);mask-image:var(--m)}
+.draw.go{animation:sweep 2.4s cubic-bezier(.55,.1,.25,1) .35s forwards}
+.draw.done{-webkit-mask-image:none;mask-image:none}
+@keyframes sweep{to{--sw:360deg}}
+.horder{position:fixed;z-index:30;top:20px;right:var(--g);transition:opacity .45s,transform .45s}
+html.on .horder{opacity:0;transform:translateY(-10px);pointer-events:none}
+
+/* ---------- right rail (appears after the first screen) ---------- */
+.rail{position:fixed;z-index:30;top:var(--gap);right:var(--gap);bottom:var(--gap);width:var(--rw);border-radius:28px;padding:22px 20px 18px;display:flex;flex-direction:column;gap:14px;
+ transform:translateX(calc(100% + 2 * var(--gap)));opacity:0;transition:transform .7s cubic-bezier(.2,.8,.2,1),opacity .5s}
+html.on .rail{transform:none;opacity:1}
+.rail .clock{font-size:calc(var(--rw) * .29);margin-top:4px;text-shadow:0 1px 16px rgba(0,0,0,.25)}
+.day{position:relative;height:24px;margin-top:-2px}
+.day .tr{position:absolute;left:0;right:0;top:8px;height:3px;border-radius:2px;background:rgba(251,244,232,.2)}
+.day .op{position:absolute;top:8px;height:3px;left:33.33%;width:50%;background:rgba(251,244,232,.55);border-radius:2px}
+.day .op2{position:absolute;top:8px;height:3px;left:83.33%;width:16.67%;background:repeating-linear-gradient(90deg,rgba(251,244,232,.55) 0 3px,transparent 3px 6px)}
+.day .dot{position:absolute;top:4px;left:calc(var(--p) * 100%);width:11px;height:11px;margin-left:-5.5px;border-radius:50%;background:var(--acc);box-shadow:0 0 16px var(--acc)}
+.day small{position:absolute;top:15px;font-size:10.5px;color:rgba(251,244,232,.78);transform:translateX(-50%);font-variant-numeric:tabular-nums}
+.day small:first-of-type{transform:none}.day small:last-of-type{transform:translateX(-100%)}
+.tlw{position:relative;flex:1;min-height:0;display:flex;margin-top:6px}
+.tlw::before,.tlw .fill{content:"";position:absolute;left:3px;top:8px;bottom:8px;width:1.5px;background:rgba(251,244,232,.22)}
+.tlw .fill{background:var(--acc);transform-origin:top;transform:scaleY(var(--tp,0));transition:transform .4s}
+.tl{list-style:none;flex:1;display:flex;flex-direction:column;justify-content:space-between;padding-left:18px}
+.tl a{display:flex;gap:10px;align-items:baseline;text-decoration:none;font-size:14px;color:rgba(251,244,232,.8);position:relative;padding:1px 0;transition:color .2s}
+.tl a::before{content:"";position:absolute;left:-19.5px;top:.52em;width:8px;height:8px;border-radius:50%;background:rgba(40,30,22,.9);border:1.5px solid rgba(251,244,232,.45);transition:background .3s,border-color .3s,transform .3s}
+.tl time{font-variant-numeric:tabular-nums;font-weight:500;min-width:3.05em}
+.tl a:hover,.tl a[aria-current]{color:#fff}
+.tl a[aria-current]::before{background:var(--acc);border-color:var(--acc);transform:scale(1.25)}
+.st{font-size:13px;line-height:1.35}
+.st::before{content:"● ";color:#e0893a}.st[data-open=true]::before{color:#5bd07c}
+.btn{display:block;text-align:center;background:var(--cream);color:var(--ink);text-decoration:none;font-weight:500;padding:12px 18px;border-radius:99px;font-size:15px;transition:background .2s}
+.btn:hover{background:#fff}
+.nav{display:none}
+
+/* ---------- scenes: every hour is one full-bleed screen ---------- */
+.sc{position:relative;height:100vh;height:100svh;min-height:520px;overflow:hidden;scroll-snap-align:start;background:var(--ink)}
+.sc::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+ background:linear-gradient(180deg,rgba(14,10,7,.34),rgba(14,10,7,0) 17%,rgba(14,10,7,0) 46%,rgba(14,10,7,.7))}
+.track{list-style:none;position:absolute;inset:0;display:flex;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scrollbar-width:none;cursor:grab;outline-offset:-4px}
+.track::-webkit-scrollbar{display:none}
+.track.drag{cursor:grabbing;user-select:none}
+.track>li{flex:none;height:100%;width:100%;overflow:hidden}
+.track>li.h{width:50%}
+.track img,.track video{pointer-events:none;-webkit-user-drag:none}
+.fit .track{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;overflow:hidden;cursor:auto}
+.fit .track>li{width:auto}
+@supports (animation-timeline:view()){
+ .sc.one img{animation:settle linear both;animation-timeline:view();animation-range:entry 0% cover 50%}
+ @keyframes settle{from{transform:scale(1.08)}to{transform:scale(1)}}
+}
+/* first-view nudge: the whole strip leans left once, then settles back */
+.sc.tease .track>li{animation:tease 1.5s cubic-bezier(.45,0,.2,1)}
+@keyframes tease{0%,100%{transform:none}42%{transform:translateX(-11vw)}}
+
+/* caption – the V07 voice: huge light numerals, calm headline */
+.cap{position:absolute;z-index:3;left:var(--g);bottom:clamp(30px,7vh,72px);max-width:min(640px,calc(100vw - var(--rw) - 2 * var(--gap) - 2 * var(--g)));text-shadow:0 1px 22px rgba(0,0,0,.35);pointer-events:none}
+.cap>*{pointer-events:auto}
+.cap time{display:block;font:300 clamp(64px,9.5vw,148px)/.9 var(--f);letter-spacing:-.045em;font-variant-numeric:tabular-nums}
+.cap h2,.cap h1{font:500 clamp(25px,2.7vw,40px)/1.16 var(--f);letter-spacing:-.018em;margin-top:12px}
+.cap p{margin-top:10px;font-size:17px;max-width:44ch;color:rgba(251,244,232,.95)}
+.hero .cap .ey{display:block;font-size:clamp(15px,1.4vw,19px);font-weight:500;letter-spacing:.14em;text-transform:uppercase;line-height:1.3}
+.hero .cap h1{font-size:clamp(52px,8.4vw,136px);font-weight:700;line-height:1.04;letter-spacing:-.045em;margin-top:6px}
+@keyframes drop{0%,100%{transform:scaleY(.3);transform-origin:top}50%{transform:scaleY(1)}}
+/* hairline pills: no glass, just a drawn outline on the photo */
+.ln{display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(251,244,232,.62);border-radius:99px;padding:8px 16px;font-size:14px;font-weight:500;letter-spacing:.02em;color:var(--cream);text-decoration:none;background:rgba(20,14,10,.12);text-shadow:0 1px 8px rgba(0,0,0,.35);transition:background .25s,color .25s,border-color .25s}
+a.ln:hover,button.ln:hover{background:var(--cream);color:var(--ink);border-color:var(--cream);text-shadow:none}
+.tag{margin-top:16px}
+.pill{display:inline-block;margin-top:16px;background:var(--warm);color:var(--ink);text-decoration:none;font-weight:500;padding:12px 20px;border-radius:99px;text-shadow:none}
+
+/* horizontal gallery affordances */
+.play{position:absolute;z-index:4;top:96px;left:24px;cursor:pointer;font-family:inherit}
+
+/* ---------- bottom row: allowed scroll directions + "více informací" ---------- */
+.dir{position:fixed;z-index:31;left:50%;bottom:14px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:2px;filter:drop-shadow(0 1px 6px rgba(0,0,0,.45));transition:opacity .8s;opacity:0;pointer-events:none}
+html.idle .dir,.dir:focus-within{opacity:1;pointer-events:auto}
+html:not(.idle) .dir{transition-duration:.25s}
+.dir .x{position:relative;width:36px;height:36px}
+.dir .o{position:absolute;left:50%;top:50%;width:5px;height:5px;margin:-2.5px 0 0 -2.5px;border-radius:50%;background:rgba(251,244,232,.8)}
+.dir button{position:absolute;border:0;background:none;padding:0;cursor:pointer;transition:opacity .45s}
+.dir button:disabled{opacity:0;pointer-events:none}
+.dir .up,.dir .dn{left:50%;width:32px;height:50%;margin-left:-16px}.dir .up{top:0}.dir .dn{top:50%}
+.dir .lf,.dir .rt{top:50%;height:32px;width:50%;margin-top:-16px}.dir .lf{left:0}.dir .rt{left:50%}
+.dir i{position:absolute;background:rgba(251,244,232,.62)}
+.dir .up i,.dir .dn i{left:50%;width:1px;height:100%;margin-left:-.5px}
+.dir .lf i,.dir .rt i{top:50%;height:1px;width:100%;margin-top:-.5px}
+.dir .up i{bottom:0}.dir .dn i{top:0}.dir .lf i{right:0}.dir .rt i{left:0}
+/* arrowhead: a 5 px chevron sitting on the tip of each arm */
+.dir button::after{content:"";position:absolute;width:5px;height:5px;border:solid rgba(251,244,232,.75);border-width:1px 1px 0 0}
+.dir .up::after{left:50%;top:0;margin-left:-3px;transform:rotate(-45deg)}
+.dir .dn::after{left:50%;bottom:0;margin-left:-3px;transform:rotate(135deg)}
+.dir .lf::after{top:50%;left:0;margin-top:-3px;transform:rotate(-135deg)}
+.dir .rt::after{top:50%;right:0;margin-top:-3px;transform:rotate(45deg)}
+.dir .up{animation:drU 2.2s ease-in-out infinite}.dir .dn{animation:drD 2.2s ease-in-out infinite}
+.dir .lf{animation:drL 2.2s ease-in-out infinite}.dir .rt{animation:drR 2.2s ease-in-out infinite}
+@keyframes drU{50%{transform:translateY(-3px)}}@keyframes drD{50%{transform:translateY(3px)}}
+@keyframes drL{50%{transform:translateX(-3px)}}@keyframes drR{50%{transform:translateX(3px)}}
+.dir .lb{opacity:.8;font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;margin-top:10px;min-height:1em}
+.dir .lb:empty{display:none}
+.more{position:fixed;z-index:31;bottom:34px;right:var(--g);font-size:13.5px;padding:9px 16px;transition:right .7s cubic-bezier(.2,.8,.2,1),opacity .4s,background .25s,color .25s,border-color .25s}
+html.on .more{opacity:0;pointer-events:none}
+.rail .ln,.rail .btn{display:flex;justify-content:center;align-items:center;gap:8px;height:46px;padding:0 18px;font-size:15px;font-weight:500;letter-spacing:.01em;border:1px solid transparent;box-sizing:border-box}
+.rail .ln{margin-top:auto;border-color:rgba(251,244,232,.62)}
+.rail .ln+.btn{margin-top:-4px}
+html.at-info .more{opacity:0;pointer-events:none}
+.more span{display:inline-block;animation:armDrop 2s ease-in-out infinite}
+@keyframes armDrop{0%,100%{transform:none}50%{transform:translateY(3px)}}
+
+/* ---------- closing: order + visit, glass on the window photo ---------- */
+.close{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;scroll-snap-align:start}
+.close>picture{position:absolute;inset:0}
+.close::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(14,10,7,.3),rgba(14,10,7,.55))}
+.close>*:not(picture){position:relative;z-index:2}
+.close .lead{padding:96px var(--g) 0;max-width:calc(100vw - var(--rw) - 2 * var(--gap))}
+.close .lead h2{font:700 clamp(40px,5.6vw,88px)/1.05 var(--f);letter-spacing:-.04em}
+.close .lead p{margin-top:10px;font-size:18px;max-width:46ch}
+.panel{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--gap);padding:28px calc(var(--rw) + 3 * var(--gap)) 20px var(--g)}
+.card{border-radius:24px;padding:24px}
+.card h3{font:700 26px/1.12 var(--f);letter-spacing:-.025em;margin-bottom:8px}
+.card p{font-size:16px;color:rgba(251,244,232,.9)}
+.card dl{display:grid;grid-template-columns:auto 1fr;gap:4px 18px;margin:12px 0;font-size:16px}
+.card dt{color:rgba(251,244,232,.72)}
+/* cukroví card: dates as a hairline row, prices as a menu with dotted leaders */
+.card .meta{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 12px}
+.card .meta span{border:1px solid rgba(251,244,232,.45);border-radius:99px;padding:3px 10px;font-size:13px;color:var(--cream)}
+.card .sorts{font-size:15px;color:rgba(251,244,232,.82)}
+.card dl.menu{display:grid;grid-template-columns:1fr auto;margin:12px 0 0;font-size:15.5px;gap:0}
+.card dl.menu dt,.card dl.menu dd{padding:6px 0;border-bottom:1px dotted rgba(251,244,232,.3)}
+.card dl.menu dt{color:var(--cream)}
+.card dl.menu dd{text-align:right;font-variant-numeric:tabular-nums;font-weight:500;padding-left:12px}
+.card dl.menu :nth-last-child(-n+2){border-bottom:0}
+@media (min-width:1101px){.panel{grid-template-columns:1fr 1.3fr 1fr}}
+.card dl.cols{grid-template-columns:1fr auto 1fr auto}
+.card dl.cols dd:nth-of-type(odd){padding-right:18px}
+.card dl.cols dt:nth-of-type(even){padding-left:0}
+.card dl.cols :nth-last-child(-n+4){border-bottom:0}
+@media (max-width:480px){.card dl.cols{grid-template-columns:1fr auto}.card dl.cols dd:nth-of-type(odd){padding-right:0}.card dl.cols :nth-last-child(-n+4){border-bottom:1px dotted rgba(251,244,232,.3)}.card dl.cols :nth-last-child(-n+2){border-bottom:0}}
+.card h4{font:500 12px/1 var(--f);letter-spacing:.16em;text-transform:uppercase;color:rgba(251,244,232,.75);margin:18px 0 0;padding-top:16px;border-top:1px solid rgba(251,244,232,.22)}
+form{display:grid;gap:10px;margin-top:14px}
+input,select,textarea{font:inherit;font-size:16px;padding:12px 14px;border:1px solid rgba(251,244,232,.28);border-radius:14px;background:rgba(251,244,232,.1);color:var(--cream);width:100%;min-width:0;color-scheme:dark}
+input::placeholder,textarea::placeholder{color:rgba(251,244,232,.72)}
+select option{color:var(--ink);background:var(--cream)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+form button{border:0;border-radius:99px;padding:14px;background:var(--cream);color:var(--ink);font-weight:500;cursor:pointer}
+footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:8px calc(var(--rw) + 3 * var(--gap)) 26px var(--g);font-size:14px;color:rgba(251,244,232,.9)}
+
+/* ---------- phone / small tablet: rail becomes a floating glass navbar ---------- */
+@media (max-width:900px){
+ :root{--g:18px}
+ .top,.rail{display:none}
+ .nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;position:fixed;z-index:30;top:10px;left:10px;right:10px;height:58px;padding:0 8px 0 16px;border-radius:22px}
+ .nav .lock{display:flex;align-items:center;gap:7px;color:var(--cream)}
+ .nav .logo{width:58px;height:auto;display:block}
+ .nav .markw{width:27px;height:auto;margin-top:-3px}
+ .hero-mark{margin-bottom:16px}
+ .nav .mid{display:flex;flex-direction:column;align-items:center;gap:2px}
+ .nav .clock{font-size:27px;font-weight:500}
+ .nav .part{font-size:9.5px;letter-spacing:.14em}
+ .nav .btn{justify-self:end;padding:9px 15px;font-size:14px}
+ .nav .bar{position:absolute;left:22px;right:22px;bottom:0;height:2px;border-radius:2px;background:var(--acc);transform-origin:left;transform:scaleX(var(--prog,0))}
+ .track>li.h{width:100%}
+ .fit.duo .track{grid-auto-flow:row;grid-auto-rows:1fr;grid-auto-columns:auto}
+ .fit.trio .track{grid-template-columns:1fr 1fr;grid-template-rows:1.25fr 1fr;grid-auto-flow:row}
+ .fit.trio .track>li:first-child{grid-column:1/-1}
+ .cap{max-width:calc(100vw - 2 * var(--g));bottom:76px}
+ .cap time{font-size:clamp(56px,17vw,84px)}
+ .cap h2{font-size:clamp(24px,6.6vw,30px)}
+ .cap p{font-size:16px}
+ .hero .cap{bottom:76px}
+ .hero .cap h1{font-size:clamp(50px,15vw,76px)}
+ .dir{bottom:10px}.dir .x{width:34px;height:34px}
+ .more,html.on .more{opacity:1;pointer-events:auto;right:12px;bottom:26px;font-size:12.5px;padding:7px 12px}
+ html.at-info .dir,html.at-info .more{opacity:0;pointer-events:none}
+ .play{top:84px;left:18px}
+ .close .lead{padding-top:100px;max-width:none}
+ .panel,footer{padding-left:var(--g);padding-right:var(--g)}
+ .panel{grid-template-columns:1fr}
+}
+@media (max-width:480px){.two{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ .rl,.dg.fast .rl{transition:none}
+ .colon,.dir button,.more span{animation:none!important}
+ .sc.one img,.sc.tease .track>li{animation:none}
+ .draw{-webkit-mask-image:none;mask-image:none}
+ .rail,.horder{transition:opacity .2s}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#info">Přeskočit na objednávku a kontakt</a>
+
+<header class="top">
+  <a class="brand" href="#" aria-label="Putra – domů">{{markw}}{{logo}}</a>
+  <a class="horder ln" href="#info">Objednat dort</a>
+</header>
+
+<header class="nav glass">
+  <a class="lock" href="#" aria-label="Putra – domů">{{markw}}{{logo}}</a>
+  <div class="mid" aria-hidden="true"><div class="clock" data-clock></div><span class="part" data-part>ráno</span></div>
+  <a class="btn" href="#info">Objednat</a>
+  <span class="bar" aria-hidden="true"></span>
+</header>
+
+<aside class="rail glass" aria-label="Časová osa dne" inert>
+  <div aria-hidden="true"><span class="part" data-part>ráno</span><div class="clock" data-clock></div></div>
+  <div class="day" aria-hidden="true"><span class="tr"></span><span class="op"></span><span class="op2"></span><span class="dot"></span><small style="left:0">6</small><small style="left:33.33%">10</small><small style="left:83.33%">16</small><small style="left:100%">18</small></div>
+  <nav class="tlw" aria-label="Hodiny dne"><span class="fill" aria-hidden="true"></span><ol class="tl">
+    <li><a href="#s0650"><time>06:50</time>Ještě zavřeno</a></li>
+    <li><a href="#s0700"><time>07:00</time>Výrobna</a></li>
+    <li><a href="#s0930"><time>09:30</time>Vitrína</a></li>
+    <li><a href="#s1000"><time>10:00</time>Otevíráme</a></li>
+    <li><a href="#s1120"><time>11:20</time>Káva u okna</a></li>
+    <li><a href="#s1230"><time>12:30</time>Pavlova</a></li>
+    <li><a href="#s1330"><time>13:30</time>Parapet</a></li>
+    <li><a href="#s1445"><time>14:45</time>Na oslavu</a></li>
+    <li><a href="#s1550"><time>15:50</time>Poslední choux</a></li>
+    <li><a href="#s1600"><time>16:00</time>Vyprodáno</a></li>
+    <li><a href="#s1630"><time>16:30</time>Cukroví</a></li>
+  </ol></nav>
+  <a class="ln" href="#info">Více informací <span aria-hidden="true">↓</span></a>
+  <a class="btn" href="#info">Objednat dort</a>
+</aside>
+
+<main>
+<header class="sc one hero" id="s0650" data-t="06:50">
+  <ul class="track" role="presentation"><li>{{pic:p-okno-hero|100vw||eager}}</li></ul>
+  <div class="cap">{{markw:draw hero-mark}}<span class="ey">Brno-Židenice · Táborská 102</span><h1>Den v Putře.</h1><p>Malá cukrárna a kavárna, kde se peče z pravého másla. Projděte si s námi jeden obyčejný den — od prvního plechu po poslední choux. U většiny hodin se dá listovat do strany.</p></div>
+</header>
+
+<section class="sc" id="s0700" data-t="07:00" aria-labelledby="h0700">
+  <ul class="track" tabindex="0" aria-label="Fotky ze 7:00, listujte do strany">
+    <li class="h">{{pic:p-pusinky|(max-width:900px) 100vw, 50vw}}</li>
+    <li class="h">{{pic:p-croissanty-plech|(max-width:900px) 100vw, 50vw}}</li>
+    <li class="h">{{pic:p-dort-potirani|(max-width:900px) 100vw, 50vw}}</li>
+    <li class="h">{{pic:p-croissanty|(max-width:900px) 100vw, 50vw}}</li>
+    <li>{{pic:p-kuchyne-vajicko|100vw}}</li>
+  </ul>
+  <div class="cap"><time>07:00</time><h2 id="h0700">Nejdřív máslo. Vždycky.</h2><p>Putra je staročesky čerstvé máslo. Croissanty a pusinky jdou do trouby, dorty na objednávku dostávají první vrstvu krému.</p></div>
+</section>
+
+<section class="sc" id="s0930" data-t="09:30" aria-labelledby="h0930">
+  <ul class="track" tabindex="0" aria-label="Fotky z 9:30, listujte do strany">
+    <li class="h">{{pic:p-cokoladovy-choux|(max-width:900px) 100vw, 50vw}}</li>
+    <li class="h">{{pic:p-interier-pult|(max-width:900px) 100vw, 50vw}}</li>
+    <li class="h">{{pic:p-choux-malinovy|(max-width:900px) 100vw, 50vw}}</li>
+    <li class="h">{{pic:p-vetrnik|(max-width:900px) 100vw, 50vw}}</li>
+    <li class="h">{{pic:p-makronky|(max-width:900px) 100vw, 50vw}}</li>
+    <li class="h">{{pic:p-brownie|(max-width:900px) 100vw, 50vw}}</li>
+    <li>{{pic:p-vitrina-choux|100vw}}</li>
+  </ul>
+  <div class="cap"><time>09:30</time><h2 id="h0930">Vitrína se plní.</h2><p>Větrníky s karamelem, choux, řezy, tartaletky. Každý týden trochu jinak — podle toho, co voní na Zelňáku.</p></div>
+</section>
+
+<section class="sc" id="s1000" data-t="10:00" aria-labelledby="h1000">
+  <ul class="track" tabindex="0" aria-label="Fotky z 10:00, listujte do strany">
+    <li>{{pic:p-zastera|100vw}}</li>
+    <li class="h">{{pic:p-dvojice|(max-width:900px) 100vw, 50vw}}</li>
+    <li class="h">{{pic:p-vyrobna|(max-width:900px) 100vw, 50vw}}</li>
+    <li class="h">{{pic:p-vitrina-cedulky|(max-width:900px) 100vw, 50vw}}</li>
+    <li class="h">{{pic:p-interier-kvetiny|(max-width:900px) 100vw, 50vw}}</li>
+    <li>{{pic:p-stoly-u-okna|100vw}}</li>
+    <li>{{pic:p-u-dveri|100vw}}</li>
+  </ul>
+  <div class="cap"><time>10:00</time><h2 id="h1000">Otevíráme.</h2><p>Úterý a pátek do 16:00, středa a čtvrtek do 18:00.</p><span class="tag ln" data-status>Út–Pá od 10:00</span></div>
+</section>
+
+<section class="sc" id="s1120" data-t="11:20" aria-labelledby="h1120">
+  <ul class="track" tabindex="0" aria-label="Fotky z 11:20, listujte do strany">
+    <li>{{pic:p-zakusek-kava|100vw}}</li>
+    <li class="h">{{pic:p-cappuccino|(max-width:900px) 100vw, 50vw}}</li>
+    <li class="h">{{pic:p-oranzovy-hrnek|(max-width:900px) 100vw, 50vw}}</li>
+    <li class="h">{{pic:p-latte-shora|(max-width:900px) 100vw, 50vw}}</li>
+    <li class="h">{{pic:p-rez-kava|(max-width:900px) 100vw, 50vw}}</li>
+  </ul>
+  <div class="cap"><time>11:20</time><h2 id="h1120">První flat white u okna.</h2><p>Káva z brněnské pražírny, voda z kohoutku zdarma. Nikdo nespěchá.</p></div>
+</section>
+
+<section class="sc" id="s1230" data-t="12:30" aria-labelledby="h1230">
+  <ul class="track" tabindex="0" aria-label="Fotky z 12:30, listujte do strany">
+    <li class="h">{{pic:p-pavlova-smich|(max-width:900px) 100vw, 50vw}}</li>
+    <li class="h">{{pic:p-pavlova-vysoka|(max-width:900px) 100vw, 50vw}}</li>
+    <li class="h vid"><video muted loop playsinline preload="none" data-poster="{{src:p-reel-pavlova:720}}" style="background:#6b5a4c" aria-label="Krátké video: pavlova s ovocnou omáčkou na talíři"><source src="../assets/video/pavlova-reel.mp4" type="video/mp4"></video></li>
+    <li class="h">{{pic:p-pavlova-vidlicka|(max-width:900px) 100vw, 50vw}}</li>
+    <li>{{pic:p-vetrnik-dvere|100vw}}</li>
+  </ul>
+  <div class="cap"><time>12:30</time><h2 id="h1230">Pavlova místo oběda.</h2><p>Pečená pusinka, krém a ovoce ze Zelňáku. Borůvky dnes, zítra třeba fíky.</p></div>
+</section>
+
+<section class="sc" id="s1330" data-t="13:30" aria-labelledby="h1330">
+  <ul class="track" tabindex="0" aria-label="Fotky z 13:30, listujte do strany">
+    <li>{{pic:p-slunce|100vw}}</li>
+    <li class="h">{{pic:p-ledove|(max-width:900px) 100vw, 50vw}}</li>
+    <li class="h">{{pic:p-limonady|(max-width:900px) 100vw, 50vw}}</li>
+    <li class="h">{{pic:p-choux-vidlicka|(max-width:900px) 100vw, 50vw}}</li>
+    <li class="h">{{pic:p-matcha|(max-width:900px) 100vw, 50vw}}</li>
+  </ul>
+  <div class="cap"><time>13:30</time><h2 id="h1330">Slunce se opře do parapetu.</h2><p>Nejlepší místo v Putře. Kdo tu sedí, ví.</p></div>
+</section>
+
+<section class="sc" id="s1445" data-t="14:45" aria-labelledby="h1445">
+  <ul class="track" tabindex="0" aria-label="Fotky ze 14:45, listujte do strany">
+    <li class="h">{{pic:p-zdobeni|(max-width:900px) 100vw, 50vw}}</li>
+    <li class="h">{{pic:p-jednorozec|(max-width:900px) 100vw, 50vw}}</li>
+    <li class="h">{{pic:p-bento|(max-width:900px) 100vw, 50vw}}</li>
+    <li class="h">{{pic:p-dort-shora|(max-width:900px) 100vw, 50vw}}</li>
+    <li class="h">{{pic:p-dort-cokoladovy|(max-width:900px) 100vw, 50vw}}</li>
+  </ul>
+  <div class="cap"><time>14:45</time><h2 id="h1445">Někdo si odnáší dort na oslavu.</h2><p>Zákusky s sebou balíme do krabic, dorty na objednávku vydáváme po domluvě.</p></div>
+</section>
+
+<section class="sc" id="s1550" data-t="15:50" aria-labelledby="h1550">
+  <ul class="track" tabindex="0" aria-label="Fotky z 15:50, listujte do strany">
+    <li class="h">{{pic:p-choux-ostruzina|(max-width:900px) 100vw, 50vw}}</li>
+    <li class="h">{{pic:p-choux-nakrojene|(max-width:900px) 100vw, 50vw}}</li>
+    <li class="h">{{pic:p-malinovy|(max-width:900px) 100vw, 50vw}}</li>
+    <li class="h">{{pic:p-croissant-choux|(max-width:900px) 100vw, 50vw}}</li>
+  </ul>
+  <div class="cap"><time>15:50</time><h2 id="h1550">Poslední choux.</h2><p>V pátek pečeme do vyprodání. Kdo dřív přijde…</p></div>
+</section>
+
+<section class="sc one" id="s1600" data-t="16:00" aria-labelledby="h1600">
+  <ul class="track" role="presentation"><li>{{pic:p-zidle-svetlo|100vw}}</li></ul>
+  <div class="cap"><time>16:00</time><h2 id="h1600">Vyprodáno. Zítra znovu.</h2><p>Židle ve slunci, prázdná vitrína. Ve středu a ve čtvrtek máme otevřeno do 18:00.</p></div>
+</section>
+
+<section class="sc fit trio" id="s1630" data-t="16:30" aria-labelledby="h1630">
+  <ul class="track" role="presentation">
+    <li>{{pic:p-vceli-uly|(max-width:900px) 100vw, 34vw}}</li>
+    <li>{{pic:p-linecke|(max-width:900px) 50vw, 34vw}}</li>
+    <li>{{pic:p-cukrovi-krabice|(max-width:900px) 50vw, 34vw}}</li>
+  </ul>
+  <div class="cap"><time>16:30</time><h2 id="h1630">Mezitím vzadu: vánoční cukroví.</h2><p>Linecké hvězdičky, včelí úlky, vanilkové rohlíčky. Krabice se plní až do prosince.</p><a class="pill" href="#cukrovi">Zamluvit krabici</a></div>
+</section>
+
+<section class="close" id="info" aria-labelledby="hinfo">
+  {{pic:p-okno-polstare|100vw}}
+  <div class="lead">{{markw:draw end-mark}}<h2 id="hinfo">Zítra zase od rána.</h2><p>Dort na oslavu, krabice cukroví nebo jen místo u okna — tady je všechno, co k tomu potřebujete.</p></div>
+  <div class="panel">
+    <div class="card glass">
+      <h3>Dort na objednávku</h3>
+      <p>Od 1 290 Kč, nejméně 3 dny předem. Ozveme se do 24 hodin.</p>
+      <form onsubmit="event.preventDefault();this.querySelector('button').textContent='Odesláno ♡'">
+        <div class="two"><input name="jmeno" placeholder="Jméno" aria-label="Jméno" autocomplete="name" required><input type="email" name="email" placeholder="E-mail" aria-label="E-mail" autocomplete="email" required></div>
+        <div class="two"><select name="varianta" aria-label="Varianta"><option>Dort</option><option>Zákusky</option><option>Vánoční cukroví</option></select><input type="date" name="den" aria-label="Den vyzvednutí" required></div>
+        <textarea name="zprava" rows="2" placeholder="Pro kolik lidí, jaká chuť…" aria-label="Zpráva"></textarea>
+        <button type="submit">Odeslat</button>
+      </form>
+    </div>
+    <div class="card glass" id="cukrovi">
+      <h3>Vánoční cukroví 2026</h3>
+      <p class="meta"><span>Objednávky do 10. 12.</span><span>Výdej 18.–22. 12.</span></p>
+      <p class="sorts">Linecké · vanilkové rohlíčky · pracny · kokosky</p>
+      <dl class="menu"><dt>Krabice 0,5 kg</dt><dd>690 Kč</dd><dt>Krabice 1 kg</dt><dd>1 290 Kč</dd></dl>
+      <a class="pill" href="#info">Zamluvit krabici</a>
+      <h4>Ve vitríně</h4>
+      <dl class="menu cols"><dt>Větrník</dt><dd>89 Kč</dd><dt>Pistáciový řez</dt><dd>95 Kč</dd><dt>Mini pavlova</dt><dd>99 Kč</dd><dt>Choux</dt><dd>85 Kč</dd><dt>Skořicový šnek</dt><dd>65 Kč</dd><dt>Flat white</dt><dd>79 Kč</dd></dl>
+    </div>
+    <div class="card glass" id="navsteva">
+      <h3>Táborská 3238/102</h3>
+      <p>615 00 Brno-Židenice · <a href="tel:+420773558819">773 558 819</a></p>
+      <dl><dt>Út</dt><dd>10:00–16:00</dd><dt>St–Čt</dt><dd>10:00–18:00</dd><dt>Pá</dt><dd>10:00–16:00, do vyprodání</dd><dt>So–Po</dt><dd>zavřeno</dd></dl>
+      <span class="st" data-status></span><br>
+      <a class="pill" href="https://maps.google.com/?cid=6744509639000696065" rel="noopener">Navigovat</a>
+    </div>
+  </div>
+  <footer><span>Putra – výrobna a sladké pečení · Petra Kopalová · IČO 21717435</span><span>5,0 ★ na Google · <a href="https://www.instagram.com/putrabrno/" rel="noopener">@putrabrno</a></span></footer>
+</section>
+</main>
+
+<nav class="dir" aria-label="Kam se dá posouvat">
+  <div class="x"><span class="o" aria-hidden="true"></span>
+    <button class="up" type="button" aria-label="Předchozí hodina"><i></i></button>
+    <button class="dn" type="button" aria-label="Další hodina"><i></i></button>
+    <button class="lf" type="button" aria-label="Předchozí fotky"><i></i></button>
+    <button class="rt" type="button" aria-label="Další fotky"><i></i></button>
+  </div>
+  <span class="lb" aria-hidden="true"></span>
+</nav>
+<nav aria-label="Rychlý odkaz"><a class="more ln" href="#info">Více informací <span aria-hidden="true">↓</span></a></nav>
+
+<script>
+(function(){
+var RM=matchMedia('(prefers-reduced-motion: reduce)'),root=document.documentElement;
+function beh(){return RM.matches?'auto':'smooth'}
+
+/* --- rolling digital clock --- */
+var clocks=[].slice.call(document.querySelectorAll('[data-clock]')),parts=[].slice.call(document.querySelectorAll('[data-part]'));
+var reel='';for(var n=0;n<10;n++)reel+='<span>'+n+'</span>';
+var dig='<span class="dg"><span class="rl">'+reel+'</span></span>';
+clocks.forEach(function(c){c.innerHTML=dig+dig+'<span class="colon">:</span>'+dig+dig.replace('dg','dg fast')});
+var reels=clocks.map(function(c){return c.querySelectorAll('.rl')});
+var stops=[].slice.call(document.querySelectorAll('[data-t]')),mins=stops.map(function(s){var t=s.dataset.t.split(':');return t[0]*60+ +t[1]});
+var links=[].slice.call(document.querySelectorAll('.tl a')),tlw=document.querySelector('.tlw'),rail=document.querySelector('.rail'),nav=document.querySelector('.nav');
+function partOf(m){return m<420?'před otevřením':m<540?'ráno':m<600?'dopoledne':m<690?'dopoledne':m<780?'poledne':m<945?'odpoledne':m<975?'zavíráme':'podvečer'}
+var shown=-1,act=-1,on=null;
+function show(m){
+  if(m===shown)return;shown=m;
+  var h=Math.floor(m/60),mm=m%60,d=[Math.floor(h/10),h%10,Math.floor(mm/10),mm%10];
+  reels.forEach(function(rs){for(var i=0;i<4;i++)rs[i].style.transform='translateY('+(-d[i])+'em)'});
+  var pt=partOf(m);parts.forEach(function(p){if(p.textContent!==pt)p.textContent=pt});
+  root.style.setProperty('--p',Math.max(0,Math.min(1,(m-360)/720)).toFixed(4));
+}
+function tick(){
+  ticking=false;
+  var y=2,tops=stops.map(function(s){return s.getBoundingClientRect().top}),i=-1;
+  for(var k=0;k<tops.length;k++)if(tops[k]<=y)i=k;
+  var m;
+  if(i<0)m=mins[0];
+  else if(i===stops.length-1)m=mins[i];
+  else{var f=(y-tops[i])/(tops[i+1]-tops[i]);m=Math.round(mins[i]+Math.max(0,Math.min(1,f))*(mins[i+1]-mins[i]))}
+  show(m);
+  var a=Math.max(0,i);
+  if(a!==act){act=a;links.forEach(function(l,j){if(j===a)l.setAttribute('aria-current','step');else l.removeAttribute('aria-current')})}
+  tlw.style.setProperty('--tp',(a/(stops.length-1)).toFixed(3));
+  var max=root.scrollHeight-innerHeight;nav.style.setProperty('--prog',max>0?(scrollY/max).toFixed(4):0);
+  /* the rail only joins after the opening screen */
+  var o=scrollY>innerHeight*.55;
+  if(o!==on){on=o;root.classList.toggle('on',o);if(o)rail.removeAttribute('inert');else rail.setAttribute('inert','')}
+}
+var ticking=false;
+function req(){if(!ticking){ticking=true;requestAnimationFrame(tick)}}
+addEventListener('scroll',req,{passive:true});addEventListener('resize',req);tick();
+
+/* --- full-bleed horizontal galleries: move freely, then glide to the nearest whole screen --- */
+var galleries=[];
+[].forEach.call(document.querySelectorAll('.sc:not(.fit):not(.one)'),function(sc){
+  var row=sc.querySelector('.track'),cards=[].slice.call(row.children),stopsX=[];
+  /* a "screen" = a scroll position where the view starts at a photo edge and ends at a photo edge (only whole photos) */
+  function layout(){
+    var W=row.clientWidth,max=row.scrollWidth-W,ends=cards.map(function(c){return c.offsetLeft+c.offsetWidth});
+    stopsX=cards.map(function(c){return c.offsetLeft}).filter(function(x){return x<=max+2&&ends.some(function(e){return Math.abs(e-(x+W))<3})});
+    if(stopsX[stopsX.length-1]<max-2)stopsX.push(max);
+  }
+  function nearest(sl){var b=stopsX[0];stopsX.forEach(function(x){if(Math.abs(x-sl)<Math.abs(b-sl))b=x});return b}
+  function upd(){var max=row.scrollWidth-row.clientWidth,sl=row.scrollLeft;g.canL=sl>2;g.canR=sl<max-2;dirUpd()}
+  function settle(){if(down)return;var x=nearest(row.scrollLeft);if(Math.abs(x-row.scrollLeft)>1)row.scrollTo({left:x,behavior:beh()})}
+  function go(dir){
+    var sl=row.scrollLeft,x=null;
+    if(dir>0){stopsX.some(function(s){if(s>sl+4){x=s;return true}})}else{stopsX.forEach(function(s){if(s<sl-4)x=s})}
+    if(x!==null)row.scrollTo({left:x,behavior:beh()});
+  }
+  var g={sc:sc,go:go,canL:false,canR:true};galleries.push(g);
+  row.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'){e.preventDefault();go(1)}else if(e.key==='ArrowLeft'){e.preventDefault();go(-1)}
+    else if(e.key==='Home'){e.preventDefault();row.scrollTo({left:0,behavior:'auto'})}else if(e.key==='End'){e.preventDefault();row.scrollTo({left:row.scrollWidth,behavior:'auto'})}
+  });
+  var raf=0,idleT=0;
+  row.addEventListener('scroll',function(){
+    if(!raf)raf=requestAnimationFrame(function(){raf=0;upd()});
+    clearTimeout(idleT);idleT=setTimeout(settle,160); /* trackpad momentum keeps firing scroll; settle once it goes quiet */
+  },{passive:true});
+  addEventListener('resize',function(){layout();row.scrollLeft=nearest(row.scrollLeft);upd()});layout();upd();
+  /* mouse drag (touch and trackpad scroll natively) */
+  var down=false,sx=0,ss=0,moved=false;
+  row.addEventListener('pointerdown',function(e){if(e.pointerType!=='mouse'||e.button!==0)return;down=true;moved=false;sx=e.clientX;ss=row.scrollLeft});
+  addEventListener('pointermove',function(e){if(!down)return;var dx=e.clientX-sx;if(!moved&&Math.abs(dx)>4){moved=true;row.classList.add('drag')}if(moved)row.scrollLeft=ss-dx});
+  addEventListener('pointerup',function(){if(!down)return;down=false;row.classList.remove('drag');if(moved)settle()});
+  /* first time the hour is on screen: lean the strip left once, so it reads as "there is more" */
+  new IntersectionObserver(function(es,o){es.forEach(function(e){if(e.intersectionRatio>=.7){o.disconnect();if(!RM.matches&&row.scrollLeft<2){sc.classList.add('tease');setTimeout(function(){sc.classList.remove('tease')},1600)}}})},{threshold:[.7]}).observe(sc);
+});
+
+/* --- bottom glyph: shows (and offers) only the directions this screen allows: ↓ on the first, ⊢ ✚ ⊣ in galleries --- */
+var screens=[].slice.call(document.querySelectorAll('main>.sc,main>.close')),dir=document.querySelector('.dir');
+var bU=dir.querySelector('.up'),bD=dir.querySelector('.dn'),bL=dir.querySelector('.lf'),bR=dir.querySelector('.rt'),lb=dir.querySelector('.lb');
+function cur(){var c=innerHeight/2,b=0;screens.forEach(function(s,i){var r=s.getBoundingClientRect();if(r.top<=c)b=i});return b}
+function dirUpd(){
+  if(!bU)return;
+  var i=cur(),s=screens[i],g=null;galleries.forEach(function(x){if(x.sc===s)g=x});
+  bU.disabled=i===0;bD.disabled=i===screens.length-1;bL.disabled=!(g&&g.canL);bR.disabled=!(g&&g.canR);
+  lb.textContent=i===0?'Posouvejte':'';
+  root.classList.toggle('at-info',s.id==='info');
+}
+function toScreen(i){screens[i].scrollIntoView({behavior:beh()})}
+bU.addEventListener('click',function(){toScreen(Math.max(0,cur()-1))});
+bD.addEventListener('click',function(){toScreen(Math.min(screens.length-1,cur()+1))});
+bL.addEventListener('click',function(){galleries.forEach(function(g){if(g.sc===screens[cur()])g.go(-1)})});
+bR.addEventListener('click',function(){galleries.forEach(function(g){if(g.sc===screens[cur()])g.go(1)})});
+addEventListener('scroll',function(){requestAnimationFrame(dirUpd)},{passive:true});dirUpd();
+/* the sign only shows after 6 s without scrolling, swiping or keys (3 s on the opening screen); any of those hides it again */
+var idle=0;function wake(){root.classList.remove('idle');clearTimeout(idle);idle=setTimeout(function(){root.classList.add('idle')},cur()===0?3000:6000)}
+['scroll','wheel','touchstart','keydown','pointerdown'].forEach(function(ev){addEventListener(ev,wake,{passive:true,capture:true})});wake();
+
+/* --- logo curl: draw the hero one on load, the closing one when it comes into view --- */
+[].forEach.call(document.querySelectorAll('.draw'),function(m){
+  if(RM.matches||!(window.CSS&&'registerProperty' in CSS)){m.classList.add('done');return}
+  m.addEventListener('animationend',function(){m.classList.add('done')});
+  new IntersectionObserver(function(es,o){if(es[0].isIntersecting){o.disconnect();m.classList.add('go')}},{threshold:.6}).observe(m);
+});
+
+/* --- reel: plays muted only while visible, never with reduced motion; always pausable --- */
+[].forEach.call(document.querySelectorAll('.track video'),function(v){
+  var li=v.parentNode,b=document.createElement('button'),user=null;b.type='button';b.className='play ln';b.setAttribute('aria-pressed','false');b.textContent='Přehrát video';
+  li.style.position="relative";li.appendChild(b);
+  function set(p){b.textContent=p?'Pozastavit':'Přehrát video';b.setAttribute('aria-pressed',p?'true':'false')}
+  b.addEventListener('click',function(){if(v.paused){user=true;v.play()}else{user=false;v.pause()}});
+  v.addEventListener('play',function(){set(true)});v.addEventListener('pause',function(){set(false)});
+  new IntersectionObserver(function(es,o){if(es[0].isIntersecting){v.poster=v.dataset.poster;o.disconnect()}},{rootMargin:'600px 100%'}).observe(v);
+  new IntersectionObserver(function(es){es.forEach(function(e){
+    if(e.isIntersecting&&!RM.matches&&user!==false){v.play().catch(function(){})}else if(!e.isIntersecting&&!v.paused)v.pause();
+  })},{threshold:.6}).observe(v);
+});
+})();
+</script>
+{{status}}
+</body>
+</html>
