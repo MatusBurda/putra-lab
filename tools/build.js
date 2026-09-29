@@ -227,6 +227,7 @@ async function build(file) {
     .replace(/\{\{logo\}\}/g, `<svg class="logo" viewBox="0 0 46.599 16.528" role="img" aria-label="Putra"><path fill="currentColor" transform="translate(-89.918 -154.96) scale(.98221)" d="${WORD}"/></svg>`)
     .replace(/\{\{logo-outline\}\}/g, `<svg class="logo" viewBox="0 0 46.599 16.528" role="img" aria-label="Putra"><path fill="none" stroke="currentColor" stroke-width=".09" vector-effect="non-scaling-stroke" transform="translate(-89.918 -154.96) scale(.98221)" d="${WORD}"/></svg>`)
     .replace(/\{\{markw(?::([\w -]+))?\}\}/g, (_, cls) => markw(cls))
+    .replace(/\{\{marksym\}\}/g, `<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="curl" viewBox="0 0 46.599 37.306"><path fill="currentColor" transform="${MARK_T}" d="${MARKW}"/></symbol></svg>`)
     .replace(/\{\{mark\}\}/g, markSvg().replace('<svg ', '<svg class="mark" aria-hidden="true" '))
     .replace(/\{\{status\}\}/g, STATUS);
   const out = path.join(ROOT, 'index.html');

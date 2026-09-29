@@ -103,8 +103,17 @@ html.on .rail{transform:none;opacity:1}
 .sc.tease .track>li{animation:tease 1.5s cubic-bezier(.45,0,.2,1)}
 @keyframes tease{0%,100%{transform:none}42%{transform:translateX(-11vw)}}
 
+/* hero: faint scattered logo marks that appear after the intro (placed by JS) */
+.scatter{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden;color:var(--cream)}
+.scatter svg{position:absolute;height:auto;opacity:0;transition:opacity 2.4s ease;will-change:opacity}
+.scatter svg.on{opacity:var(--o)}
+/* the caption wave sits above the dark scrim (z 2) but under the text (z 4), so it reads behind the words */
+.scatter.front{z-index:3}
+@media (prefers-reduced-motion:no-preference){.scatter svg{animation:sdrift var(--dur) ease-in-out infinite alternate}}
+@keyframes sdrift{from{transform:rotate(var(--r)) translate(0,0)}to{transform:rotate(calc(var(--r) + var(--dr))) translate(var(--dx),var(--dy))}}
+
 /* caption – the V07 voice: huge light numerals, calm headline */
-.cap{position:absolute;z-index:3;left:var(--g);bottom:clamp(30px,7vh,72px);max-width:min(640px,calc(100vw - var(--rw) - 2 * var(--gap) - 2 * var(--g)));text-shadow:0 1px 22px rgba(0,0,0,.35);pointer-events:none}
+.cap{position:absolute;z-index:4;left:var(--g);bottom:clamp(30px,7vh,72px);max-width:min(640px,calc(100vw - var(--rw) - 2 * var(--gap) - 2 * var(--g)));text-shadow:0 1px 22px rgba(0,0,0,.35);pointer-events:none}
 /* captions let swipes and drags fall through to the photos; only links stay tappable */
 .cap *{pointer-events:none}
 .cap a,.cap button{pointer-events:auto}
@@ -315,6 +324,7 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
 <main>
 <header class="sc one hero" id="s0650" data-t="06:50">
   <ul class="track" role="presentation"><li>{{pic:p-okno-hero|100vw||eager}}</li></ul>
+  <div class="scatter" aria-hidden="true"></div><div class="scatter front" aria-hidden="true"></div>
   <div class="cap">{{markw:draw hero-mark}}<span class="ey">Brno-Židenice · Táborská 102</span><h1>Den v Putře.</h1><p>Malá cukrárna a kavárna, kde se peče z pravého másla. Projděte si s námi jeden obyčejný den — od prvního plechu po poslední choux. U většiny hodin se dá listovat do strany.</p></div>
 </header>
 
@@ -469,6 +479,7 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
 </nav>
 <nav aria-label="Rychlý odkaz"><a class="more ln" href="#info">Více informací <span aria-hidden="true">↓</span></a></nav>
 
+{{marksym}}
 <script>
 (function(){
 var RM=matchMedia('(prefers-reduced-motion: reduce)'),root=document.documentElement;
@@ -639,6 +650,56 @@ function drawCurl(m){
     if(e.isIntersecting&&!RM.matches&&user!==false){v.play().catch(function(){})}else if(!e.isIntersecting&&!v.paused)v.pause();
   })},{threshold:.6}).observe(v);
 });
+})();
+
+/* --- hero: faint scattered logo marks, fade in after the intro --- */
+(function(){
+ var PH=matchMedia('(max-width: 900px)'),box=document.querySelector('.scatter'),front=document.querySelector('.scatter.front'),hero=box&&box.parentNode,cap=hero&&hero.querySelector('.cap');
+ if(!box)return;
+ function rnd(a,b){return a+Math.random()*(b-a)}
+ var placed=[];
+ function spawn(list,op,host){
+  list.forEach(function(m,i){
+   var v=document.createElementNS('http://www.w3.org/2000/svg','svg');
+   v.setAttribute('viewBox','0 0 46.599 37.306');v.innerHTML='<use href="#curl"/>';
+   var st=v.style,rot=rnd(-180,180);
+   st.width=m.s+'px';st.left=(m.x-m.s/2)+'px';st.top=(m.y-m.s*.4)+'px';
+   st.setProperty('--r',rot+'deg');st.setProperty('--o',rnd(op[0],op[1]).toFixed(3));
+   st.setProperty('--dr',rnd(-9,9).toFixed(1)+'deg');st.setProperty('--dx',rnd(-10,10).toFixed(1)+'px');st.setProperty('--dy',rnd(-10,10).toFixed(1)+'px');
+   st.setProperty('--dur',rnd(16,28).toFixed(1)+'s');st.transform='rotate('+rot+'deg)';
+   st.transitionDelay=(i*.35+rnd(0,.3)).toFixed(2)+'s';
+   (host||box).appendChild(v);placed.push(m);
+   requestAnimationFrame(function(){requestAnimationFrame(function(){v.classList.add('on')})});
+  });
+ }
+ function clear(x,y,r,f){for(var j=0;j<placed.length;j++)if(Math.hypot(x-placed[j].x,y-placed[j].y)<(r+placed[j].r)*f)return false;return true}
+ /* first wave (2 s): 3–4 marks behind the caption and the hero logo on the left */
+ function behind(){
+  var ph=PH.matches,hr=hero.getBoundingClientRect(),cr=cap.getBoundingClientRect(),
+   L=cr.left-hr.left,T=cr.top-hr.top,R=Math.min(cr.right-hr.left,L+(ph?hero.clientWidth:560)),B=cr.bottom-hr.top;
+  var n=ph?3:4,smin=ph?54:80,smax=ph?96:170,out=[],tries=0;
+  while(out.length<n&&tries++<400){
+   var s=rnd(smin,smax),r=s*.62,x=rnd(L+r*.4,R-r*.4),y=rnd(T+r*.3,B-r*.3);
+   if(clear(x,y,r,.9)){var m={x:x,y:y,r:r,s:s};placed.push(m);out.push(m)}
+  }
+  placed.length-=out.length;spawn(out,[.06,.12],front);
+ }
+ /* second wave (2.8 s): marks around the rest of the screen, clear of the text and chrome */
+ function place(){
+  var W=hero.clientWidth,H=hero.clientHeight,ph=PH.matches,hr=hero.getBoundingClientRect(),cr=cap.getBoundingClientRect(),pad=24;
+  /* keep-out rects (px, hero coords): caption block, top-left brand / phone navbar, bottom sign */
+  var ex=[[cr.left-hr.left-pad,cr.top-hr.top-pad,cr.right-hr.left+pad,cr.bottom-hr.top+pad],
+   ph?[0,0,W,84]:[0,0,260,84],[W/2-90,H-72,W/2+90,H],[W-240,0,W,84],[W-240,H-84,W,H]];
+  var n=ph?6:10,smin=ph?44:64,smax=ph?92:160,out=[],tries=0;
+  while(out.length<n&&tries++<600){
+   var s=rnd(smin,smax)*(1-tries/1400),r=s*.62,x=rnd(r,W-r),y=rnd(r,H-r),ok=true;
+   for(var i=0;i<ex.length&&ok;i++){var e=ex[i],cx=Math.max(e[0],Math.min(x,e[2])),cy=Math.max(e[1],Math.min(y,e[3]));if(Math.hypot(x-cx,y-cy)<r)ok=false}
+   for(var j=0;j<out.length&&ok;j++)if(Math.hypot(x-out[j].x,y-out[j].y)<(r+out[j].r)*1.05)ok=false;
+   if(ok&&clear(x,y,r,1.05))out.push({x:x,y:y,r:r,s:s});
+  }
+  spawn(out,[.06,.14]);
+ }
+ setTimeout(behind,2000);setTimeout(place,2800);
 })();
 </script>
 {{status}}
